@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Shoe Shop</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string-array name="man">
+        <item>Ботинки</item>
+        <item>Кеды</item>
+        <item>Кроссовки</item>
+        <item>Туфли</item>
+        <item>Шлепанцы</item>
+    </string-array>
+
+    <string-array name="woman">
+        <item>Рыжик</item>
+        <item>Барсик</item>
+        <item>Мурзик</item>
+    </string-array>
+
+
+</resources>
