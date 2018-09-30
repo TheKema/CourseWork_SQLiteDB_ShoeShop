@@ -2,6 +2,8 @@ package ainullov.kamil.com.shoeshop;
 
 //import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,15 +14,30 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
 import ainullov.kamil.com.shoeshop.fragments.MainFragment;
 import ainullov.kamil.com.shoeshop.fragments.ManFragment;
 import ainullov.kamil.com.shoeshop.fragments.WomanFragment;
+import ainullov.kamil.com.shoeshop.pojo.ShoeType;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     public static boolean manTRUEwomanFALSE = false;
     public static String shoesTYPE = "Кроссовки";
-    public static int gender = 1; // 0 - женщина, 1 = мужчина, 2
+    public static String gender = "M"; // Ж 0 - женщина, М 1 = мужчина, 2
+
+    // !ВРЕМЕННО
+    public static boolean VREMENNO = true;
+
+    public static List<ShoeType> shoeTypesMan = new ArrayList<>();
+    public static List<ShoeType> shoeTypesWoman = new ArrayList<>();
 
 
     MainFragment mainFragment = new MainFragment();
@@ -46,6 +63,79 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+if (VREMENNO) {
+    // !ВРЕМЕННО ...
+    DataBaseHelper dbHelper;
+    dbHelper = new DataBaseHelper(this);
+    // подключение к БД
+    SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+    ContentValues cv = new ContentValues();
+    // подключение к БД
+    cv.put("type", "Кроссовки");
+    cv.put("gender", "М");
+    cv.put("coast", 1399);
+    cv.put("name", "Крос №1");
+
+    // ArrayList, из чисел - размер обуви, превращаем в строку и суем в db, потом достанем и превратив в ArrayList
+    ArrayList<String> items = new ArrayList<>();
+    items.add("39");
+    items.add("40");
+    items.add("42");
+    items.add("42");
+    items.add("43");
+    JSONObject json = new JSONObject();
+    try {
+        json.put("uniqueArrays", new JSONArray(items));
+    } catch (JSONException e) {
+        e.printStackTrace();
+    }
+    String arrayList = json.toString();
+    cv.put("size", arrayList);
+
+    // вставляем запись
+    db.insert("shoe", null, cv);
+
+    cv.put("type", "Кроссовки");
+    cv.put("gender", "М");
+    cv.put("coast", 2239);
+    cv.put("name", "Крос №2");
+    db.insert("shoe", null, cv);
+
+    cv.put("type", "Ботинки");
+    cv.put("gender", "Ж");
+    cv.put("coast", 2990);
+    cv.put("name", "Ботинки №1");
+    // вставляем запись
+    db.insert("shoe", null, cv);
+
+    cv.put("type", "Кроссовки");
+    cv.put("gender", "Ж");
+    cv.put("coast", 990);
+    cv.put("name", "Крос №3");
+    db.insert("shoe", null, cv);
+
+
+    dbHelper.close();
+    VREMENNO = false;
+}
+        // ... ВРЕМЕННО!
+
+
+        shoeTypesMan.add(new ShoeType("Ботинки"));
+        shoeTypesMan.add(new ShoeType("Кеды"));
+        shoeTypesMan.add(new ShoeType("Кроссовки"));
+        shoeTypesMan.add(new ShoeType("Туфли"));
+
+        shoeTypesWoman.add(new ShoeType("Ботинки"));
+        shoeTypesWoman.add(new ShoeType("Кеды"));
+        shoeTypesWoman.add(new ShoeType("Кроссовки"));
+        shoeTypesWoman.add(new ShoeType("Туфли"));
+        shoeTypesWoman.add(new ShoeType("Сапоги"));
+        shoeTypesWoman.add(new ShoeType("Балетки"));
+
+
     }
 
     @Override

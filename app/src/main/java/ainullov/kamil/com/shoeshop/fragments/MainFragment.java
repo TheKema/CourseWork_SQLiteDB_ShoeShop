@@ -36,43 +36,6 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         btnWomanMain = (Button) view.findViewById(R.id.btnWomanMain);
         btnManMain.setOnClickListener(this);
         btnWomanMain.setOnClickListener(this);
-
-
-        DataBaseHelper dbHelper;
-        dbHelper = new DataBaseHelper(getActivity());
-        // подключение к БД
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-
-        // !ВРЕМЕННО ...
-
-        ContentValues cv = new ContentValues();
-        // подключение к БД
-        cv.put("type", "Кроссовки");
-        cv.put("gender", "М");
-        cv.put("name", "Крос №1");
-        // вставляем запись
-        db.insert("shoe", null, cv);
-
-        cv.put("type", "Кроссовки");
-        cv.put("gender", "М");
-        cv.put("name", "Крос №2");
-        db.insert("shoe", null, cv);
-
-        cv.put("type", "Ботинки");
-        cv.put("gender", "Ж");
-        cv.put("name", "Ботинки №1");
-        // вставляем запись
-        db.insert("shoe", null, cv);
-
-        cv.put("type", "Кроссовки");
-        cv.put("gender", "Ж");
-        cv.put("name", "Крос №3");
-        db.insert("shoe", null, cv);
-
-        // ... ВРЕМЕННО!
-
-        dbHelper.close();
-
     }
 
     @Override
@@ -85,11 +48,13 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.btnManMain:
                 MainActivity.manTRUEwomanFALSE = true;
+                MainActivity.gender = "М";
                 fTrans.replace(R.id.container, manFragment);
                 fTrans.addToBackStack(null);
                 break;
             case R.id.btnWomanMain:
                 MainActivity.manTRUEwomanFALSE = false;
+                MainActivity.gender = "Ж";
                 fTrans.replace(R.id.container, womanFragment);
                 fTrans.addToBackStack(null);
                 break;

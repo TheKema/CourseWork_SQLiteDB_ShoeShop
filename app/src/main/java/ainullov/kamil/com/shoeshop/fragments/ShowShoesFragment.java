@@ -31,19 +31,22 @@ public class ShowShoesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_showshoes, container, false);
-
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        shoes.clear();
 
         dbHelper = new DataBaseHelper(getActivity());
 
         // подключение к БД
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        selection = "type = ?";
-        selectionArgs = new String[]{MainActivity.shoesTYPE};
+        selection = "type = ? AND gender = ?";
+        // sqLiteDatabase.query(INSPECTION_PLAN_TRANSACTION,
+        // projection, input_number  + "= ? AND "+ name"= ?", new String[]{String.valueOf(numberToCheck), "XXX"},
+        // null, null, null, null);
+        selectionArgs = new String[]{MainActivity.shoesTYPE, MainActivity.gender};
         // Чтение, делаем запрос всех данных из таблицы, получаем Cursor
         Cursor c = db.query("shoe", null, selection, selectionArgs, null, null, null);
         c.moveToFirst();
@@ -55,16 +58,19 @@ public class ShowShoesFragment extends Fragment {
             int nameColIndex = c.getColumnIndex("name");
             int coastColIndex = c.getColumnIndex("coast");
             int desciptionColIndex = c.getColumnIndex("desciption");
-            int infColIndex = c.getColumnIndex("inf");
             int sizeColIndex = c.getColumnIndex("size");
 
             do {
-                //            if (!c.getString(typeColIndex).isEmpty())// получаем значения по номерам столбцов
-                shoes.add(new OneShoe(c.getString(nameColIndex)));
-//                        c.getString(nameColIndex),
-//                        c.getString(desciptionColIndex),
-//                        c.getInt(coastColIndex),
-//
+//            if (!c.getString(typeColIndex).isEmpty())// получаем значения по номерам столбцов
+//                shoes.add(new OneShoe(c.getString(nameColIndex)));
+                shoes.add(new OneShoe(c.getInt(idColIndex),
+                        c.getString(typeColIndex),
+                        c.getString(genderColIndex),
+                        c.getInt(quantityColIndex),
+                        c.getString(nameColIndex),
+                        c.getInt(coastColIndex),
+                        c.getString(desciptionColIndex),
+                        c.getString(sizeColIndex)));
             } while (c.moveToNext());
         }
         c.close();
@@ -76,5 +82,8 @@ public class ShowShoesFragment extends Fragment {
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         ShowShoesAdapter adapter = new ShowShoesAdapter(getActivity(), shoes);
         recyclerView.setAdapter(adapter);
+
     }
+
+
 }

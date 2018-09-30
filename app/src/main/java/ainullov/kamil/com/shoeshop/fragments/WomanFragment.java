@@ -12,13 +12,14 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import ainullov.kamil.com.shoeshop.MainActivity;
 import ainullov.kamil.com.shoeshop.R;
 import ainullov.kamil.com.shoeshop.adapters.ShoeTypeAdapter;
 import ainullov.kamil.com.shoeshop.pojo.ShoeType;
 
 public class WomanFragment extends Fragment {
 
-    List<ShoeType> shoeTypes = new ArrayList<>();
+//    List<ShoeType> shoeTypes = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -31,15 +32,15 @@ public class WomanFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        shoeTypes.add(new ShoeType("Ботинки"));
-        shoeTypes.add(new ShoeType("Кеды"));
-        shoeTypes.add(new ShoeType("Кроссовки"));
-        shoeTypes.add(new ShoeType("Туфли"));
-        shoeTypes.add(new ShoeType("Сапоги"));
-        shoeTypes.add(new ShoeType("Балетки"));
+//        shoeTypes.add(new ShoeType("Ботинки"));
+//        shoeTypes.add(new ShoeType("Кеды"));
+//        shoeTypes.add(new ShoeType("Кроссовки"));
+//        shoeTypes.add(new ShoeType("Туфли"));
+//        shoeTypes.add(new ShoeType("Сапоги"));
+//        shoeTypes.add(new ShoeType("Балетки"));
         RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        ShoeTypeAdapter adapter = new ShoeTypeAdapter(getActivity(), shoeTypes);
+        ShoeTypeAdapter adapter = new ShoeTypeAdapter(getActivity(), MainActivity.shoeTypesWoman);
         recyclerView.setAdapter(adapter);
     }
 }

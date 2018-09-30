@@ -25,8 +25,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 + "name text,"
                 + "coast integer,"
                 + "desciption text,"
-                + "inf text,"
-                + "size integer" + ");");
+                + "size text" + ");");
     }
 
     @Override
