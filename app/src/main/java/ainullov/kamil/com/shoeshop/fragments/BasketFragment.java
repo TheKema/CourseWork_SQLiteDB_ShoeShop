@@ -22,7 +22,7 @@ import ainullov.kamil.com.shoeshop.pojo.BasketFavoriteShoe;
 
 // Корзина
 public class BasketFragment extends Fragment implements View.OnClickListener {
-    List<BasketFavoriteShoe> basketShoes = new ArrayList<>();
+    List<BasketFavoriteShoe> basketFavoriteShoes = new ArrayList<>();
     DataBaseHelper dbHelper;
     BasketAdapter adapter;
 
@@ -41,7 +41,7 @@ public class BasketFragment extends Fragment implements View.OnClickListener {
         btnBuy.setOnClickListener(this);
 
 
-        basketShoes.clear(); // Очистка, для того, чтобы элементы не дублировались. Исправить!
+        basketFavoriteShoes.clear(); // Очистка, для того, чтобы элементы не дублировались. Исправить!
 
         dbHelper = new DataBaseHelper(getActivity());
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -53,7 +53,7 @@ public class BasketFragment extends Fragment implements View.OnClickListener {
             int shoeSizeColIndex = c.getColumnIndex("shoeSize");
 
             do {
-                basketShoes.add(new BasketFavoriteShoe(c.getInt(uniquekeyColIndex), c.getString(shoeSizeColIndex)));
+                basketFavoriteShoes.add(new BasketFavoriteShoe(c.getInt(uniquekeyColIndex), c.getString(shoeSizeColIndex)));
 
             } while (c.moveToNext());
         }
@@ -62,7 +62,7 @@ public class BasketFragment extends Fragment implements View.OnClickListener {
 
         RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.rvBasket);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new BasketAdapter(getActivity(), basketShoes);
+        adapter = new BasketAdapter(getActivity(), basketFavoriteShoes);
         recyclerView.setAdapter(adapter);
     }
 
@@ -82,7 +82,7 @@ public class BasketFragment extends Fragment implements View.OnClickListener {
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
                 db.delete("basket", null, null);
                 dbHelper.close();
-                basketShoes.clear();
+                basketFavoriteShoes.clear();
                 adapter.notifyDataSetChanged();
                 break;
         }

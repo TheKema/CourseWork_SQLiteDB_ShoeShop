@@ -26,12 +26,12 @@ import ainullov.kamil.com.shoeshop.pojo.BasketFavoriteShoe;
 public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder> {
 
     private LayoutInflater inflater;
-    private List<BasketFavoriteShoe> basketShoes;
+    private List<BasketFavoriteShoe> basketFavoriteShoes;
 
     private Context context;
 
-    public BasketAdapter(Context context, List<BasketFavoriteShoe> basketShoes) {
-        this.basketShoes = basketShoes;
+    public BasketAdapter(Context context, List<BasketFavoriteShoe> basketFavoriteShoes) {
+        this.basketFavoriteShoes = basketFavoriteShoes;
         this.inflater = LayoutInflater.from(context);
         this.context = context;
     }
@@ -45,12 +45,12 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(BasketAdapter.ViewHolder holder, int position) {
-        BasketFavoriteShoe basketShoe = basketShoes.get(position);
-//        basketShoe.getUniquekey();
-//        basketShoe.getSize();
+        BasketFavoriteShoe basketFavoriteShoe = basketFavoriteShoes.get(position);
+//        basketFavoriteShoe.getUniquekey();
+//        basketFavoriteShoe.getSize();
 
 //      Получаем уникальный ключ, полученный ранее из бд basket, по которому в бд shoe находим запись
-        String uniquekey = String.valueOf(basketShoe.getUniquekey());
+        String uniquekey = String.valueOf(basketFavoriteShoe.getUniquekey());
 
         Cursor c;
         DataBaseHelper dbHelper;
@@ -86,7 +86,7 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
             do {
                 holder.tvBasketName.setText(c.getString(nameColIndex));
                 holder.tvBasketCoast.setText(String.valueOf(c.getInt(coastColIndex)));
-                holder.tvBasketSize.setText(basketShoe.getSize());
+                holder.tvBasketSize.setText(basketFavoriteShoe.getSize());
             } while (c.moveToNext());
         }
         c.close();
@@ -95,7 +95,7 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return basketShoes.size();
+        return basketFavoriteShoes.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -124,8 +124,8 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
                     int idColIndex;
 
                     int positionIndexInShoe = 99999; // По уникальному ключу узнаем id товара в shoe и переходим к нему
-                    BasketFavoriteShoe basketShoe = basketShoes.get(getAdapterPosition());
-                    String uniquekey = String.valueOf(basketShoe.getUniquekey());
+                    BasketFavoriteShoe basketFavoriteShoe = basketFavoriteShoes.get(getAdapterPosition());
+                    String uniquekey = String.valueOf(basketFavoriteShoe.getUniquekey());
 
                     dbHelper = new DataBaseHelper(context);
                     SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -162,15 +162,15 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
                 public void onClick(View view) {
                     DataBaseHelper dbHelper;
 
-                    BasketFavoriteShoe basketShoe = basketShoes.get(getAdapterPosition());
-                    int deleteItemByUniqueKey = basketShoe.getUniquekey();
+                    BasketFavoriteShoe basketFavoriteShoe = basketFavoriteShoes.get(getAdapterPosition());
+                    int deleteItemByUniqueKey = basketFavoriteShoe.getUniquekey();
                     dbHelper = new DataBaseHelper(context);
                     SQLiteDatabase db = dbHelper.getWritableDatabase();
                     db.delete("basket", "shoeUniquekeyBasket = " + deleteItemByUniqueKey, null);
                     dbHelper.close();
 
 
-                    basketShoes.remove(getAdapterPosition());
+                    basketFavoriteShoes.remove(getAdapterPosition());
                     notifyDataSetChanged();
                 }
             });

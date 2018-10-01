@@ -45,12 +45,12 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(FavoriteAdapter.ViewHolder holder, int position) {
-        BasketFavoriteShoe basketShoe = favoriteShoes.get(position);
-//        basketShoe.getUniquekey();
-//        basketShoe.getSize();
+        BasketFavoriteShoe basketFavoriteShoe = favoriteShoes.get(position);
+//        basketFavoriteShoe.getUniquekey();
+//        basketFavoriteShoe.getSize();
 
 //      Получаем уникальный ключ, полученный ранее из бд basket, по которому в бд shoe находим запись
-        String uniquekey = String.valueOf(basketShoe.getUniquekey());
+        String uniquekey = String.valueOf(basketFavoriteShoe.getUniquekey());
 
         Cursor c;
         DataBaseHelper dbHelper;
@@ -86,7 +86,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
             do {
                 holder.tvBasketName.setText(c.getString(nameColIndex));
                 holder.tvBasketCoast.setText(String.valueOf(c.getInt(coastColIndex)));
-                holder.tvBasketSize.setText(basketShoe.getSize());
+                holder.tvBasketSize.setText(basketFavoriteShoe.getSize());
             } while (c.moveToNext());
         }
         c.close();
@@ -124,8 +124,8 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
                     int idColIndex;
 
                     int positionIndexInShoe = 99999; // По уникальному ключу узнаем id товара в shoe и переходим к нему
-                    BasketFavoriteShoe basketShoe = favoriteShoes.get(getAdapterPosition());
-                    String uniquekey = String.valueOf(basketShoe.getUniquekey());
+                    BasketFavoriteShoe basketFavoriteShoe = favoriteShoes.get(getAdapterPosition());
+                    String uniquekey = String.valueOf(basketFavoriteShoe.getUniquekey());
 
                     dbHelper = new DataBaseHelper(context);
                     SQLiteDatabase db = dbHelper.getWritableDatabase();
