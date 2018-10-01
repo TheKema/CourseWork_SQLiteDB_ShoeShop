@@ -18,11 +18,11 @@ import java.util.List;
 import ainullov.kamil.com.shoeshop.R;
 import ainullov.kamil.com.shoeshop.adapters.BasketAdapter;
 import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
-import ainullov.kamil.com.shoeshop.pojo.BasketShoe;
+import ainullov.kamil.com.shoeshop.pojo.BasketFavoriteShoe;
 
 // Корзина
 public class BasketFragment extends Fragment implements View.OnClickListener {
-    List<BasketShoe> basketShoes = new ArrayList<>();
+    List<BasketFavoriteShoe> basketShoes = new ArrayList<>();
     DataBaseHelper dbHelper;
     BasketAdapter adapter;
 
@@ -53,7 +53,7 @@ public class BasketFragment extends Fragment implements View.OnClickListener {
             int shoeSizeColIndex = c.getColumnIndex("shoeSize");
 
             do {
-                basketShoes.add(new BasketShoe(c.getInt(uniquekeyColIndex), c.getString(shoeSizeColIndex)));
+                basketShoes.add(new BasketFavoriteShoe(c.getInt(uniquekeyColIndex), c.getString(shoeSizeColIndex)));
 
             } while (c.moveToNext());
         }

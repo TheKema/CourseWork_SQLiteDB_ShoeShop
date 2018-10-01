@@ -22,30 +22,30 @@ import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
 import ainullov.kamil.com.shoeshop.fragments.ShoesDetailedFragment;
 import ainullov.kamil.com.shoeshop.pojo.BasketFavoriteShoe;
 
-//Корзина Adapter
-public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder> {
+//Понравившееся Adapter
+public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHolder> {
 
     private LayoutInflater inflater;
-    private List<BasketFavoriteShoe> basketShoes;
+    private List<BasketFavoriteShoe> favoriteShoes;
 
     private Context context;
 
-    public BasketAdapter(Context context, List<BasketFavoriteShoe> basketShoes) {
-        this.basketShoes = basketShoes;
+    public FavoriteAdapter(Context context, List<BasketFavoriteShoe> favoriteShoes) {
+        this.favoriteShoes = favoriteShoes;
         this.inflater = LayoutInflater.from(context);
         this.context = context;
     }
 
     @Override
-    public BasketAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public FavoriteAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = inflater.inflate(R.layout.basket_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(BasketAdapter.ViewHolder holder, int position) {
-        BasketFavoriteShoe basketShoe = basketShoes.get(position);
+    public void onBindViewHolder(FavoriteAdapter.ViewHolder holder, int position) {
+        BasketFavoriteShoe basketShoe = favoriteShoes.get(position);
 //        basketShoe.getUniquekey();
 //        basketShoe.getSize();
 
@@ -95,7 +95,7 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return basketShoes.size();
+        return favoriteShoes.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -124,7 +124,7 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
                     int idColIndex;
 
                     int positionIndexInShoe = 99999; // По уникальному ключу узнаем id товара в shoe и переходим к нему
-                    BasketFavoriteShoe basketShoe = basketShoes.get(getAdapterPosition());
+                    BasketFavoriteShoe basketShoe = favoriteShoes.get(getAdapterPosition());
                     String uniquekey = String.valueOf(basketShoe.getUniquekey());
 
                     dbHelper = new DataBaseHelper(context);
@@ -162,15 +162,15 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
                 public void onClick(View view) {
                     DataBaseHelper dbHelper;
 
-                    BasketFavoriteShoe basketShoe = basketShoes.get(getAdapterPosition());
-                    int deleteItemByUniqueKey = basketShoe.getUniquekey();
+                    BasketFavoriteShoe favoriteShoe = favoriteShoes.get(getAdapterPosition());
+                    int deleteItemByUniqueKey = favoriteShoe.getUniquekey();
                     dbHelper = new DataBaseHelper(context);
                     SQLiteDatabase db = dbHelper.getWritableDatabase();
-                    db.delete("basket", "shoeUniquekeyBasket = " + deleteItemByUniqueKey, null);
+                    db.delete("favorite", "shoeUniquekeyBasket = " + deleteItemByUniqueKey, null);
                     dbHelper.close();
 
 
-                    basketShoes.remove(getAdapterPosition());
+                    favoriteShoes.remove(getAdapterPosition());
                     notifyDataSetChanged();
                 }
             });

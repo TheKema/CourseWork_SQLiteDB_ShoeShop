@@ -24,6 +24,7 @@ import java.util.List;
 
 import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
 import ainullov.kamil.com.shoeshop.fragments.BasketFragment;
+import ainullov.kamil.com.shoeshop.fragments.FavoriteFragment;
 import ainullov.kamil.com.shoeshop.fragments.MainFragment;
 import ainullov.kamil.com.shoeshop.fragments.ManFragment;
 import ainullov.kamil.com.shoeshop.fragments.WomanFragment;
@@ -179,6 +180,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
         }
         if (id == R.id.action_favorite) {
+            FavoriteFragment favoriteFragment = new FavoriteFragment();
+            FragmentTransaction fTrans;
+            fTrans = getFragmentManager().beginTransaction();
+            fTrans.replace(R.id.container, favoriteFragment);
+            fTrans.addToBackStack(null);
+            fTrans.commit();
+
             return true;
         }
 
@@ -192,6 +200,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ManFragment manFragment = new ManFragment();
         WomanFragment womanFragment = new WomanFragment();
         BasketFragment basketFragment = new BasketFragment();
+        FavoriteFragment favoriteFragment = new FavoriteFragment();
         FragmentTransaction fTrans;
         fTrans = getFragmentManager().beginTransaction();
         int id = item.getItemId();
@@ -207,7 +216,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fTrans.replace(R.id.container, womanFragment);
             fTrans.addToBackStack(null);
         } else if (id == R.id.nav_favorites) {
-
+            fTrans.replace(R.id.container, favoriteFragment);
+            fTrans.addToBackStack(null);
         } else if (id == R.id.nav_basket) {
             fTrans.replace(R.id.container, basketFragment);
             fTrans.addToBackStack(null);

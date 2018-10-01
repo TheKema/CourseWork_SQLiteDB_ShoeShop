@@ -183,6 +183,11 @@ public class ShoesDetailedFragment extends Fragment implements View.OnClickListe
                 break;
             case R.id.btnFavDetailed:
 
+//
+//                !!! СДЕЛАТЬ
+//
+
+
                 DataBaseHelper dbHelperFav;
                 dbHelperFav = new DataBaseHelper(getActivity());
                 SQLiteDatabase dbFav = dbHelperFav.getWritableDatabase();
@@ -191,7 +196,6 @@ public class ShoesDetailedFragment extends Fragment implements View.OnClickListe
                 cvFav.put("shoeUniquekeyBasket", shoeUniquekeyBasket);
                 cvFav.put("shoeSize", sizePicked);
                 dbFav.insert("favorite", null, cvFav);
-
                 dbHelperFav.close();
 
                 break;

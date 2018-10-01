@@ -1,18 +1,18 @@
 package ainullov.kamil.com.shoeshop.pojo;
 
-public class BasketShoe {
+public class BasketFavoriteShoe {
     private int id;
     private int uniquekey; // Оставить только уникальный код, id и размер !
     private String name;
     private int coast;
     private String size; // JSON строка, в которой в массиве будут находится числа
 
-    public BasketShoe(int uniquekey, String size) {
+    public BasketFavoriteShoe(int uniquekey, String size) {
         this.uniquekey = uniquekey;
         this.size = size;
     }
 
-    public BasketShoe(int id, int uniquekey, String name, int coast, String size) {
+    public BasketFavoriteShoe(int id, int uniquekey, String name, int coast, String size) {
         this.id = id;
         this.uniquekey = uniquekey;
         this.name = name;
