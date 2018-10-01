@@ -1,7 +1,8 @@
 package ainullov.kamil.com.shoeshop.pojo;
 
 public class OneShoe {
-    private int id;
+    private int id;        // !
+    private int uniquekey; // Добавить изображение
     private String type;
     private String gender;
     private int quantity;
@@ -14,8 +15,9 @@ public class OneShoe {
         this.name = name;
     }
 
-    public OneShoe(int id, String type, String gender, int quantity, String name, int coast, String desc, String size) {
+    public OneShoe(int id, int uniquekey, String type, String gender, int quantity, String name, int coast, String desc, String size) {
         this.id = id;
+        this.uniquekey = uniquekey;
         this.type = type;
         this.gender = gender;
         this.quantity = quantity;
@@ -23,6 +25,14 @@ public class OneShoe {
         this.coast = coast;
         this.desc = desc;
         this.size = size;
+    }
+
+    public int getUniquekey() {
+        return uniquekey;
+    }
+
+    public void setUniquekey(int uniquekey) {
+        this.uniquekey = uniquekey;
     }
 
     public String getDesc() {
@@ -88,4 +98,6 @@ public class OneShoe {
     public void setSize(String size) {
         this.size = size;
     }
+
+
 }

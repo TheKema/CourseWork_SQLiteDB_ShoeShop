@@ -18,6 +18,7 @@ import ainullov.kamil.com.shoeshop.R;
 import ainullov.kamil.com.shoeshop.fragments.ShoesDetailedFragment;
 import ainullov.kamil.com.shoeshop.pojo.OneShoe;
 
+//Конкретная информация о товаре Adapter
 public class ShowShoesAdapter extends RecyclerView.Adapter<ShowShoesAdapter.ViewHolder> {
 
     private LayoutInflater inflater;
@@ -40,7 +41,6 @@ public class ShowShoesAdapter extends RecyclerView.Adapter<ShowShoesAdapter.View
     @Override
     public void onBindViewHolder(ShowShoesAdapter.ViewHolder holder, int position) {
         OneShoe shoe = shoes.get(position);
-//        holder.imageView.setImageResource(phone.getImage());
         holder.tvShoeName.setText(shoe.getName());
         holder.tvShoeCost.setText(String.valueOf(shoe.getCoast()));
     }

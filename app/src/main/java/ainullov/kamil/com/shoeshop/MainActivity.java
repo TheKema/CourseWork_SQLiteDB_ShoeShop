@@ -1,6 +1,7 @@
 package ainullov.kamil.com.shoeshop;
 
 //import android.app.Fragment;
+
 import android.app.FragmentTransaction;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
+import ainullov.kamil.com.shoeshop.fragments.BasketFragment;
 import ainullov.kamil.com.shoeshop.fragments.MainFragment;
 import ainullov.kamil.com.shoeshop.fragments.ManFragment;
 import ainullov.kamil.com.shoeshop.fragments.WomanFragment;
@@ -64,62 +66,66 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-if (VREMENNO) {
-    // !ВРЕМЕННО ...
-    DataBaseHelper dbHelper;
-    dbHelper = new DataBaseHelper(this);
-    // подключение к БД
-    SQLiteDatabase db = dbHelper.getWritableDatabase();
+        if (VREMENNO) {
+            // !ВРЕМЕННО ...
+            DataBaseHelper dbHelper;
+            dbHelper = new DataBaseHelper(this);
+            // подключение к БД
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-    ContentValues cv = new ContentValues();
-    // подключение к БД
-    cv.put("type", "Кроссовки");
-    cv.put("gender", "М");
-    cv.put("coast", 1399);
-    cv.put("name", "Крос №1");
+            ContentValues cv = new ContentValues();
+            // подключение к БД
+            cv.put("type", "Кроссовки");
+            cv.put("gender", "М");
+            cv.put("uniquekey", 0);
+            cv.put("coast", 1399);
+            cv.put("name", "Крос №1");
 
-    // ArrayList, из чисел - размер обуви, превращаем в строку и суем в db, потом достанем и превратив в ArrayList
-    ArrayList<String> items = new ArrayList<>();
-    items.add("39");
-    items.add("40");
-    items.add("42");
-    items.add("42");
-    items.add("43");
-    JSONObject json = new JSONObject();
-    try {
-        json.put("uniqueArrays", new JSONArray(items));
-    } catch (JSONException e) {
-        e.printStackTrace();
-    }
-    String arrayList = json.toString();
-    cv.put("size", arrayList);
+            // ArrayList, из чисел - размер обуви, превращаем в строку и суем в db, потом достанем и превратив в ArrayList
+            ArrayList<String> items = new ArrayList<>();
+            items.add("39");
+            items.add("40");
+            items.add("42");
+            items.add("42");
+            items.add("43");
+            JSONObject json = new JSONObject();
+            try {
+                json.put("uniqueArrays", new JSONArray(items));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            String arrayList = json.toString();
+            cv.put("size", arrayList);
 
-    // вставляем запись
-    db.insert("shoe", null, cv);
+            // вставляем запись
+            db.insert("shoe", null, cv);
 
-    cv.put("type", "Кроссовки");
-    cv.put("gender", "М");
-    cv.put("coast", 2239);
-    cv.put("name", "Крос №2");
-    db.insert("shoe", null, cv);
+            cv.put("type", "Кроссовки");
+            cv.put("gender", "М");
+            cv.put("uniquekey", 1);
+            cv.put("coast", 2239);
+            cv.put("name", "Крос №2");
+            db.insert("shoe", null, cv);
 
-    cv.put("type", "Ботинки");
-    cv.put("gender", "Ж");
-    cv.put("coast", 2990);
-    cv.put("name", "Ботинки №1");
-    // вставляем запись
-    db.insert("shoe", null, cv);
+            cv.put("type", "Ботинки");
+            cv.put("gender", "Ж");
+            cv.put("uniquekey", 2);
+            cv.put("coast", 2990);
+            cv.put("name", "Ботинки №1");
+            // вставляем запись
+            db.insert("shoe", null, cv);
 
-    cv.put("type", "Кроссовки");
-    cv.put("gender", "Ж");
-    cv.put("coast", 990);
-    cv.put("name", "Крос №3");
-    db.insert("shoe", null, cv);
+            cv.put("type", "Кроссовки");
+            cv.put("gender", "Ж");
+            cv.put("uniquekey", 3);
+            cv.put("coast", 990);
+            cv.put("name", "Крос №3");
+            db.insert("shoe", null, cv);
 
 
-    dbHelper.close();
-    VREMENNO = false;
-}
+            dbHelper.close();
+            VREMENNO = false;
+        }
         // ... ВРЕМЕННО!
 
 
@@ -159,7 +165,20 @@ if (VREMENNO) {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_personal_area) {
+            return true;
+        }
+        if (id == R.id.action_basket) {
+            BasketFragment basketFragment = new BasketFragment();
+            FragmentTransaction fTrans;
+            fTrans = getFragmentManager().beginTransaction();
+            fTrans.replace(R.id.container, basketFragment);
+            fTrans.addToBackStack(null);
+            fTrans.commit();
+
+            return true;
+        }
+        if (id == R.id.action_favorite) {
             return true;
         }
 
@@ -172,6 +191,7 @@ if (VREMENNO) {
 
         ManFragment manFragment = new ManFragment();
         WomanFragment womanFragment = new WomanFragment();
+        BasketFragment basketFragment = new BasketFragment();
         FragmentTransaction fTrans;
         fTrans = getFragmentManager().beginTransaction();
         int id = item.getItemId();
@@ -189,7 +209,8 @@ if (VREMENNO) {
         } else if (id == R.id.nav_favorites) {
 
         } else if (id == R.id.nav_basket) {
-
+            fTrans.replace(R.id.container, basketFragment);
+            fTrans.addToBackStack(null);
         } else if (id == R.id.nav_personal_area) {
 
         }
@@ -199,7 +220,6 @@ if (VREMENNO) {
         item.setChecked(true);
         // Выводим выбранный пункт в заголовке
         setTitle(item.getTitle());
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

@@ -20,6 +20,7 @@ import ainullov.kamil.com.shoeshop.adapters.ShowShoesAdapter;
 import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
 import ainullov.kamil.com.shoeshop.pojo.OneShoe;
 
+//Вид обуви
 public class ShowShoesFragment extends Fragment {
 
     List<OneShoe> shoes = new ArrayList<>();
@@ -39,19 +40,15 @@ public class ShowShoesFragment extends Fragment {
         shoes.clear();
 
         dbHelper = new DataBaseHelper(getActivity());
-
-        // подключение к БД
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         selection = "type = ? AND gender = ?";
-        // sqLiteDatabase.query(INSPECTION_PLAN_TRANSACTION,
-        // projection, input_number  + "= ? AND "+ name"= ?", new String[]{String.valueOf(numberToCheck), "XXX"},
-        // null, null, null, null);
         selectionArgs = new String[]{MainActivity.shoesTYPE, MainActivity.gender};
-        // Чтение, делаем запрос всех данных из таблицы, получаем Cursor
+
         Cursor c = db.query("shoe", null, selection, selectionArgs, null, null, null);
         c.moveToFirst();
         if (c.moveToFirst()) {
             int idColIndex = c.getColumnIndex("id");
+            int uniquekeyColIndex = c.getColumnIndex("uniquekey");
             int typeColIndex = c.getColumnIndex("type");
             int genderColIndex = c.getColumnIndex("gender");
             int quantityColIndex = c.getColumnIndex("quantity");
@@ -61,9 +58,9 @@ public class ShowShoesFragment extends Fragment {
             int sizeColIndex = c.getColumnIndex("size");
 
             do {
-//            if (!c.getString(typeColIndex).isEmpty())// получаем значения по номерам столбцов
-//                shoes.add(new OneShoe(c.getString(nameColIndex)));
+//            if (!c.getString(typeColIndex).isEmpty())
                 shoes.add(new OneShoe(c.getInt(idColIndex),
+                        c.getInt(uniquekeyColIndex),
                         c.getString(typeColIndex),
                         c.getString(genderColIndex),
                         c.getInt(quantityColIndex),

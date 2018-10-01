@@ -12,13 +12,24 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-//        sqLiteDatabase.execSQL("create table shoestype ("
-//                + "id integer primary key autoincrement,"
-//                + "type text,"
-//                + "gender text" + ");");
+        sqLiteDatabase.execSQL("create table basket ("
+                + "id integer primary key autoincrement,"
+                + "shoeUniquekeyBasket integer,"
+                + "shoeSize text,"
+                + "shoeId integer," // Потом удалить, первоначально использовалось в качестве уникального ключа
+                + "gender text" + ");");
 
+        sqLiteDatabase.execSQL("create table favorite ("
+                + "id integer primary key autoincrement,"
+                + "shoeUniquekeyBasket integer,"
+                + "shoeSize text,"
+                + "shoeId integer,"
+                + "gender text" + ");");
+
+        //Создать поле - уникальный код товара
         sqLiteDatabase.execSQL("create table shoe ("
                 + "id integer primary key autoincrement,"
+                + "uniquekey integer,"
                 + "type text,"  // SELECT * FROM child_table WHERE parent_id = 2
                 + "gender text,"
                 + "quantity integer," // Если == 0, удалить
@@ -30,6 +41,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+
 
     }
 }

@@ -1,6 +1,7 @@
 package ainullov.kamil.com.shoeshop.fragments;
 
 import android.app.Fragment;
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,7 +29,7 @@ import java.util.Set;
 
 import ainullov.kamil.com.shoeshop.R;
 import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
-
+//Конкретная информация о товаре
 public class ShoesDetailedFragment extends Fragment implements View.OnClickListener {
     ImageView ivShoeDetailed;
     TextView tvNameDetailed;
@@ -37,16 +39,26 @@ public class ShoesDetailedFragment extends Fragment implements View.OnClickListe
     Button btnFavDetailed;
     TextView tvDescDetailed;
 
+
+    int shoeUniquekeyBasket;
+    Cursor c;
     DataBaseHelper dbHelper;
     String selection = null;
     String[] selectionArgs = null;
+    int idColIndex;
+    int uniquekeyColIndex;
+    int typeColIndex;
+    int genderColIndex;
+    int quantityColIndex;
+    int nameColIndex;
+    int coastColIndex;
+    int desciptionColIndex;
+    int sizeColIndex;
+
 
     List<String> arrayListSize = new ArrayList<>();
     Set<String> uniqueListSize;
-
-    String[] sizesArray = {"35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45"};
     int sizeposition = 0;
-
     String sizePicked = "42";
 
 
@@ -79,22 +91,20 @@ public class ShoesDetailedFragment extends Fragment implements View.OnClickListe
         // подключение к БД
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         selection = "id = ?";
-        // sqLiteDatabase.query(INSPECTION_PLAN_TRANSACTION,
-        // projection, input_number  + "= ? AND "+ name"= ?", new String[]{String.valueOf(numberToCheck), "XXX"},
-        // null, null, null, null);
         selectionArgs = new String[]{String.valueOf(id)};
         // Чтение, делаем запрос всех данных из таблицы, получаем Cursor
-        Cursor c = db.query("shoe", null, selection, selectionArgs, null, null, null);
+        c = db.query("shoe", null, selection, selectionArgs, null, null, null);
         c.moveToFirst();
         if (c.moveToFirst()) {
-            int idColIndex = c.getColumnIndex("id");
-            int typeColIndex = c.getColumnIndex("type");
-            int genderColIndex = c.getColumnIndex("gender");
-            int quantityColIndex = c.getColumnIndex("quantity");
-            int nameColIndex = c.getColumnIndex("name");
-            int coastColIndex = c.getColumnIndex("coast");
-            int desciptionColIndex = c.getColumnIndex("desciption");
-            int sizeColIndex = c.getColumnIndex("size");
+            idColIndex = c.getColumnIndex("id");
+            uniquekeyColIndex = c.getColumnIndex("uniquekey");
+            typeColIndex = c.getColumnIndex("type");
+            genderColIndex = c.getColumnIndex("gender");
+            quantityColIndex = c.getColumnIndex("quantity");
+            nameColIndex = c.getColumnIndex("name");
+            coastColIndex = c.getColumnIndex("coast");
+            desciptionColIndex = c.getColumnIndex("desciption");
+            sizeColIndex = c.getColumnIndex("size");
 
             do {
                 try {
@@ -106,7 +116,7 @@ public class ShoesDetailedFragment extends Fragment implements View.OnClickListe
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
+                shoeUniquekeyBasket = c.getInt(uniquekeyColIndex);
                 tvNameDetailed.setText(c.getString(nameColIndex));
                 tvCoastDetailed.setText(String.valueOf(c.getInt(coastColIndex)));
             } while (c.moveToNext());
@@ -114,11 +124,10 @@ public class ShoesDetailedFragment extends Fragment implements View.OnClickListe
         c.close();
         dbHelper.close();
 
-
+        //!!!
+        // На будущее, когда нужно будет разбираться с размерами и количеством
         // Конвертирование ArrayList в string array
-        //First Step: convert ArrayList to an Object array.
         Object[] objSizes = arrayListSize.toArray();
-        //Second Step: convert Object array to String array
         String[] strSizes = Arrays.copyOf(objSizes, objSizes.length, String[].class);
 
         //Убрать повторяющиеся размеры
@@ -142,8 +151,10 @@ public class ShoesDetailedFragment extends Fragment implements View.OnClickListe
                                        int position, long id) {
                 sizeposition = position;
                 // для метода get, чтобы получить значение выбранной позиции
-                List<String> listGetPosition = new ArrayList<String>(uniqueListSize);
+                List<String> listGetPosition = new ArrayList<>(uniqueListSize);
                 sizePicked = listGetPosition.get(sizeposition);
+
+                Toast.makeText(getActivity(), "Pos " + sizePicked, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -159,8 +170,29 @@ public class ShoesDetailedFragment extends Fragment implements View.OnClickListe
         switch (view.getId()) {
             case R.id.btnBasketDetailed:
 
+                DataBaseHelper dbHelper;
+                dbHelper = new DataBaseHelper(getActivity());
+                SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+                ContentValues cv = new ContentValues();
+                cv.put("shoeUniquekeyBasket", shoeUniquekeyBasket);
+                cv.put("shoeSize", sizePicked);
+                db.insert("basket", null, cv);
+                dbHelper.close();
+
                 break;
             case R.id.btnFavDetailed:
+
+                DataBaseHelper dbHelperFav;
+                dbHelperFav = new DataBaseHelper(getActivity());
+                SQLiteDatabase dbFav = dbHelperFav.getWritableDatabase();
+
+                ContentValues cvFav = new ContentValues();
+                cvFav.put("shoeUniquekeyBasket", shoeUniquekeyBasket);
+                cvFav.put("shoeSize", sizePicked);
+                dbFav.insert("favorite", null, cvFav);
+
+                dbHelperFav.close();
 
                 break;
         }

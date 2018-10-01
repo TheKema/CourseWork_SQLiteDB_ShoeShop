@@ -2,8 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_personal_area"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:title="Л.к."
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_basket"
+        android:title="Корз."
+        app:showAsAction="always">
+    </item>
+    <item
+        android:id="@+id/action_favorite"
+        android:title="Избр."
+        app:showAsAction="ifRoom">
+    </item>
 </menu>

@@ -18,6 +18,7 @@ import ainullov.kamil.com.shoeshop.R;
 import ainullov.kamil.com.shoeshop.fragments.ShowShoesFragment;
 import ainullov.kamil.com.shoeshop.pojo.ShoeType;
 
+//Вид обуви Adapter
 public class ShoeTypeAdapter extends RecyclerView.Adapter<ShoeTypeAdapter.ViewHolder> {
 
     private LayoutInflater inflater;
@@ -40,11 +41,8 @@ public class ShoeTypeAdapter extends RecyclerView.Adapter<ShoeTypeAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ShoeTypeAdapter.ViewHolder holder, int position) {
-//        ContactsContract.CommonDataKinds.Phone phone = phones.get(position);
         ShoeType shoeType = shoeTypes.get(position);
-//        holder.imageView.setImageResource(phone.getImage());
         holder.tvDepart.setText(shoeType.getName());
-//        holder.companyView.setText(phone.getCompany());
     }
 
     @Override
@@ -66,14 +64,13 @@ public class ShoeTypeAdapter extends RecyclerView.Adapter<ShoeTypeAdapter.ViewHo
                 public void onClick(View view) {
                     int positionIndex = getAdapterPosition();
                     MainActivity.shoesTYPE = shoeTypes.get(positionIndex).getName();
-                    Toast.makeText(context,"shoesTYPE" + MainActivity.shoesTYPE,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "shoesTYPE" + MainActivity.shoesTYPE, Toast.LENGTH_SHORT).show();
                     ShowShoesFragment showShoesFragment = new ShowShoesFragment();
                     FragmentTransaction fTrans;
                     fTrans = ((Activity) context).getFragmentManager().beginTransaction();
 
                     fTrans.replace(R.id.container, showShoesFragment);
                     fTrans.addToBackStack(null);
-
                     fTrans.commit();
                 }
             });
