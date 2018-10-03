@@ -33,7 +33,7 @@ public class FavoriteFragment extends Fragment{
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        getActivity().setTitle("Избранное");
         favoriteShoes.clear(); // Очистка, для того, чтобы элементы не дублировались. Исправить!
 
         dbHelper = new DataBaseHelper(getActivity());

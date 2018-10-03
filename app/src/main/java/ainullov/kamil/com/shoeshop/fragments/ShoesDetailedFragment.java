@@ -29,6 +29,7 @@ import java.util.Set;
 
 import ainullov.kamil.com.shoeshop.R;
 import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
+
 //Конкретная информация о товаре
 public class ShoesDetailedFragment extends Fragment implements View.OnClickListener {
     ImageView ivShoeDetailed;
@@ -170,36 +171,66 @@ public class ShoesDetailedFragment extends Fragment implements View.OnClickListe
         switch (view.getId()) {
             case R.id.btnBasketDetailed:
 
-                DataBaseHelper dbHelper;
-                dbHelper = new DataBaseHelper(getActivity());
-                SQLiteDatabase db = dbHelper.getWritableDatabase();
+                if (checkRepeat("basket") == 0) {
 
-                ContentValues cv = new ContentValues();
-                cv.put("shoeUniquekeyBasket", shoeUniquekeyBasket);
-                cv.put("shoeSize", sizePicked);
-                db.insert("basket", null, cv);
-                dbHelper.close();
+                    DataBaseHelper dbHelper;
+                    dbHelper = new DataBaseHelper(getActivity());
+                    SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+                    ContentValues cv = new ContentValues();
+                    cv.put("shoeUniquekeyBasket", shoeUniquekeyBasket);
+                    cv.put("shoeSize", sizePicked);
+                    db.insert("basket", null, cv);
+                    dbHelper.close();
+
+                }
 
                 break;
             case R.id.btnFavDetailed:
 
-//
-//                !!! СДЕЛАТЬ
-//
+                if (checkRepeat("favorite") == 0) {
 
+                    DataBaseHelper dbHelperFav;
+                    dbHelperFav = new DataBaseHelper(getActivity());
+                    SQLiteDatabase dbFav = dbHelperFav.getWritableDatabase();
 
-                DataBaseHelper dbHelperFav;
-                dbHelperFav = new DataBaseHelper(getActivity());
-                SQLiteDatabase dbFav = dbHelperFav.getWritableDatabase();
-
-                ContentValues cvFav = new ContentValues();
-                cvFav.put("shoeUniquekeyBasket", shoeUniquekeyBasket);
-                cvFav.put("shoeSize", sizePicked);
-                dbFav.insert("favorite", null, cvFav);
-                dbHelperFav.close();
+                    ContentValues cvFav = new ContentValues();
+                    cvFav.put("shoeUniquekeyBasket", shoeUniquekeyBasket);
+                    cvFav.put("shoeSize", sizePicked);
+                    dbFav.insert("favorite", null, cvFav);
+                    dbHelperFav.close();
+                }
 
                 break;
         }
     }
+
+
+    // Проверка, добавлялся ли ранее товар в корзину или в избранное
+    public int checkRepeat(String tableName) {
+        DataBaseHelper dbHelper;
+        dbHelper = new DataBaseHelper(getActivity());
+        // подключение к БД
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        Cursor c = null;
+        try {
+            db = dbHelper.getReadableDatabase();
+            String query = "select count(*) from "+tableName+" where shoeUniquekeyBasket = ?";
+            c = db.rawQuery(query, new String[]{String.valueOf(shoeUniquekeyBasket)});
+            if (c.moveToFirst()) {
+                return c.getInt(0);
+            }
+            return 0;
+        } finally {
+            if (c != null) {
+                c.close();
+            }
+            if (db != null) {
+                db.close();
+            }
+        }
+    }
+
 
 }

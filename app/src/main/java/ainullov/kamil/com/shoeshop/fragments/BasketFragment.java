@@ -1,6 +1,7 @@
 package ainullov.kamil.com.shoeshop.fragments;
 
 import android.app.Fragment;
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -11,7 +12,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +46,7 @@ public class BasketFragment extends Fragment implements View.OnClickListener {
         super.onViewCreated(view, savedInstanceState);
         btnBuy = (Button) view.findViewById(R.id.btnBuy);
         btnBuy.setOnClickListener(this);
+        getActivity().setTitle("Корзина");
 
 
         basketFavoriteShoes.clear(); // Очистка, для того, чтобы элементы не дублировались. Исправить!
@@ -77,11 +85,103 @@ public class BasketFragment extends Fragment implements View.OnClickListener {
 
         switch (view.getId()) {
             case R.id.btnBuy:
+                // Прохождение по всем товарам списка
+                for (int i = 0; i < basketFavoriteShoes.size(); i++) {
+
+                    int shoeUniquekeyBasket = basketFavoriteShoes.get(i).getUniquekey();
+                    String shoeSize = basketFavoriteShoes.get(i).getSize();
+                    int deleteNumber = 99999999; // Изменить, вдруг будет такое количество товаров
+
+                    List<String> arrayListSize = new ArrayList<>();
+
+                    Cursor c;
+                    DataBaseHelper dbHelperChangeShoe;
+                    String selection = null;
+                    String[] selectionArgs = null;
+                    int quantityColIndex;
+                    int sizeColIndex;
+
+                    // Подключаемся к БД и получаем у i позиции  количество и размеры
+                    // !! Размеры у нас в json строке
+                    dbHelperChangeShoe = new DataBaseHelper(getActivity());
+                    SQLiteDatabase dbChangeShoe = dbHelperChangeShoe.getWritableDatabase();
+                    selection = "uniquekey = ?";
+                    selectionArgs = new String[]{String.valueOf(shoeUniquekeyBasket)};
+                    // Чтение, делаем запрос всех данных из таблицы, получаем Cursor
+                    c = dbChangeShoe.query("shoe", null, selection, selectionArgs, null, null, null);
+                    c.moveToFirst();
+                    if (c.moveToFirst()) {
+                        quantityColIndex = c.getColumnIndex("quantity");
+                        sizeColIndex = c.getColumnIndex("size");
+
+                        do {
+                            int quantityChange = c.getInt(quantityColIndex);
+                            String jsonSizes = c.getString(sizeColIndex);
+
+                            //json размеры превращаем в arraylist<String> с размерами
+                            try {
+                                JSONObject json = new JSONObject(c.getString(sizeColIndex));
+                                JSONArray items = json.optJSONArray("uniqueArrays");
+                                for (int k = 0; k < items.length(); k++) {
+                                    arrayListSize.add(items.optString(k));
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                            // Проходимся по каждому элементу arrayListSize и получаем индекс размера обуви из бд , который совпадает с размером в корзине
+                            for (int j = 0; j < arrayListSize.size(); j++) {
+                                if (arrayListSize.get(j).equals(shoeSize)) {
+                                    deleteNumber = j;
+                                }
+                            }
+
+                            // Удаляем размер, который был только что куплен
+                            //
+                            // Сделал не в цикле удаление( засунув в скобки j), т.к.
+                            // вроде только при помощи итератора можно итерироваться и удалять одновременно // Проверить!
+                            arrayListSize.remove(deleteNumber);
+
+                            // Оставшиеся размеры преобразуем в json массив и суем в БД, количество товара рассчитывается из
+                            // количества элементов в массиве
+                            ContentValues cv = new ContentValues();
+                            JSONObject json = new JSONObject();
+                            try {
+                                json.put("uniqueArrays", new JSONArray(arrayListSize));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            String arrayList = json.toString();
+
+                            cv.put("quantity", arrayListSize.size());
+                            cv.put("size", arrayList);
+                            Toast.makeText(getActivity(),"sizes "+ arrayList, Toast.LENGTH_SHORT).show();
+
+
+                            // Обновляем записм в бд если >0, если =0, то удаляем
+                            if(arrayListSize.size()>0) {
+//                                db.insert("shoe", null, cv);
+                                dbChangeShoe.update("shoe", cv, "uniquekey = ?", new String[] { String.valueOf(shoeUniquekeyBasket) });
+                            }
+                            if(arrayListSize.size()==0){
+                                dbChangeShoe.delete("shoe", "uniquekey = " + shoeUniquekeyBasket, null);
+                            }
+
+                        } while (c.moveToNext());
+                    }
+                    c.close();
+                    dbHelperChangeShoe.close();
+
+                }
+
+                // Удаляем элементы в корзине
                 DataBaseHelper dbHelper;
                 dbHelper = new DataBaseHelper(getActivity());
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
                 db.delete("basket", null, null);
                 dbHelper.close();
+
+
                 basketFavoriteShoes.clear();
                 adapter.notifyDataSetChanged();
                 break;

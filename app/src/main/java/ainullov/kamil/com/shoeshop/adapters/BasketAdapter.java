@@ -106,10 +106,10 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
 
         ViewHolder(View view) {
             super(view);
-            clBasket = (ConstraintLayout) view.findViewById(R.id.clBasket);
-            ivBasketShoe = (ImageView) view.findViewById(R.id.ivBasketShoe);
-            tvBasketName = (TextView) view.findViewById(R.id.tvBasketName);
-            tvBasketCoast = (TextView) view.findViewById(R.id.tvBasketCoast);
+            clBasket = (ConstraintLayout) view.findViewById(R.id.clFavorite);
+            ivBasketShoe = (ImageView) view.findViewById(R.id.ivFavoriteShoe);
+            tvBasketName = (TextView) view.findViewById(R.id.tvFavoriteName);
+            tvBasketCoast = (TextView) view.findViewById(R.id.tvFavoriteCoast);
             tvBasketSize = (TextView) view.findViewById(R.id.tvBasketSize);
             btnDelete = (Button) view.findViewById(R.id.btnDelete);
 

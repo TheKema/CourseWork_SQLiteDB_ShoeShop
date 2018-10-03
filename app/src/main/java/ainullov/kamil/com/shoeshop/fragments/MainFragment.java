@@ -36,6 +36,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         btnWomanMain = (Button) view.findViewById(R.id.btnWomanMain);
         btnManMain.setOnClickListener(this);
         btnWomanMain.setOnClickListener(this);
+        getActivity().setTitle("Обувенок");
     }
 
     @Override
@@ -50,11 +51,13 @@ public class MainFragment extends Fragment implements View.OnClickListener {
                 MainActivity.manTRUEwomanFALSE = true;
                 MainActivity.gender = "М";
                 fTrans.replace(R.id.container, manFragment);
+                getActivity().setTitle("М");
                 fTrans.addToBackStack(null);
                 break;
             case R.id.btnWomanMain:
                 MainActivity.manTRUEwomanFALSE = false;
                 MainActivity.gender = "Ж";
+                getActivity().setTitle("Ж");
                 fTrans.replace(R.id.container, womanFragment);
                 fTrans.addToBackStack(null);
                 break;

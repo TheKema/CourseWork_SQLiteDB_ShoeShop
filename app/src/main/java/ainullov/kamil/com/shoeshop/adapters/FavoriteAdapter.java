@@ -39,7 +39,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
     @Override
     public FavoriteAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = inflater.inflate(R.layout.basket_item, parent, false);
+        View view = inflater.inflate(R.layout.favorite_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -84,9 +84,8 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
             sizeColIndex = c.getColumnIndex("size");
 
             do {
-                holder.tvBasketName.setText(c.getString(nameColIndex));
-                holder.tvBasketCoast.setText(String.valueOf(c.getInt(coastColIndex)));
-                holder.tvBasketSize.setText(basketFavoriteShoe.getSize());
+                holder.tvFavoriteName.setText(c.getString(nameColIndex));
+                holder.tvFavoriteCoast.setText(String.valueOf(c.getInt(coastColIndex)));
             } while (c.moveToNext());
         }
         c.close();
@@ -99,22 +98,21 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        final ConstraintLayout clBasket;
-        final ImageView ivBasketShoe;
-        final TextView tvBasketName, tvBasketCoast, tvBasketSize;
+        final ConstraintLayout clFavorite;
+        final ImageView ivFavoriteShoe;
+        final TextView tvFavoriteName, tvFavoriteCoast;
         final Button btnDelete;
 
         ViewHolder(View view) {
             super(view);
-            clBasket = (ConstraintLayout) view.findViewById(R.id.clBasket);
-            ivBasketShoe = (ImageView) view.findViewById(R.id.ivBasketShoe);
-            tvBasketName = (TextView) view.findViewById(R.id.tvBasketName);
-            tvBasketCoast = (TextView) view.findViewById(R.id.tvBasketCoast);
-            tvBasketSize = (TextView) view.findViewById(R.id.tvBasketSize);
+            clFavorite = (ConstraintLayout) view.findViewById(R.id.clFavorite);
+            ivFavoriteShoe = (ImageView) view.findViewById(R.id.ivFavoriteShoe);
+            tvFavoriteName = (TextView) view.findViewById(R.id.tvFavoriteName);
+            tvFavoriteCoast = (TextView) view.findViewById(R.id.tvFavoriteCoast);
             btnDelete = (Button) view.findViewById(R.id.btnDelete);
 
             //Переход к товару из корзины, переход к ShoesDetailedFragment
-            clBasket.setOnClickListener(new View.OnClickListener() {
+            clFavorite.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Cursor c;

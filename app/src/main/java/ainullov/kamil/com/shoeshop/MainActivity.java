@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -84,11 +85,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             // ArrayList, из чисел - размер обуви, превращаем в строку и суем в db, потом достанем и превратив в ArrayList
             ArrayList<String> items = new ArrayList<>();
-            items.add("39");
             items.add("40");
             items.add("42");
             items.add("42");
-            items.add("43");
             JSONObject json = new JSONObject();
             try {
                 json.put("uniqueArrays", new JSONArray(items));
@@ -96,14 +95,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 e.printStackTrace();
             }
             String arrayList = json.toString();
-            cv.put("size", arrayList);
 
+            cv.put("quantity", items.size());
+            cv.put("size", arrayList);
+            Toast.makeText(this,"sizes "+ arrayList, Toast.LENGTH_SHORT).show();
             // вставляем запись
             db.insert("shoe", null, cv);
 
             cv.put("type", "Кроссовки");
             cv.put("gender", "М");
             cv.put("uniquekey", 1);
+            cv.put("quantity", items.size());
             cv.put("coast", 2239);
             cv.put("name", "Крос №2");
             db.insert("shoe", null, cv);
@@ -112,6 +114,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             cv.put("gender", "Ж");
             cv.put("uniquekey", 2);
             cv.put("coast", 2990);
+            cv.put("quantity", items.size());
             cv.put("name", "Ботинки №1");
             // вставляем запись
             db.insert("shoe", null, cv);
@@ -120,6 +123,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             cv.put("gender", "Ж");
             cv.put("uniquekey", 3);
             cv.put("coast", 990);
+            cv.put("quantity", items.size());
             cv.put("name", "Крос №3");
             db.insert("shoe", null, cv);
 
@@ -209,10 +213,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fTrans.replace(R.id.container, mainFragment);
         } else if (id == R.id.nav_man) {
             manTRUEwomanFALSE = true;
+            gender = "М";
+            // Выводим выбранный пункт в заголовке
+//            setTitle(item.getTitle());
+            setTitle("М");
             fTrans.replace(R.id.container, manFragment);
             fTrans.addToBackStack(null);
         } else if (id == R.id.nav_woman) {
             manTRUEwomanFALSE = false;
+            gender = "Ж";
+            setTitle("Ж");
             fTrans.replace(R.id.container, womanFragment);
             fTrans.addToBackStack(null);
         } else if (id == R.id.nav_favorites) {
@@ -228,8 +238,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // Выделяем выбранный пункт меню в шторке
         item.setChecked(true);
-        // Выводим выбранный пункт в заголовке
-        setTitle(item.getTitle());
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
