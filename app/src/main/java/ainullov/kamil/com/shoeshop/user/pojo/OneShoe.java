@@ -1,4 +1,4 @@
-package ainullov.kamil.com.shoeshop.pojo;
+package ainullov.kamil.com.shoeshop.user.pojo;
 
 public class OneShoe {
     private int id;        // !

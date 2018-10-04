@@ -1,4 +1,4 @@
-package ainullov.kamil.com.shoeshop.fragments;
+package ainullov.kamil.com.shoeshop.user.fragments;
 
 import android.app.Fragment;
 import android.content.ContentValues;
@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Set;
 
 import ainullov.kamil.com.shoeshop.R;
-import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
+import ainullov.kamil.com.shoeshop.user.db.DataBaseHelper;
 
 //Конкретная информация о товаре
 public class ShoesDetailedFragment extends Fragment implements View.OnClickListener {

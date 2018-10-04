@@ -1,4 +1,4 @@
-package ainullov.kamil.com.shoeshop.adapters;
+package ainullov.kamil.com.shoeshop.user.adapters;
 
 import android.app.Activity;
 import android.app.FragmentTransaction;
@@ -15,8 +15,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import ainullov.kamil.com.shoeshop.R;
-import ainullov.kamil.com.shoeshop.fragments.ShoesDetailedFragment;
-import ainullov.kamil.com.shoeshop.pojo.OneShoe;
+import ainullov.kamil.com.shoeshop.user.fragments.ShoesDetailedFragment;
+import ainullov.kamil.com.shoeshop.user.pojo.OneShoe;
 
 //Конкретная информация о товаре Adapter
 public class ShowShoesAdapter extends RecyclerView.Adapter<ShowShoesAdapter.ViewHolder> {

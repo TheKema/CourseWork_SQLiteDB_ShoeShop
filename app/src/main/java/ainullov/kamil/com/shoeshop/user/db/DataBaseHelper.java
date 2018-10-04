@@ -1,4 +1,4 @@
-package ainullov.kamil.com.shoeshop.db;
+package ainullov.kamil.com.shoeshop.user.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -35,6 +35,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 + "quantity integer," // Если == 0, удалить
                 + "name text,"
                 + "coast integer,"
+                + "provider text,"
+                + "date real,"
                 + "desciption text,"
                 + "size text" + ");");
     }

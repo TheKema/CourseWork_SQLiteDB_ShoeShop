@@ -1,4 +1,4 @@
-package ainullov.kamil.com.shoeshop.adapters;
+package ainullov.kamil.com.shoeshop.user.adapters;
 
 import android.app.Activity;
 import android.app.FragmentTransaction;
@@ -18,34 +18,34 @@ import android.widget.TextView;
 import java.util.List;
 
 import ainullov.kamil.com.shoeshop.R;
-import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
-import ainullov.kamil.com.shoeshop.fragments.ShoesDetailedFragment;
-import ainullov.kamil.com.shoeshop.pojo.BasketFavoriteShoe;
+import ainullov.kamil.com.shoeshop.user.db.DataBaseHelper;
+import ainullov.kamil.com.shoeshop.user.fragments.ShoesDetailedFragment;
+import ainullov.kamil.com.shoeshop.user.pojo.BasketFavoriteShoe;
 
-//Корзина Adapter
-public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder> {
+//Понравившееся Adapter
+public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHolder> {
 
     private LayoutInflater inflater;
-    private List<BasketFavoriteShoe> basketFavoriteShoes;
+    private List<BasketFavoriteShoe> favoriteShoes;
 
     private Context context;
 
-    public BasketAdapter(Context context, List<BasketFavoriteShoe> basketFavoriteShoes) {
-        this.basketFavoriteShoes = basketFavoriteShoes;
+    public FavoriteAdapter(Context context, List<BasketFavoriteShoe> favoriteShoes) {
+        this.favoriteShoes = favoriteShoes;
         this.inflater = LayoutInflater.from(context);
         this.context = context;
     }
 
     @Override
-    public BasketAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public FavoriteAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = inflater.inflate(R.layout.basket_item, parent, false);
+        View view = inflater.inflate(R.layout.favorite_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(BasketAdapter.ViewHolder holder, int position) {
-        BasketFavoriteShoe basketFavoriteShoe = basketFavoriteShoes.get(position);
+    public void onBindViewHolder(FavoriteAdapter.ViewHolder holder, int position) {
+        BasketFavoriteShoe basketFavoriteShoe = favoriteShoes.get(position);
 //        basketFavoriteShoe.getUniquekey();
 //        basketFavoriteShoe.getSize();
 
@@ -84,9 +84,8 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
             sizeColIndex = c.getColumnIndex("size");
 
             do {
-                holder.tvBasketName.setText(c.getString(nameColIndex));
-                holder.tvBasketCoast.setText(String.valueOf(c.getInt(coastColIndex)));
-                holder.tvBasketSize.setText(basketFavoriteShoe.getSize());
+                holder.tvFavoriteName.setText(c.getString(nameColIndex));
+                holder.tvFavoriteCoast.setText(String.valueOf(c.getInt(coastColIndex)));
             } while (c.moveToNext());
         }
         c.close();
@@ -95,26 +94,25 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return basketFavoriteShoes.size();
+        return favoriteShoes.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        final ConstraintLayout clBasket;
-        final ImageView ivBasketShoe;
-        final TextView tvBasketName, tvBasketCoast, tvBasketSize;
+        final ConstraintLayout clFavorite;
+        final ImageView ivFavoriteShoe;
+        final TextView tvFavoriteName, tvFavoriteCoast;
         final Button btnDelete;
 
         ViewHolder(View view) {
             super(view);
-            clBasket = (ConstraintLayout) view.findViewById(R.id.clFavorite);
-            ivBasketShoe = (ImageView) view.findViewById(R.id.ivFavoriteShoe);
-            tvBasketName = (TextView) view.findViewById(R.id.tvFavoriteName);
-            tvBasketCoast = (TextView) view.findViewById(R.id.tvFavoriteCoast);
-            tvBasketSize = (TextView) view.findViewById(R.id.tvBasketSize);
+            clFavorite = (ConstraintLayout) view.findViewById(R.id.clFavorite);
+            ivFavoriteShoe = (ImageView) view.findViewById(R.id.ivFavoriteShoe);
+            tvFavoriteName = (TextView) view.findViewById(R.id.tvFavoriteName);
+            tvFavoriteCoast = (TextView) view.findViewById(R.id.tvFavoriteCoast);
             btnDelete = (Button) view.findViewById(R.id.btnDelete);
 
             //Переход к товару из корзины, переход к ShoesDetailedFragment
-            clBasket.setOnClickListener(new View.OnClickListener() {
+            clFavorite.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Cursor c;
@@ -124,7 +122,7 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
                     int idColIndex;
 
                     int positionIndexInShoe = 99999; // По уникальному ключу узнаем id товара в shoe и переходим к нему
-                    BasketFavoriteShoe basketFavoriteShoe = basketFavoriteShoes.get(getAdapterPosition());
+                    BasketFavoriteShoe basketFavoriteShoe = favoriteShoes.get(getAdapterPosition());
                     String uniquekey = String.valueOf(basketFavoriteShoe.getUniquekey());
 
                     dbHelper = new DataBaseHelper(context);
@@ -162,15 +160,15 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
                 public void onClick(View view) {
                     DataBaseHelper dbHelper;
 
-                    BasketFavoriteShoe basketFavoriteShoe = basketFavoriteShoes.get(getAdapterPosition());
-                    int deleteItemByUniqueKey = basketFavoriteShoe.getUniquekey();
+                    BasketFavoriteShoe favoriteShoe = favoriteShoes.get(getAdapterPosition());
+                    int deleteItemByUniqueKey = favoriteShoe.getUniquekey();
                     dbHelper = new DataBaseHelper(context);
                     SQLiteDatabase db = dbHelper.getWritableDatabase();
-                    db.delete("basket", "shoeUniquekeyBasket = " + deleteItemByUniqueKey, null);
+                    db.delete("favorite", "shoeUniquekeyBasket = " + deleteItemByUniqueKey, null);
                     dbHelper.close();
 
 
-                    basketFavoriteShoes.remove(getAdapterPosition());
+                    favoriteShoes.remove(getAdapterPosition());
                     notifyDataSetChanged();
                 }
             });

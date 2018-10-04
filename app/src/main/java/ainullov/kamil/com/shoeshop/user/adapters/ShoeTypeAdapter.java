@@ -1,4 +1,4 @@
-package ainullov.kamil.com.shoeshop.adapters;
+package ainullov.kamil.com.shoeshop.user.adapters;
 
 import android.app.Activity;
 import android.app.FragmentTransaction;
@@ -15,8 +15,8 @@ import java.util.List;
 
 import ainullov.kamil.com.shoeshop.MainActivity;
 import ainullov.kamil.com.shoeshop.R;
-import ainullov.kamil.com.shoeshop.fragments.ShowShoesFragment;
-import ainullov.kamil.com.shoeshop.pojo.ShoeType;
+import ainullov.kamil.com.shoeshop.user.fragments.ShowShoesFragment;
+import ainullov.kamil.com.shoeshop.user.pojo.ShoeType;
 
 //Вид обуви Adapter
 public class ShoeTypeAdapter extends RecyclerView.Adapter<ShoeTypeAdapter.ViewHolder> {

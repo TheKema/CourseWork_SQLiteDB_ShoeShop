@@ -1,9 +1,7 @@
-package ainullov.kamil.com.shoeshop.fragments;
+package ainullov.kamil.com.shoeshop.user.fragments;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -11,13 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import ainullov.kamil.com.shoeshop.MainActivity;
 import ainullov.kamil.com.shoeshop.R;
-import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
-import ainullov.kamil.com.shoeshop.pojo.OneShoe;
 
 public class MainFragment extends Fragment implements View.OnClickListener {
     Button btnManMain;

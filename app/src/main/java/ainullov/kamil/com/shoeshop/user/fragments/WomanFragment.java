@@ -1,4 +1,4 @@
-package ainullov.kamil.com.shoeshop.fragments;
+package ainullov.kamil.com.shoeshop.user.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import ainullov.kamil.com.shoeshop.MainActivity;
 import ainullov.kamil.com.shoeshop.R;
-import ainullov.kamil.com.shoeshop.adapters.ShoeTypeAdapter;
+import ainullov.kamil.com.shoeshop.user.adapters.ShoeTypeAdapter;
 
 //Виды женской обуви
 public class WomanFragment extends Fragment {

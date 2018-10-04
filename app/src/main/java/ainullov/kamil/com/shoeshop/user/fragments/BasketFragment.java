@@ -1,4 +1,4 @@
-package ainullov.kamil.com.shoeshop.fragments;
+package ainullov.kamil.com.shoeshop.user.fragments;
 
 import android.app.Fragment;
 import android.content.ContentValues;
@@ -18,14 +18,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
 import ainullov.kamil.com.shoeshop.R;
-import ainullov.kamil.com.shoeshop.adapters.BasketAdapter;
-import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
-import ainullov.kamil.com.shoeshop.pojo.BasketFavoriteShoe;
+import ainullov.kamil.com.shoeshop.user.adapters.BasketAdapter;
+import ainullov.kamil.com.shoeshop.user.db.DataBaseHelper;
+import ainullov.kamil.com.shoeshop.user.pojo.BasketFavoriteShoe;
 
 // Корзина
 public class BasketFragment extends Fragment implements View.OnClickListener {

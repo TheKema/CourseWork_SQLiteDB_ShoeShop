@@ -1,4 +1,4 @@
-package ainullov.kamil.com.shoeshop.fragments;
+package ainullov.kamil.com.shoeshop.user.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -9,13 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import ainullov.kamil.com.shoeshop.MainActivity;
 import ainullov.kamil.com.shoeshop.R;
-import ainullov.kamil.com.shoeshop.adapters.ShoeTypeAdapter;
-import ainullov.kamil.com.shoeshop.pojo.ShoeType;
+import ainullov.kamil.com.shoeshop.user.adapters.ShoeTypeAdapter;
+
 // Виды мужской обуви
 public class ManFragment extends Fragment {
 

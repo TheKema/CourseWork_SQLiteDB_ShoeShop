@@ -23,13 +23,14 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
-import ainullov.kamil.com.shoeshop.fragments.BasketFragment;
-import ainullov.kamil.com.shoeshop.fragments.FavoriteFragment;
-import ainullov.kamil.com.shoeshop.fragments.MainFragment;
-import ainullov.kamil.com.shoeshop.fragments.ManFragment;
-import ainullov.kamil.com.shoeshop.fragments.WomanFragment;
-import ainullov.kamil.com.shoeshop.pojo.ShoeType;
+import ainullov.kamil.com.shoeshop.R;
+import ainullov.kamil.com.shoeshop.user.db.DataBaseHelper;
+import ainullov.kamil.com.shoeshop.user.fragments.BasketFragment;
+import ainullov.kamil.com.shoeshop.user.fragments.FavoriteFragment;
+import ainullov.kamil.com.shoeshop.user.fragments.MainFragment;
+import ainullov.kamil.com.shoeshop.user.fragments.ManFragment;
+import ainullov.kamil.com.shoeshop.user.fragments.WomanFragment;
+import ainullov.kamil.com.shoeshop.user.pojo.ShoeType;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -171,6 +172,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_personal_area) {
+            ManagerFragment managerFragment = new ManagerFragment();
+            FragmentTransaction fTrans;
+            fTrans = getFragmentManager().beginTransaction();
+            fTrans.replace(R.id.container, managerFragment);
+            fTrans.addToBackStack(null);
+            fTrans.commit();
             return true;
         }
         if (id == R.id.action_basket) {
@@ -205,6 +212,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         WomanFragment womanFragment = new WomanFragment();
         BasketFragment basketFragment = new BasketFragment();
         FavoriteFragment favoriteFragment = new FavoriteFragment();
+
+        ManagerFragment managerFragment = new ManagerFragment();
+
         FragmentTransaction fTrans;
         fTrans = getFragmentManager().beginTransaction();
         int id = item.getItemId();
@@ -232,7 +242,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fTrans.replace(R.id.container, basketFragment);
             fTrans.addToBackStack(null);
         } else if (id == R.id.nav_personal_area) {
-
+            fTrans.replace(R.id.container, managerFragment);
+            fTrans.addToBackStack(null);
         }
         fTrans.commit();
 
