@@ -54,7 +54,7 @@ public class ShowShoesFragment extends Fragment {
             int quantityColIndex = c.getColumnIndex("quantity");
             int nameColIndex = c.getColumnIndex("name");
             int coastColIndex = c.getColumnIndex("coast");
-            int desciptionColIndex = c.getColumnIndex("desciption");
+            int descriptionColIndex = c.getColumnIndex("description");
             int sizeColIndex = c.getColumnIndex("size");
 
             do {
@@ -66,7 +66,7 @@ public class ShowShoesFragment extends Fragment {
                         c.getInt(quantityColIndex),
                         c.getString(nameColIndex),
                         c.getInt(coastColIndex),
-                        c.getString(desciptionColIndex),
+                        c.getString(descriptionColIndex),
                         c.getString(sizeColIndex)));
             } while (c.moveToNext());
         }

@@ -36,8 +36,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 + "name text,"
                 + "coast integer,"
                 + "provider text,"
-                + "date real,"
-                + "desciption text,"
+                + "date text,"
+                + "description text,"
                 + "size text" + ");");
     }
 
