@@ -1,4 +1,4 @@
-package ainullov.kamil.com.shoeshop;
+package ainullov.kamil.com.shoeshop.manager.orderProduct;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
@@ -20,6 +20,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Random;
 
+import ainullov.kamil.com.shoeshop.R;
 import ainullov.kamil.com.shoeshop.user.db.DataBaseHelper;
 
 public class OrderProductFragment extends Fragment implements View.OnClickListener {
@@ -89,11 +90,8 @@ public class OrderProductFragment extends Fragment implements View.OnClickListen
         final ArrayAdapter<String> adapterGender = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, strGender);
         adapterGender.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerGender.setAdapter(adapterGender);
-        // заголовок
         spinnerGender.setPrompt("Title");
         spinnerGender.setSelection(genderPosition);
-        // выделяем элемент
-        // устанавливаем обработчик нажатия
         spinnerGender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
@@ -194,16 +192,13 @@ public class OrderProductFragment extends Fragment implements View.OnClickListen
                 etProvider.setText("");
                 break;
         }
-            }
-
+    }
 
     // Проверка, есть ли такой же уникальный ключ
     public int checkRepeat(String tableName) {
         DataBaseHelper dbHelper;
         dbHelper = new DataBaseHelper(getActivity());
-        // подключение к БД
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-
         Cursor c = null;
         try {
             db = dbHelper.getReadableDatabase();

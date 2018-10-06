@@ -53,7 +53,7 @@ public class ShoesDetailedFragment extends Fragment implements View.OnClickListe
     int quantityColIndex;
     int nameColIndex;
     int coastColIndex;
-    int desciptionColIndex;
+    int descriptionColIndex;
     int sizeColIndex;
 
 
@@ -86,13 +86,16 @@ public class ShoesDetailedFragment extends Fragment implements View.OnClickListe
 
 
         Bundle bundle = this.getArguments();
-        int id = bundle.getInt("id");
+//        int id = bundle.getInt("id");
+        int uniquekey = bundle.getInt("uniquekey");
 
         dbHelper = new DataBaseHelper(getActivity());
         // подключение к БД
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        selection = "id = ?";
-        selectionArgs = new String[]{String.valueOf(id)};
+        selection = "uniquekey = ?";
+//        selection = "id = ?";
+//        selectionArgs = new String[]{String.valueOf(id)};
+        selectionArgs = new String[]{String.valueOf(uniquekey)};
         // Чтение, делаем запрос всех данных из таблицы, получаем Cursor
         c = db.query("shoe", null, selection, selectionArgs, null, null, null);
         c.moveToFirst();
@@ -104,7 +107,7 @@ public class ShoesDetailedFragment extends Fragment implements View.OnClickListe
             quantityColIndex = c.getColumnIndex("quantity");
             nameColIndex = c.getColumnIndex("name");
             coastColIndex = c.getColumnIndex("coast");
-            desciptionColIndex = c.getColumnIndex("desciption");
+            descriptionColIndex = c.getColumnIndex("description");
             sizeColIndex = c.getColumnIndex("size");
 
             do {

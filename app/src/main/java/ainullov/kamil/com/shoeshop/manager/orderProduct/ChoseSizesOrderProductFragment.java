@@ -1,4 +1,4 @@
-package ainullov.kamil.com.shoeshop;
+package ainullov.kamil.com.shoeshop.manager.orderProduct;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -14,6 +14,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import ainullov.kamil.com.shoeshop.R;
 
 public class ChoseSizesOrderProductFragment extends Fragment implements View.OnClickListener {
     Button btnAddSizes;
@@ -59,8 +61,6 @@ public class ChoseSizesOrderProductFragment extends Fragment implements View.OnC
             case R.id.btnAddSizes:
                 OrderProductFragment.size = "";
 
-                // В отдельный котел я не полезу!
-
                 int[] isizes = new int[]{Integer.valueOf(et1.getText().toString()),
                         Integer.valueOf(et3.getText().toString()), Integer.valueOf(et5.getText().toString()),
                         Integer.valueOf(et7.getText().toString()), Integer.valueOf(et9.getText().toString()),
@@ -95,7 +95,6 @@ public class ChoseSizesOrderProductFragment extends Fragment implements View.OnC
                 getActivity().getFragmentManager().popBackStack();
 
                 break;
-
 
         }
 

@@ -70,7 +70,8 @@ public class ShowShoesAdapter extends RecyclerView.Adapter<ShowShoesAdapter.View
                     ShoesDetailedFragment shoesDetailedFragment = new ShoesDetailedFragment();
 
                     Bundle bundle = new Bundle();
-                    bundle.putInt("id", shoe.getId());
+//                    bundle.putInt("id", shoe.getId());
+                    bundle.putInt("uniquekey", shoe.getUniquekey());
 //                    bundle.putString("type", shoe.getType());
 //                    bundle.putString("gender", shoe.getGender());
 //                    bundle.putInt("quantity", shoe.getQuantity());
@@ -79,6 +80,7 @@ public class ShowShoesAdapter extends RecyclerView.Adapter<ShowShoesAdapter.View
 //                    bundle.putString("desciption", shoe.getDesc());
 //                    bundle.putInt("size", shoe.getSize());
                     shoesDetailedFragment.setArguments(bundle);
+
 
                     FragmentTransaction fTrans;
                     fTrans = ((Activity) context).getFragmentManager().beginTransaction();

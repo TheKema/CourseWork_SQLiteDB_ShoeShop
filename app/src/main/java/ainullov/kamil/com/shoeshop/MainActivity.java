@@ -14,7 +14,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,7 +22,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import ainullov.kamil.com.shoeshop.R;
+import ainullov.kamil.com.shoeshop.manager.ManagerFragment;
 import ainullov.kamil.com.shoeshop.user.db.DataBaseHelper;
 import ainullov.kamil.com.shoeshop.user.fragments.BasketFragment;
 import ainullov.kamil.com.shoeshop.user.fragments.FavoriteFragment;
@@ -38,8 +37,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static String shoesTYPE = "Кроссовки";
     public static String gender = "M"; // Ж 0 - женщина, М 1 = мужчина, 2
 
-    // !ВРЕМЕННО
-    public static boolean VREMENNO = true;
 
     public static List<ShoeType> shoeTypesMan = new ArrayList<>();
     public static List<ShoeType> shoeTypesWoman = new ArrayList<>();
@@ -69,71 +66,45 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-//        if (VREMENNO) {
-//            // !ВРЕМЕННО ...
-//            DataBaseHelper dbHelper;
-//            dbHelper = new DataBaseHelper(this);
-//            // подключение к БД
-//            SQLiteDatabase db = dbHelper.getWritableDatabase();
-//
-//            ContentValues cv = new ContentValues();
-//            // подключение к БД
-//            cv.put("type", "Кроссовки");
-//            cv.put("gender", "М");
-//            cv.put("uniquekey", 0);
-//            cv.put("coast", 1399);
-//            cv.put("name", "Крос №1");
-//
-//
-//            // ArrayList, из чисел - размер обуви, превращаем в строку и суем в db, потом достанем и превратив в ArrayList
-//            ArrayList<String> items = new ArrayList<>();
-//            items.add("40");
-//            items.add("42");
-//            items.add("42");
-//            JSONObject json = new JSONObject();
-//            try {
-//                json.put("uniqueArrays", new JSONArray(items));
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-//            String arrayList = json.toString();
-//
-//            cv.put("quantity", items.size());
-//            cv.put("size", arrayList);
-//            Toast.makeText(this,"sizes "+ arrayList, Toast.LENGTH_SHORT).show();
-//            // вставляем запись
-//            db.insert("shoe", null, cv);
-//
-//            cv.put("type", "Кроссовки");
-//            cv.put("gender", "М");
-//            cv.put("uniquekey", 1);
-//            cv.put("quantity", items.size());
-//            cv.put("coast", 2239);
-//            cv.put("name", "Крос №2");
-//            db.insert("shoe", null, cv);
-//
-//            cv.put("type", "Ботинки");
-//            cv.put("gender", "Ж");
-//            cv.put("uniquekey", 2);
-//            cv.put("coast", 2990);
-//            cv.put("quantity", items.size());
-//            cv.put("name", "Ботинки №1");
-//            // вставляем запись
-//            db.insert("shoe", null, cv);
-//
-//            cv.put("type", "Кроссовки");
-//            cv.put("gender", "Ж");
-//            cv.put("uniquekey", 3);
-//            cv.put("coast", 990);
-//            cv.put("quantity", items.size());
-//            cv.put("name", "Крос №3");
-//            db.insert("shoe", null, cv);
-//
-//
-//            dbHelper.close();
-//            VREMENNO = false;
-//        }
-//        // ... ВРЕМЕННО!
+
+
+        // ВРЕМЕННО!
+        DataBaseHelper dbHelper;
+        dbHelper = new DataBaseHelper(this);
+        // подключение к БД
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+
+        cv.put("type", "Кроссовки");
+        cv.put("gender", "М");
+        cv.put("coast", 1190);
+        cv.put("name", "Кроссовки №1");
+        cv.put("description", "Обувь произведена в Италии");
+        cv.put("provider", "ОбувьДел№1");
+        cv.put("date", String.valueOf(System.currentTimeMillis()));
+//         ArrayList, из чисел - размер обуви, превращаем в строку и суем в db, потом достанем и превратив в ArrayList
+            ArrayList<String> items = new ArrayList<>();
+            items.add("40");
+            items.add("42");
+            items.add("42");
+            JSONObject json = new JSONObject();
+            try {
+                json.put("uniqueArrays", new JSONArray(items));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            String arrayList = json.toString();
+
+            cv.put("quantity", items.size());
+            cv.put("size", arrayList);
+
+            cv.put("uniquekey", 123);
+
+
+        db.insert("shoe", null, cv);
+        dbHelper.close();
+//        !!!
 
 
         shoeTypesMan.add(new ShoeType("Ботинки"));

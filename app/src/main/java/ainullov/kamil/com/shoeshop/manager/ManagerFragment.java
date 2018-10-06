@@ -1,4 +1,4 @@
-package ainullov.kamil.com.shoeshop;
+package ainullov.kamil.com.shoeshop.manager;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
@@ -8,6 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import ainullov.kamil.com.shoeshop.R;
+import ainullov.kamil.com.shoeshop.manager.orderProduct.OrderProductFragment;
+import ainullov.kamil.com.shoeshop.manager.ordersAccounting.OrdersAccountingFragment;
 
 public class ManagerFragment extends Fragment implements View.OnClickListener {
     TextView tvOrderProduct;
@@ -52,19 +56,18 @@ public class ManagerFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
 
         OrderProductFragment orderProductFragment = new OrderProductFragment();
+        OrdersAccountingFragment ordersAccountingFragment = new OrdersAccountingFragment();
         FragmentTransaction fTrans;
         fTrans = getFragmentManager().beginTransaction();
 
         switch (view.getId()) {
             case R.id.tvOrderProduct:
-//                MainActivity.manTRUEwomanFALSE = true;
-//                MainActivity.gender = "М";
                 fTrans.replace(R.id.container, orderProductFragment);
-//                getActivity().setTitle("М");
                 fTrans.addToBackStack(null);
                 break;
             case R.id.tvProvider:
-
+                fTrans.replace(R.id.container, ordersAccountingFragment);
+                fTrans.addToBackStack(null);
                 break;
             case R.id.tvStorageContent:
 

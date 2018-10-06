@@ -46,8 +46,6 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
     @Override
     public void onBindViewHolder(BasketAdapter.ViewHolder holder, int position) {
         BasketFavoriteShoe basketFavoriteShoe = basketFavoriteShoes.get(position);
-//        basketFavoriteShoe.getUniquekey();
-//        basketFavoriteShoe.getSize();
 
 //      Получаем уникальный ключ, полученный ранее из бд basket, по которому в бд shoe находим запись
         String uniquekey = String.valueOf(basketFavoriteShoe.getUniquekey());
@@ -58,13 +56,8 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
         String[] selectionArgs = null;
         int idColIndex;   // Если в нужно будет добавить дополнительную информацию в item
         int uniquekeyColIndex;
-        int typeColIndex;
-        int genderColIndex;
-        int quantityColIndex;
         int nameColIndex;
         int coastColIndex;
-        int desciptionColIndex;
-        int sizeColIndex;
 
         dbHelper = new DataBaseHelper(context);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -75,13 +68,8 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
         if (c.moveToFirst()) {
             idColIndex = c.getColumnIndex("id");
             uniquekeyColIndex = c.getColumnIndex("uniquekey");
-            typeColIndex = c.getColumnIndex("type");
-            genderColIndex = c.getColumnIndex("gender");
-            quantityColIndex = c.getColumnIndex("quantity");
             nameColIndex = c.getColumnIndex("name");
             coastColIndex = c.getColumnIndex("coast");
-            desciptionColIndex = c.getColumnIndex("desciption");
-            sizeColIndex = c.getColumnIndex("size");
 
             do {
                 holder.tvBasketName.setText(c.getString(nameColIndex));
@@ -117,35 +105,11 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
             clBasket.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Cursor c;
-                    DataBaseHelper dbHelper;
-                    String selection = null;
-                    String[] selectionArgs = null;
-                    int idColIndex;
-
-                    int positionIndexInShoe = 99999; // По уникальному ключу узнаем id товара в shoe и переходим к нему
                     BasketFavoriteShoe basketFavoriteShoe = basketFavoriteShoes.get(getAdapterPosition());
-                    String uniquekey = String.valueOf(basketFavoriteShoe.getUniquekey());
-
-                    dbHelper = new DataBaseHelper(context);
-                    SQLiteDatabase db = dbHelper.getWritableDatabase();
-                    selection = "uniquekey = ?";// по уникальному ключу из basket
-                    selectionArgs = new String[]{uniquekey}; // в таблице shoe ищем и получаем id товара для дальнейшего перехода
-                    // в фрагмент ShoesDetailedFragment, туда передаем id и в нем отображается информация
-                    c = db.query("shoe", null, selection, selectionArgs, null, null, null);
-                    c.moveToFirst();
-                    if (c.moveToFirst()) {
-                        idColIndex = c.getColumnIndex("id");
-                        do {
-                            positionIndexInShoe = c.getInt(idColIndex);
-                        } while (c.moveToNext());
-                    }
-                    c.close();
-                    dbHelper.close();
 
                     ShoesDetailedFragment shoesDetailedFragment = new ShoesDetailedFragment();
                     Bundle bundle = new Bundle();
-                    bundle.putInt("id", positionIndexInShoe);
+                    bundle.putInt("uniquekey", basketFavoriteShoe.getUniquekey());
                     shoesDetailedFragment.setArguments(bundle);
 
                     FragmentTransaction fTrans;

@@ -154,15 +154,15 @@ public class BasketFragment extends Fragment implements View.OnClickListener {
 
                             cv.put("quantity", arrayListSize.size());
                             cv.put("size", arrayList);
-                            Toast.makeText(getActivity(),"sizes "+ arrayList, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "sizes " + arrayList, Toast.LENGTH_SHORT).show();
 
 
                             // Обновляем записм в бд если >0, если =0, то удаляем
-                            if(arrayListSize.size()>0) {
+                            if (arrayListSize.size() > 0) {
 //                                db.insert("shoe", null, cv);
-                                dbChangeShoe.update("shoe", cv, "uniquekey = ?", new String[] { String.valueOf(shoeUniquekeyBasket) });
+                                dbChangeShoe.update("shoe", cv, "uniquekey = ?", new String[]{String.valueOf(shoeUniquekeyBasket)});
                             }
-                            if(arrayListSize.size()==0){
+                            if (arrayListSize.size() == 0) {
                                 dbChangeShoe.delete("shoe", "uniquekey = " + shoeUniquekeyBasket, null);
                             }
 
