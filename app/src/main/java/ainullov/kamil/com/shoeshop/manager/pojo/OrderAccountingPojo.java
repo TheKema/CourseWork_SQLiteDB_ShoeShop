@@ -1,4 +1,4 @@
-package ainullov.kamil.com.shoeshop.manager.ordersAccounting;
+package ainullov.kamil.com.shoeshop.manager.pojo;
 
 public class OrderAccountingPojo {
     private int uniquekey;

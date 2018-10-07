@@ -16,6 +16,7 @@ import java.util.Collections;
 import java.util.List;
 
 import ainullov.kamil.com.shoeshop.R;
+import ainullov.kamil.com.shoeshop.manager.pojo.OrderAccountingPojo;
 import ainullov.kamil.com.shoeshop.user.db.DataBaseHelper;
 
 

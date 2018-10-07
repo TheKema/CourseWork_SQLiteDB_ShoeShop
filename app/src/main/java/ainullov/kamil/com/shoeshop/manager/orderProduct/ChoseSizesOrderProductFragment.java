@@ -16,6 +16,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import ainullov.kamil.com.shoeshop.R;
+import ainullov.kamil.com.shoeshop.manager.storageContent.StorageContentChangeProductFragment;
 
 public class ChoseSizesOrderProductFragment extends Fragment implements View.OnClickListener {
     Button btnAddSizes;
@@ -89,8 +90,17 @@ public class ChoseSizesOrderProductFragment extends Fragment implements View.OnC
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                OrderProductFragment.size = json.toString();
-                OrderProductFragment.quantity = items.size();
+
+                Bundle bundleAddOrChange = this.getArguments();
+                String strAddOrChange = bundleAddOrChange.getString("addorchange");
+                if(strAddOrChange.equals("add")) {
+                    OrderProductFragment.size = json.toString();
+                    OrderProductFragment.quantity = items.size();
+                }else if(strAddOrChange.equals("change")) {
+                    // Чтобы не создавать новый
+                    StorageContentChangeProductFragment.size = json.toString();
+                    StorageContentChangeProductFragment.quantity = items.size();
+                }
 
                 getActivity().getFragmentManager().popBackStack();
 

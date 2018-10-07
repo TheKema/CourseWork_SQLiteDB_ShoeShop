@@ -1,9 +1,8 @@
-package ainullov.kamil.com.shoeshop.manager.orderProduct;
+package ainullov.kamil.com.shoeshop.manager.storageContent;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.ContentValues;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,12 +17,13 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import ainullov.kamil.com.shoeshop.R;
+import ainullov.kamil.com.shoeshop.manager.orderProduct.ChoseSizesOrderProductFragment;
+import ainullov.kamil.com.shoeshop.manager.orderProduct.OrderProductFragment;
 import ainullov.kamil.com.shoeshop.user.db.DataBaseHelper;
 
-public class OrderProductFragment extends Fragment implements View.OnClickListener {
+public class StorageContentChangeProductFragment extends Fragment implements View.OnClickListener {
     Spinner spinnerGender;
     Spinner spinnerType;
     EditText etName;
@@ -42,6 +42,9 @@ public class OrderProductFragment extends Fragment implements View.OnClickListen
     String[] strType = new String[]{};
     ArrayAdapter<String> adapterType;
 
+    String[] strGender = new String[]{"М", "Ж"};
+
+
     // Переменные для вставки в бд
     String gender = "М";
     String type = "Кроссовки";
@@ -50,8 +53,6 @@ public class OrderProductFragment extends Fragment implements View.OnClickListen
     String provider = "КазОдеждСтрой";
     String description = "Обувь произведена в США";
     String date = String.valueOf(System.currentTimeMillis());  // При добавлении товара считывается текущее время
-    Random random = new Random();
-    int uniquekey = random.nextInt(); // При доб. тов. добавить уникальный ключ
 
 
     // ArrayList, из чисел - размер обуви, превращаем в строку и суем в db, потом достанем и превратив в ArrayList
@@ -80,13 +81,44 @@ public class OrderProductFragment extends Fragment implements View.OnClickListen
         etDesc = (EditText) view.findViewById(R.id.etDesc);
         btnSize = (Button) view.findViewById(R.id.btnSize);
         btnAddOrder = (Button) view.findViewById(R.id.btnAddOrder);
+        btnAddOrder.setText("Изменить");
         btnClearFields = (Button) view.findViewById(R.id.btnClearFields);
         btnSize.setOnClickListener(this);
         btnAddOrder.setOnClickListener(this);
         btnClearFields.setOnClickListener(this);
 
+//Установка уже имеющихся данных
+        Bundle bundle = this.getArguments();
+        gender = bundle.getString("gender");
+        type = bundle.getString("type");
+        coast = bundle.getInt("coast");
+        name = bundle.getString("name");
+        provider = bundle.getString("provider");
+        size = bundle.getString("size");
+        description = bundle.getString("description");
+        quantity = bundle.getInt("quantity");
 
-        String[] strGender = new String[]{"М", "Ж"};
+        etName.setText(name);
+        etCoast.setText(String.valueOf(coast));
+        etProvider.setText(provider);
+        etDesc.setText(description);
+// Установка сохраненых значений в spinner'ы
+        if (gender.equals("М")) {
+            genderPosition = 0;
+            for (int i = 0; i < strTypeMan.length; i++) {
+                if (type.equals(strTypeMan[i]))
+                    typePosition = i;
+                strType = strTypeMan;
+            }
+        } else if (gender.equals("Ж")) {
+            genderPosition = 1;
+            for (int i = 0; i < strTypeWoman.length; i++) {
+                if (type.equals(strTypeWoman[i]))
+                    typePosition = i;
+                strType = strTypeWoman;
+            }
+        }
+//
         final ArrayAdapter<String> adapterGender = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, strGender);
         adapterGender.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerGender.setAdapter(adapterGender);
@@ -143,13 +175,15 @@ public class OrderProductFragment extends Fragment implements View.OnClickListen
 
                 ChoseSizesOrderProductFragment choseSizesOrderProductFragment = new ChoseSizesOrderProductFragment();
                 Bundle bundleAddOrChange = new Bundle();
-                bundleAddOrChange.putString("addorchange", "add");
+                bundleAddOrChange.putString("addorchange", "change");
                 choseSizesOrderProductFragment.setArguments(bundleAddOrChange);
+
                 FragmentTransaction fTrans;
                 fTrans = getFragmentManager().beginTransaction();
                 fTrans.replace(R.id.container, choseSizesOrderProductFragment);
                 fTrans.addToBackStack(null);
                 fTrans.commit();
+
 
                 break;
             case R.id.btnAddOrder:
@@ -174,15 +208,17 @@ public class OrderProductFragment extends Fragment implements View.OnClickListen
                 cv.put("size", size);
                 cv.put("quantity", quantity);
 
-                while (checkRepeat("shoe") != 0) {
-                    uniquekey = random.nextInt();
-                }
+                Bundle bundleUnique = this.getArguments();
+                int uniquekey = bundleUnique.getInt("uniquekey");
 
-                if (checkRepeat("shoe") == 0) {
-                    cv.put("uniquekey", uniquekey);
-                }
 
-                db.insert("shoe", null, cv);
+                String whereClause = null;
+                String[] whereArgs = null;
+                whereClause = "uniquekey = ?";
+                whereArgs = new String[]{String.valueOf(uniquekey)};
+
+
+                db.update("shoe", cv, whereClause, whereArgs);
                 dbHelper.close();
 
 
@@ -197,27 +233,4 @@ public class OrderProductFragment extends Fragment implements View.OnClickListen
         }
     }
 
-    // Проверка, есть ли такой же уникальный ключ
-    public int checkRepeat(String tableName) {
-        DataBaseHelper dbHelper;
-        dbHelper = new DataBaseHelper(getActivity());
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        Cursor c = null;
-        try {
-            db = dbHelper.getReadableDatabase();
-            String query = "select count(*) from " + tableName + " where uniquekey = ?";
-            c = db.rawQuery(query, new String[]{String.valueOf(uniquekey)});
-            if (c.moveToFirst()) {
-                return c.getInt(0);
-            }
-            return 0;
-        } finally {
-            if (c != null) {
-                c.close();
-            }
-            if (db != null) {
-                db.close();
-            }
-        }
-    }
 }

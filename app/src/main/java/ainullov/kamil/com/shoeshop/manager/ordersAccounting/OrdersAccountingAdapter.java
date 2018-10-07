@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Locale;
 
 import ainullov.kamil.com.shoeshop.R;
+import ainullov.kamil.com.shoeshop.manager.pojo.OrderAccountingPojo;
 import ainullov.kamil.com.shoeshop.user.fragments.ShoesDetailedFragment;
 
 public class OrdersAccountingAdapter extends RecyclerView.Adapter<OrdersAccountingAdapter.ViewHolder> {
@@ -87,14 +88,15 @@ public class OrdersAccountingAdapter extends RecyclerView.Adapter<OrdersAccounti
 
         ViewHolder(View view) {
             super(view);
-            clOAitem = (ConstraintLayout) view.findViewById(R.id.clOAitem);
-            tvGenderOAItem = (TextView) view.findViewById(R.id.tvGenderOAItem);
-            tvTypeOAItem = (TextView) view.findViewById(R.id.tvTypeOAItem);
-            tvNameOAItem = (TextView) view.findViewById(R.id.tvNameOAItem);
-            tvCoastOAItem = (TextView) view.findViewById(R.id.tvCoastOAItem);
-            tvProviderOAItem = (TextView) view.findViewById(R.id.tvProviderOAItem);
-            tvDateOAItem = (TextView) view.findViewById(R.id.tvDateOAItem);
-            tvSizeOAItem = (TextView) view.findViewById(R.id.tvSizeOAItem);
+            clOAitem = (ConstraintLayout) view.findViewById(R.id.clSCitem);
+            tvGenderOAItem = (TextView) view.findViewById(R.id.tvGenderSCItem);
+            tvTypeOAItem = (TextView) view.findViewById(R.id.tvTypeSCItem);
+            tvNameOAItem = (TextView) view.findViewById(R.id.tvNameSCItem);
+            tvCoastOAItem = (TextView) view.findViewById(R.id.tvCoastSCItem);
+            tvProviderOAItem = (TextView) view.findViewById(R.id.tvProviderSCItem);
+            tvDateOAItem = (TextView) view.findViewById(R.id.tvDateSCItem);
+            tvSizeOAItem = (TextView) view.findViewById(R.id.tvSizeCSItem);
+
 
             //Переход к товару переход к ShoesDetailedFragment
             clOAitem.setOnClickListener(new View.OnClickListener() {

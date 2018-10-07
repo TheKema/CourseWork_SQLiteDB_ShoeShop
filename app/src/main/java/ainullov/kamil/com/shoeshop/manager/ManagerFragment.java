@@ -12,6 +12,7 @@ import android.widget.TextView;
 import ainullov.kamil.com.shoeshop.R;
 import ainullov.kamil.com.shoeshop.manager.orderProduct.OrderProductFragment;
 import ainullov.kamil.com.shoeshop.manager.ordersAccounting.OrdersAccountingFragment;
+import ainullov.kamil.com.shoeshop.manager.storageContent.StorageContentFragment;
 
 public class ManagerFragment extends Fragment implements View.OnClickListener {
     TextView tvOrderProduct;
@@ -57,6 +58,7 @@ public class ManagerFragment extends Fragment implements View.OnClickListener {
 
         OrderProductFragment orderProductFragment = new OrderProductFragment();
         OrdersAccountingFragment ordersAccountingFragment = new OrdersAccountingFragment();
+        StorageContentFragment storageContentFragment = new StorageContentFragment();
         FragmentTransaction fTrans;
         fTrans = getFragmentManager().beginTransaction();
 
@@ -70,7 +72,8 @@ public class ManagerFragment extends Fragment implements View.OnClickListener {
                 fTrans.addToBackStack(null);
                 break;
             case R.id.tvStorageContent:
-
+                fTrans.replace(R.id.container, storageContentFragment);
+                fTrans.addToBackStack(null);
                 break;
 
             case R.id.tvSalesAccounting:
