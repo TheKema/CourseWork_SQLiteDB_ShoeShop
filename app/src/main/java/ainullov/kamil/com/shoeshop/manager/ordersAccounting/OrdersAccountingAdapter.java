@@ -88,14 +88,14 @@ public class OrdersAccountingAdapter extends RecyclerView.Adapter<OrdersAccounti
 
         ViewHolder(View view) {
             super(view);
-            clOAitem = (ConstraintLayout) view.findViewById(R.id.clSCitem);
-            tvGenderOAItem = (TextView) view.findViewById(R.id.tvGenderSCItem);
-            tvTypeOAItem = (TextView) view.findViewById(R.id.tvTypeSCItem);
-            tvNameOAItem = (TextView) view.findViewById(R.id.tvNameSCItem);
-            tvCoastOAItem = (TextView) view.findViewById(R.id.tvCoastSCItem);
-            tvProviderOAItem = (TextView) view.findViewById(R.id.tvProviderSCItem);
-            tvDateOAItem = (TextView) view.findViewById(R.id.tvDateSCItem);
-            tvSizeOAItem = (TextView) view.findViewById(R.id.tvSizeCSItem);
+            clOAitem = (ConstraintLayout) view.findViewById(R.id.clSAitem);
+            tvGenderOAItem = (TextView) view.findViewById(R.id.tvGenderSAItem);
+            tvTypeOAItem = (TextView) view.findViewById(R.id.tvTypeSAItem);
+            tvNameOAItem = (TextView) view.findViewById(R.id.tvNameSAItem);
+            tvCoastOAItem = (TextView) view.findViewById(R.id.tvCoastSAItem);
+            tvProviderOAItem = (TextView) view.findViewById(R.id.tvProviderSAItem);
+            tvDateOAItem = (TextView) view.findViewById(R.id.tvDateSAItem);
+            tvSizeOAItem = (TextView) view.findViewById(R.id.tvSizeSAItem);
 
 
             //Переход к товару переход к ShoesDetailedFragment

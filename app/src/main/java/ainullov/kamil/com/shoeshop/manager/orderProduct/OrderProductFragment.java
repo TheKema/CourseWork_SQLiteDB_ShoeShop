@@ -53,12 +53,13 @@ public class OrderProductFragment extends Fragment implements View.OnClickListen
     Random random = new Random();
     int uniquekey = random.nextInt(); // При доб. тов. добавить уникальный ключ
 
+    public static String size; // Нужно, чтобы из фрагмента можно было изменить.
+    public static int quantity;
 
     // ArrayList, из чисел - размер обуви, превращаем в строку и суем в db, потом достанем и превратив в ArrayList
     ArrayList<String> sizeArrayList = new ArrayList<>();
 
-    public static String size; // Нужно, чтобы из фрагмента можно было изменить.
-    public static int quantity;
+
 
 
     @Override

@@ -26,18 +26,28 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 + "shoeId integer,"
                 + "gender text" + ");");
 
-        //Создать поле - уникальный код товара
         sqLiteDatabase.execSQL("create table shoe ("
                 + "id integer primary key autoincrement,"
                 + "uniquekey integer,"
                 + "type text,"  // SELECT * FROM child_table WHERE parent_id = 2
                 + "gender text,"
-                + "quantity integer," // Если == 0, удалить
+                + "quantity integer,"
                 + "name text,"
                 + "coast integer,"
                 + "provider text,"
                 + "date text,"
                 + "description text,"
+                + "size text" + ");");
+
+        sqLiteDatabase.execSQL("create table sold ("
+                + "id integer primary key autoincrement,"
+                + "uniquekey integer,"
+                + "type text,"  // SELECT * FROM child_table WHERE parent_id = 2
+                + "gender text,"
+                + "name text,"
+                + "coast integer,"
+                + "provider text,"
+                + "solddate text," //
                 + "size text" + ");");
     }
 

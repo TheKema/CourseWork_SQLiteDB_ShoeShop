@@ -93,14 +93,14 @@ public class StorageContentAdapter extends RecyclerView.Adapter<StorageContentAd
 
         ViewHolder(View view) {
             super(view);
-            clCSitem = (ConstraintLayout) view.findViewById(R.id.clSCitem);
-            tvGenderCSItem = (TextView) view.findViewById(R.id.tvGenderSCItem);
-            tvTypeCSItem = (TextView) view.findViewById(R.id.tvTypeSCItem);
-            tvNameCSItem = (TextView) view.findViewById(R.id.tvNameSCItem);
-            tvCoastCSItem = (TextView) view.findViewById(R.id.tvCoastSCItem);
-            tvProviderCSItem = (TextView) view.findViewById(R.id.tvProviderSCItem);
-            tvDateCSItem = (TextView) view.findViewById(R.id.tvDateSCItem);
-            tvSizeCSItem = (TextView) view.findViewById(R.id.tvSizeCSItem);
+            clCSitem = (ConstraintLayout) view.findViewById(R.id.clSAitem);
+            tvGenderCSItem = (TextView) view.findViewById(R.id.tvGenderSAItem);
+            tvTypeCSItem = (TextView) view.findViewById(R.id.tvTypeSAItem);
+            tvNameCSItem = (TextView) view.findViewById(R.id.tvNameSAItem);
+            tvCoastCSItem = (TextView) view.findViewById(R.id.tvCoastSAItem);
+            tvProviderCSItem = (TextView) view.findViewById(R.id.tvProviderSAItem);
+            tvDateCSItem = (TextView) view.findViewById(R.id.tvDateSAItem);
+            tvSizeCSItem = (TextView) view.findViewById(R.id.tvSizeSAItem);
             imageBtnDel = (ImageButton) view.findViewById(R.id.imageBtnDel);
             imageBtnChange = (ImageButton) view.findViewById(R.id.imageBtnChange);
 

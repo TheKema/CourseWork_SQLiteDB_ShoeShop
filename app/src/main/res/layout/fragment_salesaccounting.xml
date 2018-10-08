@@ -18,7 +18,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvSalesAccounting"
         android:layout_width="368dp"
-        android:layout_height="459dp"
+        android:layout_height="422dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -26,7 +26,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerTypeSA" />
+        app:layout_constraintTop_toBottomOf="@+id/tvSoldSumSA" />
 
     <Spinner
         android:id="@+id/spinnerTypeSA"
@@ -47,4 +47,16 @@
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toEndOf="@+id/tv1SA"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvSoldSumSA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Продано: 9 пар(а) на сумму: 22980 руб."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerGenderSA" />
 </android.support.constraint.ConstraintLayout>

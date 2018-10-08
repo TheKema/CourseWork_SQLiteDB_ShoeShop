@@ -12,6 +12,7 @@ import android.widget.TextView;
 import ainullov.kamil.com.shoeshop.R;
 import ainullov.kamil.com.shoeshop.manager.orderProduct.OrderProductFragment;
 import ainullov.kamil.com.shoeshop.manager.ordersAccounting.OrdersAccountingFragment;
+import ainullov.kamil.com.shoeshop.manager.salesAccounting.SalesAccountingFragment;
 import ainullov.kamil.com.shoeshop.manager.storageContent.StorageContentFragment;
 
 public class ManagerFragment extends Fragment implements View.OnClickListener {
@@ -59,6 +60,7 @@ public class ManagerFragment extends Fragment implements View.OnClickListener {
         OrderProductFragment orderProductFragment = new OrderProductFragment();
         OrdersAccountingFragment ordersAccountingFragment = new OrdersAccountingFragment();
         StorageContentFragment storageContentFragment = new StorageContentFragment();
+        SalesAccountingFragment salesAccountingFragment = new SalesAccountingFragment();
         FragmentTransaction fTrans;
         fTrans = getFragmentManager().beginTransaction();
 
@@ -77,7 +79,8 @@ public class ManagerFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.tvSalesAccounting:
-
+                fTrans.replace(R.id.container, salesAccountingFragment);
+                fTrans.addToBackStack(null);
                 break;
             case R.id.tvDayResults:
 

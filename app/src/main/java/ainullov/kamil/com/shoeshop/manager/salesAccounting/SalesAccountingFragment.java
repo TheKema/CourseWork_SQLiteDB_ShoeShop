@@ -1,4 +1,4 @@
-package ainullov.kamil.com.shoeshop.manager.storageContent;
+package ainullov.kamil.com.shoeshop.manager.salesAccounting;
 
 import android.app.Fragment;
 import android.database.Cursor;
@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -23,7 +24,11 @@ import ainullov.kamil.com.shoeshop.R;
 import ainullov.kamil.com.shoeshop.manager.pojo.OrderAccountingPojo;
 import ainullov.kamil.com.shoeshop.user.db.DataBaseHelper;
 
-public class StorageContentFragment extends Fragment {
+public class SalesAccountingFragment extends Fragment {
+
+    // Будет использоваться для sold дб,
+    // вместо date будет  solddate
+    // вместо size в виде json будет один размер
     List<OrderAccountingPojo> orderAccountingPojos = new ArrayList<>();
     Cursor c;
     DataBaseHelper dbHelper;
@@ -33,17 +38,15 @@ public class StorageContentFragment extends Fragment {
     int uniquekeyColIndex;
     int typeColIndex;
     int genderColIndex;
-    int quantityColIndex;
     int nameColIndex;
     int coastColIndex;
     int providerColIndex;
-    int dateColIndex;
-    int descriptionColIndex;
+    int solddateColIndex;
     int sizeColIndex;
 
     Spinner spinnerGenderStorageContent;
     Spinner spinnerTypeStorageContent;
-
+    TextView tvSoldSumSA;
 
     private static int genderPosition = 0;
     private static int typePosition = 0;
@@ -58,7 +61,7 @@ public class StorageContentFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_storagecontent, container, false);
+        return inflater.inflate(R.layout.fragment_salesaccounting, container, false);
 
     }
 
@@ -69,7 +72,7 @@ public class StorageContentFragment extends Fragment {
 
         spinnerGenderStorageContent = (Spinner) view.findViewById(R.id.spinnerGenderSA);
         spinnerTypeStorageContent = (Spinner) view.findViewById(R.id.spinnerTypeSA);
-
+        tvSoldSumSA = (TextView) view.findViewById(R.id.tvSoldSumSA);
 
         String[] strGender = new String[]{"М", "Ж"};
         final ArrayAdapter<String> adapterGender = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, strGender);
@@ -114,45 +117,46 @@ public class StorageContentFragment extends Fragment {
                 type = adapterType.getItem(position);
                 typePosition = position;
 
+                // Подсчет суммы проданного
+                int soldSum = 0;
 
                 dbHelper = new DataBaseHelper(getActivity());
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
                 selection = "type = ? AND gender = ?";
                 selectionArgs = new String[]{type, gender};
-                c = db.query("shoe", null, selection, selectionArgs, null, null, null);
+                c = db.query("sold", null, selection, selectionArgs, null, null, null);
                 c.moveToFirst();
                 if (c.moveToFirst()) {
                     uniquekeyColIndex = c.getColumnIndex("uniquekey");
                     typeColIndex = c.getColumnIndex("type");
                     genderColIndex = c.getColumnIndex("gender");
-                    quantityColIndex = c.getColumnIndex("quantity");
                     nameColIndex = c.getColumnIndex("name");
                     coastColIndex = c.getColumnIndex("coast");
                     providerColIndex = c.getColumnIndex("provider");
-                    dateColIndex = c.getColumnIndex("date");
-                    descriptionColIndex = c.getColumnIndex("description");
+                    solddateColIndex = c.getColumnIndex("solddate");
                     sizeColIndex = c.getColumnIndex("size");
 
                     do {
                         orderAccountingPojos.add(new OrderAccountingPojo(c.getInt(uniquekeyColIndex),
                                 c.getString(typeColIndex),
                                 c.getString(genderColIndex),
-                                c.getInt(quantityColIndex),
                                 c.getString(nameColIndex),
                                 c.getInt(coastColIndex),
                                 c.getString(providerColIndex),
-                                c.getString(dateColIndex),
-                                c.getString(descriptionColIndex),
+                                c.getString(solddateColIndex),
                                 c.getString(sizeColIndex)));
+                        soldSum += c.getInt(coastColIndex);
                     } while (c.moveToNext());
                 }
                 c.close();
                 dbHelper.close();
 
+                tvSoldSumSA.setText("Продано " + orderAccountingPojos.size() + " пар(ы/а) на сумму: " + soldSum + " руб.");
+
                 Collections.reverse(orderAccountingPojos);
                 RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.rvSalesAccounting);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                StorageContentAdapter adapter = new StorageContentAdapter(getActivity(), orderAccountingPojos);
+                SalesAccountingAdapter adapter = new SalesAccountingAdapter(getActivity(), orderAccountingPojos);
                 recyclerView.setAdapter(adapter);
 
             }
@@ -161,7 +165,6 @@ public class StorageContentFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> arg0) {
             }
         });
-
 
     }
 

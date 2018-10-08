@@ -29,6 +29,17 @@ public class OrderAccountingPojo {
         this.size = size;
     }
 
+    public OrderAccountingPojo(int uniquekey, String type, String gender, String name, int coast, String provider, String solddate, String size) {
+        this.uniquekey = uniquekey;
+        this.type = type;
+        this.gender = gender;
+        this.name = name;
+        this.coast = coast;
+        this.provider = provider;
+        this.date = solddate;
+        this.size = size;
+    }
+
     public int getUniquekey() {
         return uniquekey;
     }

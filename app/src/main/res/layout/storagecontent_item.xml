@@ -2,12 +2,12 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/clSCitem"
+    android:id="@+id/clSAitem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/tvGenderSCItem"
+        android:id="@+id/tvGenderSAItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -17,17 +17,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvTypeSCItem"
+        android:id="@+id/tvTypeSAItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Вид: Кроссовки"
-        app:layout_constraintStart_toEndOf="@+id/tvGenderSCItem"
+        app:layout_constraintStart_toEndOf="@+id/tvGenderSAItem"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvNameSCItem"
+        android:id="@+id/tvNameSAItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -37,10 +37,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvGenderSCItem" />
+        app:layout_constraintTop_toBottomOf="@+id/tvGenderSAItem" />
 
     <TextView
-        android:id="@+id/tvCoastSCItem"
+        android:id="@+id/tvCoastSAItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -50,10 +50,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvNameSCItem" />
+        app:layout_constraintTop_toBottomOf="@+id/tvNameSAItem" />
 
     <TextView
-        android:id="@+id/tvProviderSCItem"
+        android:id="@+id/tvProviderSAItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -63,10 +63,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCoastSCItem" />
+        app:layout_constraintTop_toBottomOf="@+id/tvCoastSAItem" />
 
     <TextView
-        android:id="@+id/tvDateSCItem"
+        android:id="@+id/tvDateSAItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -76,10 +76,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvProviderSCItem" />
+        app:layout_constraintTop_toBottomOf="@+id/tvProviderSAItem" />
 
     <TextView
-        android:id="@+id/tvSizeCSItem"
+        android:id="@+id/tvSizeSAItem"
         android:layout_width="366dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -89,7 +89,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDateSCItem" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDateSAItem" />
 
     <View
         android:layout_width="match_parent"
@@ -100,7 +100,7 @@
         android:background="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvSizeCSItem" />
+        app:layout_constraintTop_toBottomOf="@+id/tvSizeSAItem" />
 
     <ImageButton
         android:id="@+id/imageBtnDel"
