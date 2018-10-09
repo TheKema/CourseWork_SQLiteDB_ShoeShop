@@ -44,8 +44,8 @@ public class SalesAccountingFragment extends Fragment {
     int solddateColIndex;
     int sizeColIndex;
 
-    Spinner spinnerGenderStorageContent;
-    Spinner spinnerTypeStorageContent;
+    Spinner spinnerGenderSalesAccounting;
+    Spinner spinnerTypeSalesAccounting;
     TextView tvSoldSumSA;
 
     private static int genderPosition = 0;
@@ -70,17 +70,17 @@ public class SalesAccountingFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         orderAccountingPojos.clear();
 
-        spinnerGenderStorageContent = (Spinner) view.findViewById(R.id.spinnerGenderSA);
-        spinnerTypeStorageContent = (Spinner) view.findViewById(R.id.spinnerTypeSA);
+        spinnerGenderSalesAccounting = (Spinner) view.findViewById(R.id.spinnerGenderSA);
+        spinnerTypeSalesAccounting = (Spinner) view.findViewById(R.id.spinnerTypeSA);
         tvSoldSumSA = (TextView) view.findViewById(R.id.tvSoldSumSA);
 
         String[] strGender = new String[]{"М", "Ж"};
         final ArrayAdapter<String> adapterGender = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, strGender);
         adapterGender.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerGenderStorageContent.setAdapter(adapterGender);
-        spinnerGenderStorageContent.setPrompt("Title");
-        spinnerGenderStorageContent.setSelection(genderPosition);
-        spinnerGenderStorageContent.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnerGenderSalesAccounting.setAdapter(adapterGender);
+        spinnerGenderSalesAccounting.setPrompt("Title");
+        spinnerGenderSalesAccounting.setSelection(genderPosition);
+        spinnerGenderSalesAccounting.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
@@ -95,10 +95,10 @@ public class SalesAccountingFragment extends Fragment {
                 genderPosition = position;
                 adapterType = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, strType);
                 adapterType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinnerTypeStorageContent.setAdapter(adapterType);
+                spinnerTypeSalesAccounting.setAdapter(adapterType);
                 // заголовок
-                spinnerTypeStorageContent.setPrompt("Title");
-                spinnerTypeStorageContent.setSelection(typePosition);
+                spinnerTypeSalesAccounting.setPrompt("Title");
+                spinnerTypeSalesAccounting.setSelection(typePosition);
 
             }
 
@@ -107,7 +107,7 @@ public class SalesAccountingFragment extends Fragment {
             }
         });
 
-        spinnerTypeStorageContent.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnerTypeSalesAccounting.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {

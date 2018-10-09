@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import ainullov.kamil.com.shoeshop.R;
+import ainullov.kamil.com.shoeshop.manager.dayResults.DayResultsFragment;
 import ainullov.kamil.com.shoeshop.manager.orderProduct.OrderProductFragment;
 import ainullov.kamil.com.shoeshop.manager.ordersAccounting.OrdersAccountingFragment;
 import ainullov.kamil.com.shoeshop.manager.salesAccounting.SalesAccountingFragment;
@@ -61,6 +62,7 @@ public class ManagerFragment extends Fragment implements View.OnClickListener {
         OrdersAccountingFragment ordersAccountingFragment = new OrdersAccountingFragment();
         StorageContentFragment storageContentFragment = new StorageContentFragment();
         SalesAccountingFragment salesAccountingFragment = new SalesAccountingFragment();
+        DayResultsFragment dayResultsFragment = new DayResultsFragment();
         FragmentTransaction fTrans;
         fTrans = getFragmentManager().beginTransaction();
 
@@ -78,12 +80,13 @@ public class ManagerFragment extends Fragment implements View.OnClickListener {
                 fTrans.addToBackStack(null);
                 break;
 
-            case R.id.tvSalesAccounting:
+            case R.id.tvSalesAccounting:  /// Могут быть ошибки, т.к. id в layout'ах  смешались с storageContentFragment, ИСПРАВИТЬ!
                 fTrans.replace(R.id.container, salesAccountingFragment);
                 fTrans.addToBackStack(null);
                 break;
             case R.id.tvDayResults:
-
+                fTrans.replace(R.id.container, dayResultsFragment);
+                fTrans.addToBackStack(null);
                 break;
             case R.id.tvSalesVolume:
 

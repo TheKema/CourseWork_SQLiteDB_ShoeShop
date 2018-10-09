@@ -46,7 +46,7 @@ public class BasketFragment extends Fragment implements View.OnClickListener {
     int uniquekey = random.nextInt(); // При доб. тов. добавить уникальный ключ
 
     String size = "41";
-//    public static String size; // Нужно, чтобы из фрагмента можно было изменить.
+    //    public static String size; // Нужно, чтобы из фрагмента можно было изменить.
 //    public static int quantity;
     int typeColIndex;
     int genderColIndex;
@@ -107,54 +107,8 @@ public class BasketFragment extends Fragment implements View.OnClickListener {
             case R.id.btnBuy:
 
                 // Пока отдельно реализую добавление в sold (1) и удаление из shoe (2)
+
                 // (1)
-
-
-//                cv.put("type", type);
-//                cv.put("gender", gender);
-//                cv.put("coast", coast);
-//                cv.put("name", name);
-//                cv.put("description", description);
-//                cv.put("provider", provider);
-//                cv.put("date", date);
-//                cv.put("size", size);
-//                cv.put("quantity", quantity);
-//
-//                while (checkRepeat("shoe") != 0) {
-//                    uniquekey = random.nextInt();
-//                }
-//
-//                if (checkRepeat("shoe") == 0) {
-//                    cv.put("uniquekey", uniquekey);
-//                }
-//
-//                db.insert("shoe", null, cv);
-
-//                // Проверка, есть ли такой же уникальный ключ
-//                public int checkRepeat(String tableName) {
-//                DataBaseHelper dbHelper;
-//                dbHelper = new DataBaseHelper(getActivity());
-//                SQLiteDatabase db = dbHelper.getWritableDatabase();
-//                Cursor c = null;
-//                try {
-//                    db = dbHelper.getReadableDatabase();
-//                    String query = "select count(*) from " + tableName + " where uniquekey = ?";
-//                    c = db.rawQuery(query, new String[]{String.valueOf(uniquekey)});
-//                    if (c.moveToFirst()) {
-//                        return c.getInt(0);
-//                    }
-//                    return 0;
-//                } finally {
-//                    if (c != null) {
-//                        c.close();
-//                    }
-//                    if (db != null) {
-//                        db.close();
-//                    }
-//                }
-//            }
-
-
                 // Прохождение по всем товарам списка
                 for (int i = 0; i < basketFavoriteShoes.size(); i++) {
 
@@ -223,12 +177,7 @@ public class BasketFragment extends Fragment implements View.OnClickListener {
                     dbSold.insert("sold", null, cvSold);
                     dbHelperSold.close();
 
-
-
                 }
-
-
-
 
 
                 // (2)
@@ -284,7 +233,6 @@ public class BasketFragment extends Fragment implements View.OnClickListener {
                             }
 
                             // Удаляем размер, который был только что куплен
-                            //
                             // Сделал не в цикле удаление( засунув в скобки j), т.к.
                             // вроде только при помощи итератора можно итерироваться и удалять одновременно // Проверить!
                             arrayListSize.remove(deleteNumber);
@@ -336,27 +284,27 @@ public class BasketFragment extends Fragment implements View.OnClickListener {
 //        fTrans.commit();
     }
 
-//     Проверка, есть ли такой же уникальный ключ для db sold
-                public int checkRepeat(String tableName) {
-                DataBaseHelper dbHelper;
-                dbHelper = new DataBaseHelper(getActivity());
-                SQLiteDatabase db = dbHelper.getWritableDatabase();
-                Cursor c = null;
-                try {
-                    db = dbHelper.getReadableDatabase();
-                    String query = "select count(*) from " + tableName + " where uniquekey = ?";
-                    c = db.rawQuery(query, new String[]{String.valueOf(uniquekey)});
-                    if (c.moveToFirst()) {
-                        return c.getInt(0);
-                    }
-                    return 0;
-                } finally {
-                    if (c != null) {
-                        c.close();
-                    }
-                    if (db != null) {
-                        db.close();
-                    }
-                }
+    //     Проверка, есть ли такой же уникальный ключ для db sold
+    public int checkRepeat(String tableName) {
+        DataBaseHelper dbHelper;
+        dbHelper = new DataBaseHelper(getActivity());
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        Cursor c = null;
+        try {
+            db = dbHelper.getReadableDatabase();
+            String query = "select count(*) from " + tableName + " where uniquekey = ?";
+            c = db.rawQuery(query, new String[]{String.valueOf(uniquekey)});
+            if (c.moveToFirst()) {
+                return c.getInt(0);
             }
+            return 0;
+        } finally {
+            if (c != null) {
+                c.close();
+            }
+            if (db != null) {
+                db.close();
+            }
+        }
+    }
 }

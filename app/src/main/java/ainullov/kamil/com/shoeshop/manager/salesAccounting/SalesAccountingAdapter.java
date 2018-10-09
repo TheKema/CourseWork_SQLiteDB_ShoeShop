@@ -74,6 +74,7 @@ public class SalesAccountingAdapter extends RecyclerView.Adapter<SalesAccounting
             tvSizeSAItem = (TextView) view.findViewById(R.id.tvSizeSAItem);
 
 
+
         }
     }
 }
