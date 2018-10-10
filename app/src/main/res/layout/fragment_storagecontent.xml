@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/tv1SA"
+        android:id="@+id/tv1"
         android:layout_width="64dp"
         android:layout_height="24dp"
         android:layout_marginStart="8dp"
@@ -26,25 +26,25 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerTypeSA" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerType" />
 
     <Spinner
-        android:id="@+id/spinnerTypeSA"
+        android:id="@+id/spinnerType"
         android:layout_width="197dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/spinnerGenderSA"
+        app:layout_constraintStart_toEndOf="@+id/spinnerGender"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/spinnerGenderSA"
+        android:id="@+id/spinnerGender"
         android:layout_width="81dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintStart_toEndOf="@+id/tv1SA"
+        app:layout_constraintStart_toEndOf="@+id/tv1"
         app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

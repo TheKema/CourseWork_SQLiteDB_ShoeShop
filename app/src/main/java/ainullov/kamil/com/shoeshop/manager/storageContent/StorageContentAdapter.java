@@ -93,12 +93,12 @@ public class StorageContentAdapter extends RecyclerView.Adapter<StorageContentAd
 
         ViewHolder(View view) {
             super(view);
-            clCSitem = (ConstraintLayout) view.findViewById(R.id.clSAitem);
-            tvGenderCSItem = (TextView) view.findViewById(R.id.tvGenderSAItem);
-            tvTypeCSItem = (TextView) view.findViewById(R.id.tvTypeSAItem);
-            tvNameCSItem = (TextView) view.findViewById(R.id.tvNameSAItem);
-            tvCoastCSItem = (TextView) view.findViewById(R.id.tvCoastSAItem);
-            tvProviderCSItem = (TextView) view.findViewById(R.id.tvProviderSAItem);
+            clCSitem = (ConstraintLayout) view.findViewById(R.id.clitem);
+            tvGenderCSItem = (TextView) view.findViewById(R.id.tvGenderItem);
+            tvTypeCSItem = (TextView) view.findViewById(R.id.tvTypeItem);
+            tvNameCSItem = (TextView) view.findViewById(R.id.tvNameItem);
+            tvCoastCSItem = (TextView) view.findViewById(R.id.tvCoastItem);
+            tvProviderCSItem = (TextView) view.findViewById(R.id.tvProviderItem);
             tvDateCSItem = (TextView) view.findViewById(R.id.tvDateSAItem);
             tvSizeCSItem = (TextView) view.findViewById(R.id.tvSizeSAItem);
             imageBtnDel = (ImageButton) view.findViewById(R.id.imageBtnDel);

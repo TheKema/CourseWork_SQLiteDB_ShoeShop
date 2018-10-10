@@ -88,12 +88,12 @@ public class OrdersAccountingAdapter extends RecyclerView.Adapter<OrdersAccounti
 
         ViewHolder(View view) {
             super(view);
-            clOAitem = (ConstraintLayout) view.findViewById(R.id.clSAitem);
-            tvGenderOAItem = (TextView) view.findViewById(R.id.tvGenderSAItem);
-            tvTypeOAItem = (TextView) view.findViewById(R.id.tvTypeSAItem);
-            tvNameOAItem = (TextView) view.findViewById(R.id.tvNameSAItem);
-            tvCoastOAItem = (TextView) view.findViewById(R.id.tvCoastSAItem);
-            tvProviderOAItem = (TextView) view.findViewById(R.id.tvProviderSAItem);
+            clOAitem = (ConstraintLayout) view.findViewById(R.id.clitem);
+            tvGenderOAItem = (TextView) view.findViewById(R.id.tvGenderItem);
+            tvTypeOAItem = (TextView) view.findViewById(R.id.tvTypeItem);
+            tvNameOAItem = (TextView) view.findViewById(R.id.tvNameItem);
+            tvCoastOAItem = (TextView) view.findViewById(R.id.tvCoastItem);
+            tvProviderOAItem = (TextView) view.findViewById(R.id.tvProviderItem);
             tvDateOAItem = (TextView) view.findViewById(R.id.tvDateSAItem);
             tvSizeOAItem = (TextView) view.findViewById(R.id.tvSizeSAItem);
 

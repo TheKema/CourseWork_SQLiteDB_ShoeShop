@@ -1,4 +1,4 @@
-package ainullov.kamil.com.shoeshop.manager.dayResults;
+package ainullov.kamil.com.shoeshop.manager.salesVolume;
 
 import android.app.Fragment;
 import android.database.Cursor;
@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,7 +28,7 @@ import ainullov.kamil.com.shoeshop.R;
 import ainullov.kamil.com.shoeshop.manager.pojo.OrderAccountingPojo;
 import ainullov.kamil.com.shoeshop.user.db.DataBaseHelper;
 
-public class DayResultsFragment extends Fragment {
+public class SalesVolumeFragment extends Fragment implements View.OnClickListener {
 
     // Будет использоваться для sold дб,
     // вместо date будет  solddate
@@ -46,12 +48,16 @@ public class DayResultsFragment extends Fragment {
     int solddateColIndex;
     int sizeColIndex;
 
-    Spinner spinnerGenderStorageContent;
-    Spinner spinnerTypeStorageContent;
-    TextView tvSoldSumSA;
+    Spinner spinnerGenderSalesVolume;
+    Spinner spinnerTypeSalesVolume;
+    Spinner spinnerDateSalesVolume;
+    TextView tvSoldSumSV;
+    EditText etDate;
+    Button btnGet;
 
     private static int genderPosition = 0;
     private static int typePosition = 0;
+    private static int datePosition = 0;
     String[] strTypeMan = new String[]{"Ботинки", "Кеды", "Кроссовки", "Туфли"};
     String[] strTypeWoman = new String[]{"Ботинки", "Кеды", "Кроссовки", "Туфли", "Сапоги", "Балетки"};
     String[] strType = new String[]{};
@@ -60,10 +66,16 @@ public class DayResultsFragment extends Fragment {
     String gender = "М";
     String type = "Кроссовки";
 
+    String date = "08.11.2018"; // ПРОВЕРИТЬ!
+
+
+    // Подсчет суммы проданного
+    int soldSum;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_dayresults, container, false);
+        return inflater.inflate(R.layout.fragment_salesvolume, container, false);
 
     }
 
@@ -72,17 +84,21 @@ public class DayResultsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         orderAccountingPojos.clear();
 
-        spinnerGenderStorageContent = (Spinner) view.findViewById(R.id.spinnerGender);
-        spinnerTypeStorageContent = (Spinner) view.findViewById(R.id.spinnerType);
-        tvSoldSumSA = (TextView) view.findViewById(R.id.tvSoldSum);
+        spinnerGenderSalesVolume = (Spinner) view.findViewById(R.id.spinnerGender);
+        spinnerTypeSalesVolume = (Spinner) view.findViewById(R.id.spinnerType);
+        spinnerDateSalesVolume = (Spinner) view.findViewById(R.id.spinnerDate);
+        tvSoldSumSV = (TextView) view.findViewById(R.id.tvSoldSum);
+        etDate = (EditText) view.findViewById(R.id.etDate);
+        btnGet = (Button) view.findViewById(R.id.btnGet);
+        btnGet.setOnClickListener(this);
 
         String[] strGender = new String[]{"М", "Ж", "Все"};
         final ArrayAdapter<String> adapterGender = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, strGender);
         adapterGender.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerGenderStorageContent.setAdapter(adapterGender);
-        spinnerGenderStorageContent.setPrompt("Title");
-        spinnerGenderStorageContent.setSelection(genderPosition);
-        spinnerGenderStorageContent.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnerGenderSalesVolume.setAdapter(adapterGender);
+        spinnerGenderSalesVolume.setPrompt("Title");
+        spinnerGenderSalesVolume.setSelection(genderPosition);
+        spinnerGenderSalesVolume.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
@@ -90,7 +106,7 @@ public class DayResultsFragment extends Fragment {
                 gender = adapterGender.getItem(position);
                 Toast.makeText(getActivity(), "type " + type + " gender " + gender, Toast.LENGTH_SHORT).show();
                 if (gender.equals("М") || gender.equals("Ж")) {
-                    spinnerTypeStorageContent.setVisibility(View.VISIBLE);
+                    spinnerTypeSalesVolume.setVisibility(View.VISIBLE);
 
                     if (gender.equals("М"))
                         strType = strTypeMan;
@@ -100,17 +116,16 @@ public class DayResultsFragment extends Fragment {
                     genderPosition = position;
                     adapterType = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, strType);
                     adapterType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spinnerTypeStorageContent.setAdapter(adapterType);
+                    spinnerTypeSalesVolume.setAdapter(adapterType);
                     // заголовок
-                    spinnerTypeStorageContent.setPrompt("Title");
-                    spinnerTypeStorageContent.setSelection(typePosition);
+                    spinnerTypeSalesVolume.setPrompt("Title");
+                    spinnerTypeSalesVolume.setSelection(typePosition);
 
 
                 } else if (gender.equals("Все")) {
-                    spinnerTypeStorageContent.setVisibility(View.INVISIBLE);
+                    spinnerTypeSalesVolume.setVisibility(View.INVISIBLE);
 
                     orderAccountingPojos.clear();
-
 
                     // Подсчет суммы проданного
                     int soldSum = 0;
@@ -153,12 +168,12 @@ public class DayResultsFragment extends Fragment {
                     c.close();
                     dbHelper.close();
 
-                    tvSoldSumSA.setText("Сегодня продано " + orderAccountingPojos.size() + " пар(ы/а) на сумму: " + soldSum + " руб.");
+                    tvSoldSumSV.setText("Продано " + orderAccountingPojos.size() + " пар(ы/а) на сумму: " + soldSum + " руб.");
 
                     Collections.reverse(orderAccountingPojos);
                     RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.rvSalesAccounting);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                    DayResultsAdapter adapter = new DayResultsAdapter(getActivity(), orderAccountingPojos);
+                    SalesVolumeAdapter adapter = new SalesVolumeAdapter(getActivity(), orderAccountingPojos);
                     recyclerView.setAdapter(adapter);
 
 
@@ -170,7 +185,8 @@ public class DayResultsFragment extends Fragment {
             }
         });
 
-        spinnerTypeStorageContent.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+        spinnerTypeSalesVolume.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
@@ -180,11 +196,61 @@ public class DayResultsFragment extends Fragment {
                 type = adapterType.getItem(position);
                 typePosition = position;
 
-                // Подсчет суммы проданного
-                int soldSum = 0;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
+
+
+        String[] strDate = new String[]{"День", "Месяц"};
+        final ArrayAdapter<String> adapterDay = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, strDate);
+        adapterDay.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerDateSalesVolume.setAdapter(adapterDay);
+//        spinnerDateSalesVolume.setPrompt("Title");
+//        spinnerDateSalesVolume.setSelection(genderPosition);
+        spinnerDateSalesVolume.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+
+                date = adapterDay.getItem(position);
+                Toast.makeText(getActivity(), "date " + date, Toast.LENGTH_SHORT).show();
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
+
+    }
+
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btnGet:
+                orderAccountingPojos.clear();
 
                 SimpleDateFormat formatDayOfWeek = new SimpleDateFormat("dd.MM.yy", Locale.ENGLISH);
                 String today = formatDayOfWeek.format(System.currentTimeMillis());
+
+                if (!etDate.getText().toString().equals(null) || !etDate.getText().toString().equals("")) {
+                    if (date.equals("День")) {
+                        formatDayOfWeek = new SimpleDateFormat("dd.MM.yy", Locale.ENGLISH);
+                        today = etDate.getText().toString();
+
+                    } else if (date.equals("Месяц")) {
+                        formatDayOfWeek = new SimpleDateFormat("MM.yy", Locale.ENGLISH);
+                        today = etDate.getText().toString();
+
+                    }
+                }
+
+                soldSum = 0;
 
 
                 dbHelper = new DataBaseHelper(getActivity());
@@ -225,22 +291,16 @@ public class DayResultsFragment extends Fragment {
                 c.close();
                 dbHelper.close();
 
-                tvSoldSumSA.setText("Сегодня продано " + orderAccountingPojos.size() + " пар(ы/а) на сумму: " + soldSum + " руб.");
+                tvSoldSumSV.setText("Сегодня продано " + orderAccountingPojos.size() + " пар(ы/а) на сумму: " + soldSum + " руб.");
 
                 Collections.reverse(orderAccountingPojos);
                 RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.rvSalesAccounting);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                DayResultsAdapter adapter = new DayResultsAdapter(getActivity(), orderAccountingPojos);
+                SalesVolumeAdapter adapter = new SalesVolumeAdapter(getActivity(), orderAccountingPojos);
                 recyclerView.setAdapter(adapter);
 
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
-            }
-        });
-
+                break;
+        }
     }
-
-
 }

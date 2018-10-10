@@ -14,6 +14,8 @@ import ainullov.kamil.com.shoeshop.manager.dayResults.DayResultsFragment;
 import ainullov.kamil.com.shoeshop.manager.orderProduct.OrderProductFragment;
 import ainullov.kamil.com.shoeshop.manager.ordersAccounting.OrdersAccountingFragment;
 import ainullov.kamil.com.shoeshop.manager.salesAccounting.SalesAccountingFragment;
+import ainullov.kamil.com.shoeshop.manager.salesVolume.SalesVolumeAdapter;
+import ainullov.kamil.com.shoeshop.manager.salesVolume.SalesVolumeFragment;
 import ainullov.kamil.com.shoeshop.manager.storageContent.StorageContentFragment;
 
 public class ManagerFragment extends Fragment implements View.OnClickListener {
@@ -63,6 +65,7 @@ public class ManagerFragment extends Fragment implements View.OnClickListener {
         StorageContentFragment storageContentFragment = new StorageContentFragment();
         SalesAccountingFragment salesAccountingFragment = new SalesAccountingFragment();
         DayResultsFragment dayResultsFragment = new DayResultsFragment();
+        SalesVolumeFragment salesVolumeFragment = new SalesVolumeFragment();
         FragmentTransaction fTrans;
         fTrans = getFragmentManager().beginTransaction();
 
@@ -89,7 +92,8 @@ public class ManagerFragment extends Fragment implements View.OnClickListener {
                 fTrans.addToBackStack(null);
                 break;
             case R.id.tvSalesVolume:
-
+                fTrans.replace(R.id.container, salesVolumeFragment);
+                fTrans.addToBackStack(null);
                 break;
             case R.id.tvEmployeePerf:
 

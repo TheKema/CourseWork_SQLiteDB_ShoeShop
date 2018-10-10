@@ -66,12 +66,12 @@ public class DayResultsAdapter extends RecyclerView.Adapter<DayResultsAdapter.Vi
 
         ViewHolder(View view) {
             super(view);
-            clDRitem = (ConstraintLayout) view.findViewById(R.id.clSAitem);
-            tvGenderDRItem = (TextView) view.findViewById(R.id.tvGenderSAItem);
-            tvTypeDRItem = (TextView) view.findViewById(R.id.tvTypeSAItem);
-            tvNameDRItem = (TextView) view.findViewById(R.id.tvNameSAItem);
-            tvCoastDRItem = (TextView) view.findViewById(R.id.tvCoastSAItem);
-            tvProviderDRItem = (TextView) view.findViewById(R.id.tvProviderSAItem);
+            clDRitem = (ConstraintLayout) view.findViewById(R.id.clitem);
+            tvGenderDRItem = (TextView) view.findViewById(R.id.tvGenderItem);
+            tvTypeDRItem = (TextView) view.findViewById(R.id.tvTypeItem);
+            tvNameDRItem = (TextView) view.findViewById(R.id.tvNameItem);
+            tvCoastDRItem = (TextView) view.findViewById(R.id.tvCoastItem);
+            tvProviderDRItem = (TextView) view.findViewById(R.id.tvProviderItem);
             tvSoldDateDRItem = (TextView) view.findViewById(R.id.tvDateSAItem);
             tvSizeDRItem = (TextView) view.findViewById(R.id.tvSizeSAItem);
 

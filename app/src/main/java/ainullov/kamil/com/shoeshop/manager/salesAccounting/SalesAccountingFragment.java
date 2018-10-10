@@ -70,9 +70,9 @@ public class SalesAccountingFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         orderAccountingPojos.clear();
 
-        spinnerGenderSalesAccounting = (Spinner) view.findViewById(R.id.spinnerGenderSA);
-        spinnerTypeSalesAccounting = (Spinner) view.findViewById(R.id.spinnerTypeSA);
-        tvSoldSumSA = (TextView) view.findViewById(R.id.tvSoldSumSA);
+        spinnerGenderSalesAccounting = (Spinner) view.findViewById(R.id.spinnerGender);
+        spinnerTypeSalesAccounting = (Spinner) view.findViewById(R.id.spinnerType);
+        tvSoldSumSA = (TextView) view.findViewById(R.id.tvSoldSum);
 
         String[] strGender = new String[]{"М", "Ж"};
         final ArrayAdapter<String> adapterGender = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, strGender);

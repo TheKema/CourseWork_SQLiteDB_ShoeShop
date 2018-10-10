@@ -67,8 +67,8 @@ public class StorageContentFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         orderAccountingPojos.clear();
 
-        spinnerGenderStorageContent = (Spinner) view.findViewById(R.id.spinnerGenderSA);
-        spinnerTypeStorageContent = (Spinner) view.findViewById(R.id.spinnerTypeSA);
+        spinnerGenderStorageContent = (Spinner) view.findViewById(R.id.spinnerGender);
+        spinnerTypeStorageContent = (Spinner) view.findViewById(R.id.spinnerType);
 
 
         String[] strGender = new String[]{"М", "Ж"};

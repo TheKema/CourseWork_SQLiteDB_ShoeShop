@@ -2,12 +2,12 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/clSAitem"
+    android:id="@+id/clitem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/tvGenderSAItem"
+        android:id="@+id/tvGenderItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -17,17 +17,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvTypeSAItem"
+        android:id="@+id/tvTypeItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Вид: Кроссовки"
-        app:layout_constraintStart_toEndOf="@+id/tvGenderSAItem"
+        app:layout_constraintStart_toEndOf="@+id/tvGenderItem"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvNameSAItem"
+        android:id="@+id/tvNameItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -37,10 +37,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvGenderSAItem" />
+        app:layout_constraintTop_toBottomOf="@+id/tvGenderItem" />
 
     <TextView
-        android:id="@+id/tvCoastSAItem"
+        android:id="@+id/tvCoastItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -50,10 +50,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvNameSAItem" />
+        app:layout_constraintTop_toBottomOf="@+id/tvNameItem" />
 
     <TextView
-        android:id="@+id/tvProviderSAItem"
+        android:id="@+id/tvProviderItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -63,7 +63,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCoastSAItem" />
+        app:layout_constraintTop_toBottomOf="@+id/tvCoastItem" />
 
     <TextView
         android:id="@+id/tvDateSAItem"
@@ -76,7 +76,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvProviderSAItem" />
+        app:layout_constraintTop_toBottomOf="@+id/tvProviderItem" />
 
     <TextView
         android:id="@+id/tvSizeSAItem"

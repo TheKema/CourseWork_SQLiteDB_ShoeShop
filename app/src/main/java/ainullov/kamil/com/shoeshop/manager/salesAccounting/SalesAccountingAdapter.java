@@ -64,12 +64,12 @@ public class SalesAccountingAdapter extends RecyclerView.Adapter<SalesAccounting
 
         ViewHolder(View view) {
             super(view);
-            clSAitem = (ConstraintLayout) view.findViewById(R.id.clSAitem);
-            tvGenderSAItem = (TextView) view.findViewById(R.id.tvGenderSAItem);
-            tvTypeSAItem = (TextView) view.findViewById(R.id.tvTypeSAItem);
-            tvNameSAItem = (TextView) view.findViewById(R.id.tvNameSAItem);
-            tvCoastSAItem = (TextView) view.findViewById(R.id.tvCoastSAItem);
-            tvProviderSAItem = (TextView) view.findViewById(R.id.tvProviderSAItem);
+            clSAitem = (ConstraintLayout) view.findViewById(R.id.clitem);
+            tvGenderSAItem = (TextView) view.findViewById(R.id.tvGenderItem);
+            tvTypeSAItem = (TextView) view.findViewById(R.id.tvTypeItem);
+            tvNameSAItem = (TextView) view.findViewById(R.id.tvNameItem);
+            tvCoastSAItem = (TextView) view.findViewById(R.id.tvCoastItem);
+            tvProviderSAItem = (TextView) view.findViewById(R.id.tvProviderItem);
             tvSoldDateSAItem = (TextView) view.findViewById(R.id.tvDateSAItem);
             tvSizeSAItem = (TextView) view.findViewById(R.id.tvSizeSAItem);
 
