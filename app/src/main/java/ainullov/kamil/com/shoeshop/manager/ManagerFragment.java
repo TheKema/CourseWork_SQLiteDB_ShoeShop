@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import ainullov.kamil.com.shoeshop.R;
 import ainullov.kamil.com.shoeshop.manager.dayResults.DayResultsFragment;
+import ainullov.kamil.com.shoeshop.manager.employeePerf.EmployeePerfFragment;
 import ainullov.kamil.com.shoeshop.manager.orderProduct.OrderProductFragment;
 import ainullov.kamil.com.shoeshop.manager.ordersAccounting.OrdersAccountingFragment;
 import ainullov.kamil.com.shoeshop.manager.salesAccounting.SalesAccountingFragment;
@@ -66,6 +67,7 @@ public class ManagerFragment extends Fragment implements View.OnClickListener {
         SalesAccountingFragment salesAccountingFragment = new SalesAccountingFragment();
         DayResultsFragment dayResultsFragment = new DayResultsFragment();
         SalesVolumeFragment salesVolumeFragment = new SalesVolumeFragment();
+        EmployeePerfFragment employeePerfFragment = new EmployeePerfFragment();
         FragmentTransaction fTrans;
         fTrans = getFragmentManager().beginTransaction();
 
@@ -96,7 +98,8 @@ public class ManagerFragment extends Fragment implements View.OnClickListener {
                 fTrans.addToBackStack(null);
                 break;
             case R.id.tvEmployeePerf:
-
+                fTrans.replace(R.id.container, employeePerfFragment);
+                fTrans.addToBackStack(null);
                 break;
         }
         fTrans.commit();

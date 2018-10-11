@@ -26,10 +26,29 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 + "shoeId integer,"
                 + "gender text" + ");");
 
+       sqLiteDatabase.execSQL("create table workers ("
+                + "id integer primary key autoincrement,"
+                + "uniquekey integer,"
+                + "name text,"
+                + "rating integer" + ");");
+
         sqLiteDatabase.execSQL("create table shoe ("
                 + "id integer primary key autoincrement,"
                 + "uniquekey integer,"
                 + "type text,"  // SELECT * FROM child_table WHERE parent_id = 2
+                + "gender text,"
+                + "quantity integer,"
+                + "name text,"
+                + "coast integer,"
+                + "provider text,"
+                + "date text,"
+                + "description text,"
+                + "size text" + ");");
+
+        sqLiteDatabase.execSQL("create table deliveries ("
+                + "id integer primary key autoincrement,"
+                + "uniquekey integer,"
+                + "type text,"  // ДЛЯ УЧЕТА ПОСТАВОК
                 + "gender text,"
                 + "quantity integer,"
                 + "name text,"
