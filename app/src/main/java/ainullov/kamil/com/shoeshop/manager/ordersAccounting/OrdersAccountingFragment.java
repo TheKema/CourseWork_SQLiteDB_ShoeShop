@@ -50,7 +50,7 @@ public class OrdersAccountingFragment extends Fragment {
 
         dbHelper = new DataBaseHelper(getActivity());
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        c = db.query("shoe", null, null, null, null, null, null);
+        c = db.query("deliveries", null, null, null, null, null, null);
         c.moveToFirst();
         if (c.moveToFirst()) {
             uniquekeyColIndex = c.getColumnIndex("uniquekey");

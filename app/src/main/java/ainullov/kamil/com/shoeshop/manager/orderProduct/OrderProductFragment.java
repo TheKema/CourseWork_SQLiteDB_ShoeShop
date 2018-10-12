@@ -184,6 +184,7 @@ public class OrderProductFragment extends Fragment implements View.OnClickListen
                 }
 
                 db.insert("shoe", null, cv);
+                db.insert("deliveries", null, cv);
                 dbHelper.close();
 
 
