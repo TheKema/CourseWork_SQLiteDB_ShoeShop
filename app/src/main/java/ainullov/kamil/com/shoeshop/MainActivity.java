@@ -4,6 +4,8 @@ package ainullov.kamil.com.shoeshop;
 
 import android.app.FragmentTransaction;
 import android.content.ContentValues;
+import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -21,6 +23,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import ainullov.kamil.com.shoeshop.manager.ManagerFragment;
 import ainullov.kamil.com.shoeshop.user.db.DataBaseHelper;
@@ -37,12 +40,41 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static String shoesTYPE = "Кроссовки";
     public static String gender = "M"; // Ж 0 - женщина, М 1 = мужчина, 2
 
-
     public static List<ShoeType> shoeTypesMan = new ArrayList<>();
     public static List<ShoeType> shoeTypesWoman = new ArrayList<>();
 
+    ManFragment manFragment = null;
+    WomanFragment womanFragment = null;
+    BasketFragment basketFragment = null;
+    FavoriteFragment favoriteFragment = null;
+    ManagerFragment managerFragment= null;
+    MainFragment mainFragment = null;
 
-    MainFragment mainFragment = new MainFragment();
+    SharedPreferences prefs = null;
+
+    // На время. первичное добавление данных в БД, для примера
+    Random random = new Random();
+    int uniquekey = random.nextInt(); // При доб. тов. добавить уникальный ключ
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        //Первый запуск. Проверка. Заполнения БД
+        if (prefs.getBoolean("firstrun", true)) {
+
+            addToDB("Кроссовки","М", 7);
+            addToDB("Кроссовки","Ж", 5);
+            addToDB("Ботинки","М", 4);
+            addToDB("Ботинки","Ж", 9);
+            addToDB("Туфли","Ж", 8);
+            addToDB("Кеды","М", 2);
+            addToDB("Кеды","Ж", 6);
+            addToDB("Сапоги","Ж", 5);
+
+            prefs.edit().putBoolean("firstrun", false).apply();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +83,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        mainFragment = new MainFragment();
         FragmentTransaction fTrans;
         fTrans = getFragmentManager().beginTransaction();
         fTrans.replace(R.id.container, mainFragment);
         fTrans.commit();
+
+        prefs = getSharedPreferences("ainullov.kamil.com.shoeshop", MODE_PRIVATE);
+
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -65,47 +101,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-
-
-        // ВРЕМЕННО!
-        DataBaseHelper dbHelper;
-        dbHelper = new DataBaseHelper(this);
-        // подключение к БД
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-
-        ContentValues cv = new ContentValues();
-
-        cv.put("type", "Кроссовки");
-        cv.put("gender", "М");
-        cv.put("coast", 1190);
-        cv.put("name", "Кроссовки №1");
-        cv.put("description", "Обувь произведена в Италии");
-        cv.put("provider", "ОбувьДел№1");
-        cv.put("date", String.valueOf(System.currentTimeMillis()));
-//         ArrayList, из чисел - размер обуви, превращаем в строку и суем в db, потом достанем и превратив в ArrayList
-            ArrayList<String> items = new ArrayList<>();
-            items.add("40");
-            items.add("42");
-            items.add("42");
-            JSONObject json = new JSONObject();
-            try {
-                json.put("uniqueArrays", new JSONArray(items));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            String arrayList = json.toString();
-
-            cv.put("quantity", items.size());
-            cv.put("size", arrayList);
-
-            cv.put("uniquekey", 123);
-
-
-        db.insert("shoe", null, cv);
-        dbHelper.close();
-//        !!!
-
 
         shoeTypesMan.add(new ShoeType("Ботинки"));
         shoeTypesMan.add(new ShoeType("Кеды"));
@@ -144,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_personal_area) {
-            ManagerFragment managerFragment = new ManagerFragment();
+            managerFragment = new ManagerFragment();
             FragmentTransaction fTrans;
             fTrans = getFragmentManager().beginTransaction();
             fTrans.replace(R.id.container, managerFragment);
@@ -153,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
         }
         if (id == R.id.action_basket) {
-            BasketFragment basketFragment = new BasketFragment();
+            basketFragment = new BasketFragment();
             FragmentTransaction fTrans;
             fTrans = getFragmentManager().beginTransaction();
             fTrans.replace(R.id.container, basketFragment);
@@ -163,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
         }
         if (id == R.id.action_favorite) {
-            FavoriteFragment favoriteFragment = new FavoriteFragment();
+            favoriteFragment = new FavoriteFragment();
             FragmentTransaction fTrans;
             fTrans = getFragmentManager().beginTransaction();
             fTrans.replace(R.id.container, favoriteFragment);
@@ -179,13 +174,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        mainFragment = new MainFragment();
+        manFragment = new ManFragment();
+        womanFragment = new WomanFragment();
+        basketFragment = new BasketFragment();
+        favoriteFragment = new FavoriteFragment();
 
-        ManFragment manFragment = new ManFragment();
-        WomanFragment womanFragment = new WomanFragment();
-        BasketFragment basketFragment = new BasketFragment();
-        FavoriteFragment favoriteFragment = new FavoriteFragment();
-
-        ManagerFragment managerFragment = new ManagerFragment();
+        managerFragment = new ManagerFragment();
 
         FragmentTransaction fTrans;
         fTrans = getFragmentManager().beginTransaction();
@@ -193,6 +188,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.nav_main) {
             fTrans.replace(R.id.container, mainFragment);
+            fTrans.addToBackStack(null);
         } else if (id == R.id.nav_man) {
             manTRUEwomanFALSE = true;
             gender = "М";
@@ -224,5 +220,81 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+
+    // Метод для заполнения ДБ при старте приложения
+    private void addToDB(String type, String gender, int forLength){
+        // Заполнение БД
+        DataBaseHelper dbHelper;
+        dbHelper = new DataBaseHelper(this);
+        // подключение к БД
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+
+        for (int i = 0; i < forLength; i++) {
+            cv.put("type", type);
+            cv.put("gender", gender);
+            cv.put("coast", 1190+i*20);
+            cv.put("name", type+" №"+i);
+            cv.put("description", "Обувь произведена в Италии");
+            cv.put("provider", "ОбувьДел№"+i);
+            cv.put("date", String.valueOf(System.currentTimeMillis()));
+//         ArrayList, из чисел - размер обуви, превращаем в строку и суем в db, потом достанем и превратив в ArrayList
+            ArrayList<String> items = new ArrayList<>();
+            items.add("40");
+            items.add("42");
+            items.add("42");
+            items.add("43");
+            JSONObject json = new JSONObject();
+            try {
+                json.put("uniqueArrays", new JSONArray(items));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            String arrayList = json.toString();
+
+            cv.put("quantity", items.size());
+            cv.put("size", arrayList);
+
+            while (checkRepeat("shoe") != 0) {
+                uniquekey = random.nextInt();
+            }
+
+            if (checkRepeat("shoe") == 0) {
+                cv.put("uniquekey", uniquekey);
+            }
+
+            db.insert("shoe", null, cv);
+        }
+        dbHelper.close();
+    }
+
+
+    // На время. первичное добавление данных в БД, для примера
+    // Проверка, есть ли такой же уникальный ключ
+    public int checkRepeat(String tableName) {
+        DataBaseHelper dbHelper;
+        dbHelper = new DataBaseHelper(this);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        Cursor c = null;
+        try {
+            db = dbHelper.getReadableDatabase();
+            String query = "select count(*) from " + tableName + " where uniquekey = ?";
+            c = db.rawQuery(query, new String[]{String.valueOf(uniquekey)});
+            if (c.moveToFirst()) {
+                return c.getInt(0);
+            }
+            return 0;
+        } finally {
+            if (c != null) {
+                c.close();
+            }
+            if (db != null) {
+                db.close();
+            }
+        }
     }
 }

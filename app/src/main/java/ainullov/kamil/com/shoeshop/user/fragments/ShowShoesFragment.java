@@ -28,6 +28,8 @@ public class ShowShoesFragment extends Fragment {
     String selection = null;
     String[] selectionArgs = null;
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

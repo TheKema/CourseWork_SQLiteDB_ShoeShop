@@ -16,6 +16,7 @@ import ainullov.kamil.com.shoeshop.user.adapters.ShoeTypeAdapter;
 //Виды женской обуви
 public class WomanFragment extends Fragment {
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

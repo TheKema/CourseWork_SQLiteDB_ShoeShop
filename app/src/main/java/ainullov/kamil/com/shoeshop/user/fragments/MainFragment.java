@@ -16,6 +16,13 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     Button btnManMain;
     Button btnWomanMain;
 
+//  Если понадобится поворот экрана (в MА, в OnCreate в этом случае переделать создание MainFragment)
+//  @Override
+//    public void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setRetainInstance(true); }
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
