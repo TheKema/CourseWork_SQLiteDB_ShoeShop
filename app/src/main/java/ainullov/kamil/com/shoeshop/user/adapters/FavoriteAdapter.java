@@ -130,7 +130,6 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
                     int deleteItemByUniqueKey = favoriteShoe.getUniquekey();
                     dbHelper = new DataBaseHelper(context);
                     SQLiteDatabase db = dbHelper.getWritableDatabase();
-//                    db.delete("favorite", "shoeUniquekeyBasket = " + deleteItemByUniqueKey, null);
                     db.delete(MainActivity.USERNAME_FAVORITE_DB, "shoeUniquekeyBasket = " + deleteItemByUniqueKey, null);
                     dbHelper.close();
 

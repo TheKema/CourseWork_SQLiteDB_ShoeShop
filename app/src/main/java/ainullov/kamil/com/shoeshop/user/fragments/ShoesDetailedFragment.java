@@ -175,7 +175,6 @@ public class ShoesDetailedFragment extends Fragment implements View.OnClickListe
         switch (view.getId()) {
             case R.id.btnBasketDetailed:
 
-//                if (checkRepeat("basket") == 0) {
                 if (checkRepeat(MainActivity.USERNAME_BASKET_DB) == 0) {
 
                     DataBaseHelper dbHelper;
@@ -185,7 +184,6 @@ public class ShoesDetailedFragment extends Fragment implements View.OnClickListe
                     ContentValues cv = new ContentValues();
                     cv.put("shoeUniquekeyBasket", shoeUniquekeyBasket);
                     cv.put("shoeSize", sizePicked);
-//                    db.insert("basket", null, cv);
                     db.insert(MainActivity.USERNAME_BASKET_DB, null, cv);
                     dbHelper.close();
 
@@ -194,7 +192,6 @@ public class ShoesDetailedFragment extends Fragment implements View.OnClickListe
                 break;
             case R.id.btnFavDetailed:
 
-//                if (checkRepeat("favorite") == 0) {
                 if (checkRepeat(MainActivity.USERNAME_FAVORITE_DB) == 0) {
 
                     DataBaseHelper dbHelperFav;
@@ -204,7 +201,6 @@ public class ShoesDetailedFragment extends Fragment implements View.OnClickListe
                     ContentValues cvFav = new ContentValues();
                     cvFav.put("shoeUniquekeyBasket", shoeUniquekeyBasket);
                     cvFav.put("shoeSize", sizePicked);
-//                    dbFav.insert("favorite", null, cvFav);
                     dbFav.insert(MainActivity.USERNAME_FAVORITE_DB, null, cvFav);
                     dbHelperFav.close();
                 }

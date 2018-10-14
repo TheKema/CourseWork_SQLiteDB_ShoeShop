@@ -12,19 +12,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-//        sqLiteDatabase.execSQL("create table basket ("
-//                + "id integer primary key autoincrement,"
-//                + "shoeUniquekeyBasket integer,"
-//                + "shoeSize text,"
-//                + "shoeId integer," // Потом удалить, первоначально использовалось в качестве уникального ключа
-//                + "gender text" + ");");
-//
-//        sqLiteDatabase.execSQL("create table favorite ("
-//                + "id integer primary key autoincrement,"
-//                + "shoeUniquekeyBasket integer,"
-//                + "shoeSize text,"
-//                + "shoeId integer,"
-//                + "gender text" + ");");
 
         sqLiteDatabase.execSQL("create table workers ("
                 + "id integer primary key autoincrement,"
@@ -61,7 +48,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("create table sold ("
                 + "id integer primary key autoincrement,"
                 + "uniquekey integer,"
-                + "type text,"  // SELECT * FROM child_table WHERE parent_id = 2
+                + "type text,"
                 + "gender text,"
                 + "name text,"
                 + "coast integer,"
@@ -72,8 +59,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
-
     }
 
     public void createClientDB(DataBaseHelper dbHelper, String dbName) {

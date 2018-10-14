@@ -41,7 +41,6 @@ public class FavoriteFragment extends Fragment{
 
         dbHelper = new DataBaseHelper(getActivity());
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-//        Cursor c = db.query("favorite", null, null, null, null, null, null);
         Cursor c = db.query(MainActivity.USERNAME_FAVORITE_DB, null, null, null, null, null, null);
         c.moveToFirst();
         if (c.moveToFirst()) {

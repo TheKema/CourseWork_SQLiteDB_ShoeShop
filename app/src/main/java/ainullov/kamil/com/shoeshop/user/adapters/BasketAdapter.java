@@ -131,7 +131,6 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
                     int deleteItemByUniqueKey = basketFavoriteShoe.getUniquekey();
                     dbHelper = new DataBaseHelper(context);
                     SQLiteDatabase db = dbHelper.getWritableDatabase();
-//                    db.delete("basket", "shoeUniquekeyBasket = " + deleteItemByUniqueKey, null);
                     db.delete(MainActivity.USERNAME_BASKET_DB, "shoeUniquekeyBasket = " + deleteItemByUniqueKey, null);
                     dbHelper.close();
 

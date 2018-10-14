@@ -74,7 +74,6 @@ public class BasketFragment extends Fragment implements View.OnClickListener {
 
         dbHelper = new DataBaseHelper(getActivity());
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-//        Cursor c = db.query("basket", null, null, null, null, null, null);
         Cursor c = db.query(MainActivity.USERNAME_BASKET_DB, null, null, null, null, null, null);
         c.moveToFirst();
         if (c.moveToFirst()) {
@@ -275,7 +274,6 @@ public class BasketFragment extends Fragment implements View.OnClickListener {
                 DataBaseHelper dbHelper;
                 dbHelper = new DataBaseHelper(getActivity());
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
-//                db.delete("basket", null, null);
                 db.delete(MainActivity.USERNAME_BASKET_DB, null, null);
                 dbHelper.close();
 

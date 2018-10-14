@@ -310,4 +310,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
     }
+
+
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("USERNAME_USER_DB",  USERNAME_USER_DB);
+        outState.putString("USERNAME_BASKET_DB", USERNAME_BASKET_DB);
+        outState.putString("USERNAME_FAVORITE_DB", USERNAME_FAVORITE_DB);
+        outState.putBoolean("manTRUEwomanFALSE", manTRUEwomanFALSE);
+        outState.putString("shoesTYPE", shoesTYPE);
+        outState.putString("gender", gender);
+    }
+
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        USERNAME_USER_DB = savedInstanceState.getString("USERNAME_USER_DB");
+        USERNAME_BASKET_DB = savedInstanceState.getString("USERNAME_BASKET_DB");
+        USERNAME_FAVORITE_DB = savedInstanceState.getString("USERNAME_FAVORITE_DB");
+        manTRUEwomanFALSE = savedInstanceState.getBoolean("manTRUEwomanFALSE");
+        shoesTYPE = savedInstanceState.getString("shoesTYPE");
+        gender = savedInstanceState.getString("gender");
+    }
 }
