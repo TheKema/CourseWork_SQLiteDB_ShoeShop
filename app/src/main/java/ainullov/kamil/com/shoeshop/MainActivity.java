@@ -25,8 +25,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import ainullov.kamil.com.shoeshop.login.LoginFragment;
 import ainullov.kamil.com.shoeshop.manager.ManagerFragment;
-import ainullov.kamil.com.shoeshop.user.db.DataBaseHelper;
+import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
 import ainullov.kamil.com.shoeshop.user.fragments.BasketFragment;
 import ainullov.kamil.com.shoeshop.user.fragments.FavoriteFragment;
 import ainullov.kamil.com.shoeshop.user.fragments.MainFragment;
@@ -35,6 +36,10 @@ import ainullov.kamil.com.shoeshop.user.fragments.WomanFragment;
 import ainullov.kamil.com.shoeshop.user.pojo.ShoeType;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    public static String USERNAME_USER_DB = "adminuser";
+    public static String USERNAME_BASKET_DB = "adminbasket";
+    public static String USERNAME_FAVORITE_DB = "adminfavorite";
 
     public static boolean manTRUEwomanFALSE = false;
     public static String shoesTYPE = "Кроссовки";
@@ -49,6 +54,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FavoriteFragment favoriteFragment = null;
     ManagerFragment managerFragment= null;
     MainFragment mainFragment = null;
+
+    LoginFragment loginFragment = null;
 
     SharedPreferences prefs = null;
 
@@ -83,11 +90,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mainFragment = new MainFragment();
+        loginFragment = new LoginFragment();
         FragmentTransaction fTrans;
         fTrans = getFragmentManager().beginTransaction();
-        fTrans.replace(R.id.container, mainFragment);
+        fTrans.replace(R.id.container, loginFragment);
         fTrans.commit();
+
+// mainFragment = new MainFragment();
+//        FragmentTransaction fTrans;
+//        fTrans = getFragmentManager().beginTransaction();
+//        fTrans.replace(R.id.container, mainFragment);
+//        fTrans.commit();
 
         prefs = getSharedPreferences("ainullov.kamil.com.shoeshop", MODE_PRIVATE);
 

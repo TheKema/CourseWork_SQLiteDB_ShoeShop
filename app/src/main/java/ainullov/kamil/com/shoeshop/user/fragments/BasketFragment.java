@@ -22,9 +22,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import ainullov.kamil.com.shoeshop.MainActivity;
 import ainullov.kamil.com.shoeshop.R;
 import ainullov.kamil.com.shoeshop.user.adapters.BasketAdapter;
-import ainullov.kamil.com.shoeshop.user.db.DataBaseHelper;
+import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
 import ainullov.kamil.com.shoeshop.user.pojo.BasketFavoriteShoe;
 
 // Корзина
@@ -73,7 +74,8 @@ public class BasketFragment extends Fragment implements View.OnClickListener {
 
         dbHelper = new DataBaseHelper(getActivity());
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        Cursor c = db.query("basket", null, null, null, null, null, null);
+//        Cursor c = db.query("basket", null, null, null, null, null, null);
+        Cursor c = db.query(MainActivity.USERNAME_BASKET_DB, null, null, null, null, null, null);
         c.moveToFirst();
         if (c.moveToFirst()) {
             int idColIndex = c.getColumnIndex("id");
@@ -273,7 +275,8 @@ public class BasketFragment extends Fragment implements View.OnClickListener {
                 DataBaseHelper dbHelper;
                 dbHelper = new DataBaseHelper(getActivity());
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
-                db.delete("basket", null, null);
+//                db.delete("basket", null, null);
+                db.delete(MainActivity.USERNAME_BASKET_DB, null, null);
                 dbHelper.close();
 
 

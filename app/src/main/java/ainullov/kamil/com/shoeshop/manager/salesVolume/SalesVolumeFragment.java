@@ -26,7 +26,7 @@ import java.util.Locale;
 
 import ainullov.kamil.com.shoeshop.R;
 import ainullov.kamil.com.shoeshop.manager.pojo.OrderAccountingPojo;
-import ainullov.kamil.com.shoeshop.user.db.DataBaseHelper;
+import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
 
 public class SalesVolumeFragment extends Fragment implements View.OnClickListener {
 

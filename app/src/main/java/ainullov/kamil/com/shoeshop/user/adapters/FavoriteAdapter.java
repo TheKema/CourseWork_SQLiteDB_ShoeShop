@@ -17,8 +17,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import ainullov.kamil.com.shoeshop.MainActivity;
 import ainullov.kamil.com.shoeshop.R;
-import ainullov.kamil.com.shoeshop.user.db.DataBaseHelper;
+import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
 import ainullov.kamil.com.shoeshop.user.fragments.ShoesDetailedFragment;
 import ainullov.kamil.com.shoeshop.user.pojo.BasketFavoriteShoe;
 
@@ -129,7 +130,8 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
                     int deleteItemByUniqueKey = favoriteShoe.getUniquekey();
                     dbHelper = new DataBaseHelper(context);
                     SQLiteDatabase db = dbHelper.getWritableDatabase();
-                    db.delete("favorite", "shoeUniquekeyBasket = " + deleteItemByUniqueKey, null);
+//                    db.delete("favorite", "shoeUniquekeyBasket = " + deleteItemByUniqueKey, null);
+                    db.delete(MainActivity.USERNAME_FAVORITE_DB, "shoeUniquekeyBasket = " + deleteItemByUniqueKey, null);
                     dbHelper.close();
 
 

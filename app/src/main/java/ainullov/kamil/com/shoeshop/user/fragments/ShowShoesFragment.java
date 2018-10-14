@@ -17,7 +17,7 @@ import java.util.List;
 import ainullov.kamil.com.shoeshop.MainActivity;
 import ainullov.kamil.com.shoeshop.R;
 import ainullov.kamil.com.shoeshop.user.adapters.ShowShoesAdapter;
-import ainullov.kamil.com.shoeshop.user.db.DataBaseHelper;
+import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
 import ainullov.kamil.com.shoeshop.user.pojo.OneShoe;
 
 //Вид обуви

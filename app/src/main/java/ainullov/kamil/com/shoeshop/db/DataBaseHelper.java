@@ -1,4 +1,4 @@
-package ainullov.kamil.com.shoeshop.user.db;
+package ainullov.kamil.com.shoeshop.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,21 +12,21 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("create table basket ("
-                + "id integer primary key autoincrement,"
-                + "shoeUniquekeyBasket integer,"
-                + "shoeSize text,"
-                + "shoeId integer," // Потом удалить, первоначально использовалось в качестве уникального ключа
-                + "gender text" + ");");
+//        sqLiteDatabase.execSQL("create table basket ("
+//                + "id integer primary key autoincrement,"
+//                + "shoeUniquekeyBasket integer,"
+//                + "shoeSize text,"
+//                + "shoeId integer," // Потом удалить, первоначально использовалось в качестве уникального ключа
+//                + "gender text" + ");");
+//
+//        sqLiteDatabase.execSQL("create table favorite ("
+//                + "id integer primary key autoincrement,"
+//                + "shoeUniquekeyBasket integer,"
+//                + "shoeSize text,"
+//                + "shoeId integer,"
+//                + "gender text" + ");");
 
-        sqLiteDatabase.execSQL("create table favorite ("
-                + "id integer primary key autoincrement,"
-                + "shoeUniquekeyBasket integer,"
-                + "shoeSize text,"
-                + "shoeId integer,"
-                + "gender text" + ");");
-
-       sqLiteDatabase.execSQL("create table workers ("
+        sqLiteDatabase.execSQL("create table workers ("
                 + "id integer primary key autoincrement,"
                 + "uniquekey integer,"
                 + "name text,"
@@ -73,6 +73,34 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
+
+    }
+
+    public void createClientDB(DataBaseHelper dbHelper, String dbName) {
+        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
+
+        sqLiteDatabase.execSQL("create table " + dbName + "user ("
+                + "id integer primary key autoincrement,"
+                + "login text,"
+                + "password text,"
+                + "basketuniquekeylist text,"
+                + "basketnamelist text,"
+                + "favoriteuniquekeylist text,"
+                + "favoritenamelist text" + ");");
+
+        sqLiteDatabase.execSQL("create table " + dbName + "basket ("
+                + "id integer primary key autoincrement,"
+                + "shoeUniquekeyBasket integer,"
+                + "shoeSize text,"
+                + "shoeId integer,"
+                + "gender text" + ");");
+
+        sqLiteDatabase.execSQL("create table " + dbName + "favorite ("
+                + "id integer primary key autoincrement,"
+                + "shoeUniquekeyBasket integer,"
+                + "shoeSize text,"
+                + "shoeId integer,"
+                + "gender text" + ");");
 
     }
 }

@@ -13,9 +13,10 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import ainullov.kamil.com.shoeshop.MainActivity;
 import ainullov.kamil.com.shoeshop.R;
 import ainullov.kamil.com.shoeshop.user.adapters.FavoriteAdapter;
-import ainullov.kamil.com.shoeshop.user.db.DataBaseHelper;
+import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
 import ainullov.kamil.com.shoeshop.user.pojo.BasketFavoriteShoe;
 
 // Корзина
@@ -40,7 +41,8 @@ public class FavoriteFragment extends Fragment{
 
         dbHelper = new DataBaseHelper(getActivity());
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        Cursor c = db.query("favorite", null, null, null, null, null, null);
+//        Cursor c = db.query("favorite", null, null, null, null, null, null);
+        Cursor c = db.query(MainActivity.USERNAME_FAVORITE_DB, null, null, null, null, null, null);
         c.moveToFirst();
         if (c.moveToFirst()) {
             int idColIndex = c.getColumnIndex("id");

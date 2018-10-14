@@ -27,8 +27,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import ainullov.kamil.com.shoeshop.MainActivity;
 import ainullov.kamil.com.shoeshop.R;
-import ainullov.kamil.com.shoeshop.user.db.DataBaseHelper;
+import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
 
 //Конкретная информация о товаре
 public class ShoesDetailedFragment extends Fragment implements View.OnClickListener {
@@ -174,7 +175,8 @@ public class ShoesDetailedFragment extends Fragment implements View.OnClickListe
         switch (view.getId()) {
             case R.id.btnBasketDetailed:
 
-                if (checkRepeat("basket") == 0) {
+//                if (checkRepeat("basket") == 0) {
+                if (checkRepeat(MainActivity.USERNAME_BASKET_DB) == 0) {
 
                     DataBaseHelper dbHelper;
                     dbHelper = new DataBaseHelper(getActivity());
@@ -183,7 +185,8 @@ public class ShoesDetailedFragment extends Fragment implements View.OnClickListe
                     ContentValues cv = new ContentValues();
                     cv.put("shoeUniquekeyBasket", shoeUniquekeyBasket);
                     cv.put("shoeSize", sizePicked);
-                    db.insert("basket", null, cv);
+//                    db.insert("basket", null, cv);
+                    db.insert(MainActivity.USERNAME_BASKET_DB, null, cv);
                     dbHelper.close();
 
                 }
@@ -191,7 +194,8 @@ public class ShoesDetailedFragment extends Fragment implements View.OnClickListe
                 break;
             case R.id.btnFavDetailed:
 
-                if (checkRepeat("favorite") == 0) {
+//                if (checkRepeat("favorite") == 0) {
+                if (checkRepeat(MainActivity.USERNAME_FAVORITE_DB) == 0) {
 
                     DataBaseHelper dbHelperFav;
                     dbHelperFav = new DataBaseHelper(getActivity());
@@ -200,7 +204,8 @@ public class ShoesDetailedFragment extends Fragment implements View.OnClickListe
                     ContentValues cvFav = new ContentValues();
                     cvFav.put("shoeUniquekeyBasket", shoeUniquekeyBasket);
                     cvFav.put("shoeSize", sizePicked);
-                    dbFav.insert("favorite", null, cvFav);
+//                    dbFav.insert("favorite", null, cvFav);
+                    dbFav.insert(MainActivity.USERNAME_FAVORITE_DB, null, cvFav);
                     dbHelperFav.close();
                 }
 

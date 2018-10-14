@@ -18,7 +18,7 @@ import java.util.List;
 
 import ainullov.kamil.com.shoeshop.R;
 import ainullov.kamil.com.shoeshop.manager.pojo.WorkersPojo;
-import ainullov.kamil.com.shoeshop.user.db.DataBaseHelper;
+import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
 
 public class EmployeePerfAdapter extends RecyclerView.Adapter<EmployeePerfAdapter.ViewHolder> {
 

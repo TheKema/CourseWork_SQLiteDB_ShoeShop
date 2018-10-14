@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import ainullov.kamil.com.shoeshop.R;
 import ainullov.kamil.com.shoeshop.manager.orderProduct.ChoseSizesOrderProductFragment;
 import ainullov.kamil.com.shoeshop.manager.orderProduct.OrderProductFragment;
-import ainullov.kamil.com.shoeshop.user.db.DataBaseHelper;
+import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
 
 public class StorageContentChangeProductFragment extends Fragment implements View.OnClickListener {
     Spinner spinnerGender;

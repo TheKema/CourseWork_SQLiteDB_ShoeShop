@@ -23,7 +23,7 @@ import java.util.Locale;
 
 import ainullov.kamil.com.shoeshop.R;
 import ainullov.kamil.com.shoeshop.manager.pojo.OrderAccountingPojo;
-import ainullov.kamil.com.shoeshop.user.db.DataBaseHelper;
+import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
 import ainullov.kamil.com.shoeshop.user.fragments.ShoesDetailedFragment;
 
 public class StorageContentAdapter extends RecyclerView.Adapter<StorageContentAdapter.ViewHolder> {

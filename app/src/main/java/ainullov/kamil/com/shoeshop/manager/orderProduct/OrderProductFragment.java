@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import ainullov.kamil.com.shoeshop.R;
-import ainullov.kamil.com.shoeshop.user.db.DataBaseHelper;
+import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
 
 public class OrderProductFragment extends Fragment implements View.OnClickListener {
     Spinner spinnerGender;

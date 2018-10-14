@@ -36,7 +36,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         btnWomanMain = (Button) view.findViewById(R.id.btnWomanMain);
         btnManMain.setOnClickListener(this);
         btnWomanMain.setOnClickListener(this);
-        getActivity().setTitle("Обувенок");
+        getActivity().setTitle("Обувной магазин");
     }
 
     @Override
