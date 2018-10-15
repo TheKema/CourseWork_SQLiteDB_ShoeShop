@@ -28,14 +28,15 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 + "name text,"
                 + "coast integer,"
                 + "provider text,"
+                + "imageurl text," // использую сайт https://imgbb.com/ для хранения фотографий обуви
                 + "date text,"
                 + "description text,"
                 + "size text" + ");");
 
-        sqLiteDatabase.execSQL("create table deliveries ("
+        sqLiteDatabase.execSQL("create table deliveries (" // Для учета поставок
                 + "id integer primary key autoincrement,"
                 + "uniquekey integer,"
-                + "type text,"  // ДЛЯ УЧЕТА ПОСТАВОК
+                + "type text,"
                 + "gender text,"
                 + "quantity integer,"
                 + "name text,"
@@ -77,6 +78,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 + "shoeUniquekeyBasket integer,"
                 + "shoeSize text,"
                 + "shoeId integer,"
+                + "imageurl text,"
                 + "gender text" + ");");
 
         sqLiteDatabase.execSQL("create table " + dbName + "favorite ("
@@ -84,6 +86,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 + "shoeUniquekeyBasket integer,"
                 + "shoeSize text,"
                 + "shoeId integer,"
+                + "imageurl text,"
                 + "gender text" + ");");
 
     }

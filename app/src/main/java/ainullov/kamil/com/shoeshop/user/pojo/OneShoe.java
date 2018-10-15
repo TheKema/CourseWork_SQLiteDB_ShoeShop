@@ -7,6 +7,7 @@ public class OneShoe {
     private String gender;
     private int quantity;
     private String name;
+    private String imageurl;
     private int coast;
     private String desc;
     private String size; // JSON строка, в которой в массиве будут находится числа
@@ -15,16 +16,37 @@ public class OneShoe {
         this.name = name;
     }
 
-    public OneShoe(int id, int uniquekey, String type, String gender, int quantity, String name, int coast, String desc, String size) {
+//    public OneShoe(int id, int uniquekey, String type, String gender, int quantity, String name, int coast, String desc, String size) {
+//        this.id = id;
+//        this.uniquekey = uniquekey;
+//        this.type = type;
+//        this.gender = gender;
+//        this.quantity = quantity;
+//        this.name = name;
+//        this.coast = coast;
+//        this.desc = desc;
+//        this.size = size;
+//    }
+
+    public OneShoe(int id, int uniquekey, String type, String gender, int quantity, String name, String imageurl, int coast, String desc, String size) {
         this.id = id;
         this.uniquekey = uniquekey;
         this.type = type;
         this.gender = gender;
         this.quantity = quantity;
         this.name = name;
+        this.imageurl = imageurl;
         this.coast = coast;
         this.desc = desc;
         this.size = size;
+    }
+
+    public String getImageurl() {
+        return imageurl;
+    }
+
+    public void setImageurl(String imageurl) {
+        this.imageurl = imageurl;
     }
 
     public int getUniquekey() {

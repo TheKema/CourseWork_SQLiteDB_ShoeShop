@@ -16,8 +16,8 @@ import java.util.List;
 
 import ainullov.kamil.com.shoeshop.MainActivity;
 import ainullov.kamil.com.shoeshop.R;
-import ainullov.kamil.com.shoeshop.user.adapters.ShowShoesAdapter;
 import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
+import ainullov.kamil.com.shoeshop.user.adapters.ShowShoesAdapter;
 import ainullov.kamil.com.shoeshop.user.pojo.OneShoe;
 
 //Вид обуви
@@ -27,7 +27,6 @@ public class ShowShoesFragment extends Fragment {
     DataBaseHelper dbHelper;
     String selection = null;
     String[] selectionArgs = null;
-
 
 
     @Override
@@ -58,6 +57,7 @@ public class ShowShoesFragment extends Fragment {
             int coastColIndex = c.getColumnIndex("coast");
             int descriptionColIndex = c.getColumnIndex("description");
             int sizeColIndex = c.getColumnIndex("size");
+            int imageurlColIndex = c.getColumnIndex("imageurl");
 
             do {
 //            if (!c.getString(typeColIndex).isEmpty())
@@ -67,6 +67,7 @@ public class ShowShoesFragment extends Fragment {
                         c.getString(genderColIndex),
                         c.getInt(quantityColIndex),
                         c.getString(nameColIndex),
+                        c.getString(imageurlColIndex),
                         c.getInt(coastColIndex),
                         c.getString(descriptionColIndex),
                         c.getString(sizeColIndex)));

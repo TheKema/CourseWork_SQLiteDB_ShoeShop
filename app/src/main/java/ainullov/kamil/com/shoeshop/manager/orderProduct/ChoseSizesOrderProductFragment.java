@@ -93,10 +93,10 @@ public class ChoseSizesOrderProductFragment extends Fragment implements View.OnC
 
                 Bundle bundleAddOrChange = this.getArguments();
                 String strAddOrChange = bundleAddOrChange.getString("addorchange");
-                if(strAddOrChange.equals("add")) {
+                if (strAddOrChange.equals("add")) {
                     OrderProductFragment.size = json.toString();
                     OrderProductFragment.quantity = items.size();
-                }else if(strAddOrChange.equals("change")) {
+                } else if (strAddOrChange.equals("change")) {
                     // Чтобы не создавать новый
                     StorageContentChangeProductFragment.size = json.toString();
                     StorageContentChangeProductFragment.quantity = items.size();

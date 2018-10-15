@@ -100,9 +100,9 @@ public class PersonalAreaFragment extends Fragment implements View.OnClickListen
 
         switch (view.getId()) {
             case R.id.btnExit:
-                MainActivity.USERNAME_USER_DB="";
-                MainActivity.USERNAME_BASKET_DB="";
-                MainActivity.USERNAME_FAVORITE_DB="";
+                MainActivity.USERNAME_USER_DB = "";
+                MainActivity.USERNAME_BASKET_DB = "";
+                MainActivity.USERNAME_FAVORITE_DB = "";
                 fTrans.remove(this);
                 fTrans.add(R.id.container, loginFragment);
                 break;
@@ -216,6 +216,3 @@ public class PersonalAreaFragment extends Fragment implements View.OnClickListen
     }
 
 }
-
-
-//

@@ -21,8 +21,8 @@ import java.util.List;
 import java.util.Random;
 
 import ainullov.kamil.com.shoeshop.R;
-import ainullov.kamil.com.shoeshop.manager.pojo.WorkersPojo;
 import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
+import ainullov.kamil.com.shoeshop.manager.pojo.WorkersPojo;
 
 public class EmployeePerfFragment extends Fragment {
     List<WorkersPojo> workersPojos = new ArrayList<>();

@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import ainullov.kamil.com.shoeshop.MainActivity;
@@ -59,6 +61,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
         int uniquekeyColIndex;
         int nameColIndex;
         int coastColIndex;
+        int imageurlColIndex;
 
         dbHelper = new DataBaseHelper(context);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -71,10 +74,14 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
             uniquekeyColIndex = c.getColumnIndex("uniquekey");
             nameColIndex = c.getColumnIndex("name");
             coastColIndex = c.getColumnIndex("coast");
+            imageurlColIndex = c.getColumnIndex("imageurl");
 
             do {
                 holder.tvFavoriteName.setText(c.getString(nameColIndex));
                 holder.tvFavoriteCoast.setText(String.valueOf(c.getInt(coastColIndex)));
+
+                Picasso.with(context).load(c.getString(imageurlColIndex)).into(holder.ivFavoriteShoe);
+
             } while (c.moveToNext());
         }
         c.close();

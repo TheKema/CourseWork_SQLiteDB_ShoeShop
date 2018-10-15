@@ -298,8 +298,6 @@ public class SalesVolumeFragment extends Fragment implements View.OnClickListene
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                 SalesVolumeAdapter adapter = new SalesVolumeAdapter(getActivity(), orderAccountingPojos);
                 recyclerView.setAdapter(adapter);
-
-
                 break;
         }
     }

@@ -20,8 +20,8 @@ import java.util.Collections;
 import java.util.List;
 
 import ainullov.kamil.com.shoeshop.R;
-import ainullov.kamil.com.shoeshop.manager.pojo.OrderAccountingPojo;
 import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
+import ainullov.kamil.com.shoeshop.manager.pojo.OrderAccountingPojo;
 
 public class StorageContentFragment extends Fragment {
     List<OrderAccountingPojo> orderAccountingPojos = new ArrayList<>();
@@ -40,6 +40,7 @@ public class StorageContentFragment extends Fragment {
     int dateColIndex;
     int descriptionColIndex;
     int sizeColIndex;
+    int imageurlColIndex;
 
     Spinner spinnerGenderStorageContent;
     Spinner spinnerTypeStorageContent;
@@ -96,7 +97,6 @@ public class StorageContentFragment extends Fragment {
                 // заголовок
                 spinnerTypeStorageContent.setPrompt("Title");
                 spinnerTypeStorageContent.setSelection(typePosition);
-
             }
 
             @Override
@@ -132,6 +132,7 @@ public class StorageContentFragment extends Fragment {
                     dateColIndex = c.getColumnIndex("date");
                     descriptionColIndex = c.getColumnIndex("description");
                     sizeColIndex = c.getColumnIndex("size");
+                    imageurlColIndex = c.getColumnIndex("imageurl");
 
                     do {
                         orderAccountingPojos.add(new OrderAccountingPojo(c.getInt(uniquekeyColIndex),
@@ -143,7 +144,8 @@ public class StorageContentFragment extends Fragment {
                                 c.getString(providerColIndex),
                                 c.getString(dateColIndex),
                                 c.getString(descriptionColIndex),
-                                c.getString(sizeColIndex)));
+                                c.getString(sizeColIndex),
+                                c.getString(imageurlColIndex)));
                     } while (c.moveToNext());
                 }
                 c.close();
@@ -162,8 +164,5 @@ public class StorageContentFragment extends Fragment {
             }
         });
 
-
     }
-
-
 }

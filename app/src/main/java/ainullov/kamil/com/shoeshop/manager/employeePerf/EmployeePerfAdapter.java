@@ -17,8 +17,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import ainullov.kamil.com.shoeshop.R;
-import ainullov.kamil.com.shoeshop.manager.pojo.WorkersPojo;
 import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
+import ainullov.kamil.com.shoeshop.manager.pojo.WorkersPojo;
 
 public class EmployeePerfAdapter extends RecyclerView.Adapter<EmployeePerfAdapter.ViewHolder> {
 

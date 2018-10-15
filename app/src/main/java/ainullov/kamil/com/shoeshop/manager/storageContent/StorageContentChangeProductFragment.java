@@ -19,9 +19,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import ainullov.kamil.com.shoeshop.R;
+import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
 import ainullov.kamil.com.shoeshop.manager.orderProduct.ChoseSizesOrderProductFragment;
 import ainullov.kamil.com.shoeshop.manager.orderProduct.OrderProductFragment;
-import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
 
 public class StorageContentChangeProductFragment extends Fragment implements View.OnClickListener {
     Spinner spinnerGender;
@@ -30,6 +30,7 @@ public class StorageContentChangeProductFragment extends Fragment implements Vie
     EditText etCoast;
     EditText etProvider;
     EditText etDesc;
+    EditText etImageUrl;
     Button btnSize;
     Button btnAddOrder;
     Button btnClearFields;
@@ -53,6 +54,7 @@ public class StorageContentChangeProductFragment extends Fragment implements Vie
     String provider = "КазОдеждСтрой";
     String description = "Обувь произведена в США";
     String date = String.valueOf(System.currentTimeMillis());  // При добавлении товара считывается текущее время
+    String imageurl = "https://image.ibb.co/dqwH5f/2184495-1.jpg";
 
 
     // ArrayList, из чисел - размер обуви, превращаем в строку и суем в db, потом достанем и превратив в ArrayList
@@ -79,6 +81,7 @@ public class StorageContentChangeProductFragment extends Fragment implements Vie
         etCoast = (EditText) view.findViewById(R.id.etCoast);
         etProvider = (EditText) view.findViewById(R.id.etProvider);
         etDesc = (EditText) view.findViewById(R.id.etDesc);
+        etImageUrl = (EditText) view.findViewById(R.id.etImageUrl);
         btnSize = (Button) view.findViewById(R.id.btnSize);
         btnAddOrder = (Button) view.findViewById(R.id.btnAddOrder);
         btnAddOrder.setText("Изменить");
@@ -97,11 +100,13 @@ public class StorageContentChangeProductFragment extends Fragment implements Vie
         size = bundle.getString("size");
         description = bundle.getString("description");
         quantity = bundle.getInt("quantity");
+        imageurl = bundle.getString("imageurl");
 
         etName.setText(name);
         etCoast.setText(String.valueOf(coast));
         etProvider.setText(provider);
         etDesc.setText(description);
+        etImageUrl.setText(imageurl);
 // Установка сохраненых значений в spinner'ы
         if (gender.equals("М")) {
             genderPosition = 0;
@@ -192,6 +197,7 @@ public class StorageContentChangeProductFragment extends Fragment implements Vie
                 description = etDesc.getText().toString();
                 provider = etProvider.getText().toString();
                 date = String.valueOf(System.currentTimeMillis());
+                imageurl = etImageUrl.getText().toString();
 
                 DataBaseHelper dbHelper;
                 dbHelper = new DataBaseHelper(getActivity());
@@ -207,6 +213,7 @@ public class StorageContentChangeProductFragment extends Fragment implements Vie
                 cv.put("date", date);
                 cv.put("size", size);
                 cv.put("quantity", quantity);
+                cv.put("imageurl", imageurl);
 
                 Bundle bundleUnique = this.getArguments();
                 int uniquekey = bundleUnique.getInt("uniquekey");

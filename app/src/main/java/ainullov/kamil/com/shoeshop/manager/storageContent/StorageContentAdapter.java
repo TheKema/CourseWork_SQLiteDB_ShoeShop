@@ -22,8 +22,8 @@ import java.util.List;
 import java.util.Locale;
 
 import ainullov.kamil.com.shoeshop.R;
-import ainullov.kamil.com.shoeshop.manager.pojo.OrderAccountingPojo;
 import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
+import ainullov.kamil.com.shoeshop.manager.pojo.OrderAccountingPojo;
 import ainullov.kamil.com.shoeshop.user.fragments.ShoesDetailedFragment;
 
 public class StorageContentAdapter extends RecyclerView.Adapter<StorageContentAdapter.ViewHolder> {
@@ -154,6 +154,7 @@ public class StorageContentAdapter extends RecyclerView.Adapter<StorageContentAd
                     bundle.putString("description", orderAccountingPojos.get(getAdapterPosition()).getDescription());
                     bundle.putString("size", orderAccountingPojos.get(getAdapterPosition()).getSize());
                     bundle.putInt("quantity", orderAccountingPojos.get(getAdapterPosition()).getQuantity());
+                    bundle.putString("imageurl", orderAccountingPojos.get(getAdapterPosition()).getImageurl());
 
 
                     storageContentChangeProductFragment.setArguments(bundle);

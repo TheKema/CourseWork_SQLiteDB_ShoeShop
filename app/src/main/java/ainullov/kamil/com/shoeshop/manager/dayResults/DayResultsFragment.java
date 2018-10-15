@@ -23,8 +23,8 @@ import java.util.List;
 import java.util.Locale;
 
 import ainullov.kamil.com.shoeshop.R;
-import ainullov.kamil.com.shoeshop.manager.pojo.OrderAccountingPojo;
 import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
+import ainullov.kamil.com.shoeshop.manager.pojo.OrderAccountingPojo;
 
 public class DayResultsFragment extends Fragment {
 

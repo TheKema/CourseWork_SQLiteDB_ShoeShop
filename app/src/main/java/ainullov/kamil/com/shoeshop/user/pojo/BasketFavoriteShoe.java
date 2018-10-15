@@ -5,10 +5,18 @@ public class BasketFavoriteShoe {
     private int uniquekey; // Оставить только уникальный код, id и размер !
     private String name;
     private int coast;
+    private String imageurl;
+
     private String size; // JSON строка, в которой в массиве будут находится числа
 
-    public BasketFavoriteShoe(int uniquekey, String size) {
+//    public BasketFavoriteShoe(int uniquekey, String size) {
+//        this.uniquekey = uniquekey;
+//        this.size = size;
+//    }
+
+    public BasketFavoriteShoe(int uniquekey, String imageurl, String size) {
         this.uniquekey = uniquekey;
+        this.imageurl = imageurl;
         this.size = size;
     }
 
@@ -18,6 +26,14 @@ public class BasketFavoriteShoe {
         this.name = name;
         this.coast = coast;
         this.size = size;
+    }
+
+    public String getImageurl() {
+        return imageurl;
+    }
+
+    public void setImageurl(String imageurl) {
+        this.imageurl = imageurl;
     }
 
     public int getUniquekey() {

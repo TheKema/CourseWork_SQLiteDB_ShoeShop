@@ -17,6 +17,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -56,12 +58,14 @@ public class ShoesDetailedFragment extends Fragment implements View.OnClickListe
     int coastColIndex;
     int descriptionColIndex;
     int sizeColIndex;
-
+    int imageurlColIndex;
 
     List<String> arrayListSize = new ArrayList<>();
     Set<String> uniqueListSize;
     int sizeposition = 0;
     String sizePicked = "42";
+    // использую сайт https://imgbb.com/ для хранения фотографий обуви
+    String strImageurl = "https://image.ibb.co/cyTrWL/175716-1.jpg";
 
 
     @Override
@@ -110,6 +114,7 @@ public class ShoesDetailedFragment extends Fragment implements View.OnClickListe
             coastColIndex = c.getColumnIndex("coast");
             descriptionColIndex = c.getColumnIndex("description");
             sizeColIndex = c.getColumnIndex("size");
+            imageurlColIndex = c.getColumnIndex("imageurl");
 
             do {
                 try {
@@ -124,6 +129,10 @@ public class ShoesDetailedFragment extends Fragment implements View.OnClickListe
                 shoeUniquekeyBasket = c.getInt(uniquekeyColIndex);
                 tvNameDetailed.setText(c.getString(nameColIndex));
                 tvCoastDetailed.setText(String.valueOf(c.getInt(coastColIndex)));
+
+                Picasso.with(getActivity()).load(c.getString(imageurlColIndex)).into(ivShoeDetailed);
+                strImageurl = c.getString(imageurlColIndex);
+
             } while (c.moveToNext());
         }
         c.close();
@@ -184,6 +193,7 @@ public class ShoesDetailedFragment extends Fragment implements View.OnClickListe
                     ContentValues cv = new ContentValues();
                     cv.put("shoeUniquekeyBasket", shoeUniquekeyBasket);
                     cv.put("shoeSize", sizePicked);
+                    cv.put("imageurl", strImageurl);
                     db.insert(MainActivity.USERNAME_BASKET_DB, null, cv);
                     dbHelper.close();
 
@@ -201,6 +211,7 @@ public class ShoesDetailedFragment extends Fragment implements View.OnClickListe
                     ContentValues cvFav = new ContentValues();
                     cvFav.put("shoeUniquekeyBasket", shoeUniquekeyBasket);
                     cvFav.put("shoeSize", sizePicked);
+                    cvFav.put("imageurl", strImageurl);
                     dbFav.insert(MainActivity.USERNAME_FAVORITE_DB, null, cvFav);
                     dbHelperFav.close();
                 }
@@ -220,7 +231,7 @@ public class ShoesDetailedFragment extends Fragment implements View.OnClickListe
         Cursor c = null;
         try {
             db = dbHelper.getReadableDatabase();
-            String query = "select count(*) from "+tableName+" where shoeUniquekeyBasket = ?";
+            String query = "select count(*) from " + tableName + " where shoeUniquekeyBasket = ?";
             c = db.rawQuery(query, new String[]{String.valueOf(shoeUniquekeyBasket)});
             if (c.moveToFirst()) {
                 return c.getInt(0);

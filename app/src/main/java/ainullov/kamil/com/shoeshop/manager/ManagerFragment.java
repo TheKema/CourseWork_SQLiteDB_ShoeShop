@@ -18,7 +18,6 @@ import ainullov.kamil.com.shoeshop.manager.employeePerf.EmployeePerfFragment;
 import ainullov.kamil.com.shoeshop.manager.orderProduct.OrderProductFragment;
 import ainullov.kamil.com.shoeshop.manager.ordersAccounting.OrdersAccountingFragment;
 import ainullov.kamil.com.shoeshop.manager.salesAccounting.SalesAccountingFragment;
-import ainullov.kamil.com.shoeshop.manager.salesVolume.SalesVolumeAdapter;
 import ainullov.kamil.com.shoeshop.manager.salesVolume.SalesVolumeFragment;
 import ainullov.kamil.com.shoeshop.manager.storageContent.StorageContentFragment;
 
@@ -111,9 +110,9 @@ public class ManagerFragment extends Fragment implements View.OnClickListener {
                 fTrans.addToBackStack(null);
                 break;
             case R.id.btnExit:
-                MainActivity.USERNAME_USER_DB="";
-                MainActivity.USERNAME_BASKET_DB="";
-                MainActivity.USERNAME_FAVORITE_DB="";
+                MainActivity.USERNAME_USER_DB = "";
+                MainActivity.USERNAME_BASKET_DB = "";
+                MainActivity.USERNAME_FAVORITE_DB = "";
                 fTrans.remove(this);
                 fTrans.add(R.id.container, loginFragment);
                 break;

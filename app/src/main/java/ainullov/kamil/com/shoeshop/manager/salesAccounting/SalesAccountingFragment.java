@@ -21,8 +21,8 @@ import java.util.Collections;
 import java.util.List;
 
 import ainullov.kamil.com.shoeshop.R;
-import ainullov.kamil.com.shoeshop.manager.pojo.OrderAccountingPojo;
 import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
+import ainullov.kamil.com.shoeshop.manager.pojo.OrderAccountingPojo;
 
 public class SalesAccountingFragment extends Fragment {
 
@@ -167,6 +167,4 @@ public class SalesAccountingFragment extends Fragment {
         });
 
     }
-
-
 }

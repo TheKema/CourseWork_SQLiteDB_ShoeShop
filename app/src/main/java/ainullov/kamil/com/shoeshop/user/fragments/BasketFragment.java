@@ -24,8 +24,8 @@ import java.util.Random;
 
 import ainullov.kamil.com.shoeshop.MainActivity;
 import ainullov.kamil.com.shoeshop.R;
-import ainullov.kamil.com.shoeshop.user.adapters.BasketAdapter;
 import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
+import ainullov.kamil.com.shoeshop.user.adapters.BasketAdapter;
 import ainullov.kamil.com.shoeshop.user.pojo.BasketFavoriteShoe;
 
 // Корзина
@@ -80,9 +80,10 @@ public class BasketFragment extends Fragment implements View.OnClickListener {
             int idColIndex = c.getColumnIndex("id");
             int uniquekeyColIndex = c.getColumnIndex("shoeUniquekeyBasket");
             int shoeSizeColIndex = c.getColumnIndex("shoeSize");
+            int imageurlColIndex = c.getColumnIndex("imageurl");
 
             do {
-                basketFavoriteShoes.add(new BasketFavoriteShoe(c.getInt(uniquekeyColIndex), c.getString(shoeSizeColIndex)));
+                basketFavoriteShoes.add(new BasketFavoriteShoe(c.getInt(uniquekeyColIndex), c.getString(imageurlColIndex), c.getString(shoeSizeColIndex)));
                 size = c.getString(shoeSizeColIndex); //Разиер для sold бд
             } while (c.moveToNext());
         }

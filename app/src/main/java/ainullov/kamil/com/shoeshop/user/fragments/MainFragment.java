@@ -2,12 +2,17 @@ package ainullov.kamil.com.shoeshop.user.fragments;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 import ainullov.kamil.com.shoeshop.MainActivity;
 import ainullov.kamil.com.shoeshop.R;
@@ -15,6 +20,7 @@ import ainullov.kamil.com.shoeshop.R;
 public class MainFragment extends Fragment implements View.OnClickListener {
     Button btnManMain;
     Button btnWomanMain;
+    ImageView ivHeader;
 
 //  Если понадобится поворот экрана (в MА, в OnCreate в этом случае переделать создание MainFragment)
 //  @Override
@@ -32,11 +38,16 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ivHeader = (ImageView) view.findViewById(R.id.ivHeader);
         btnManMain = (Button) view.findViewById(R.id.btnManMain);
         btnWomanMain = (Button) view.findViewById(R.id.btnWomanMain);
         btnManMain.setOnClickListener(this);
         btnWomanMain.setOnClickListener(this);
         getActivity().setTitle("Обувной магазин");
+
+//        Glide.with(getActivity()).load("https://openweathermap.org/img/w/10d.png").into(ivHeader);
+//        Picasso.with(getActivity()).load("https://image.ibb.co/mMjRy0/3031245-1.jpg").into(ivHeader);
+
     }
 
     @Override

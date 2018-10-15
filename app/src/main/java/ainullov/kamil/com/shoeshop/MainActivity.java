@@ -310,6 +310,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         for (int i = 0; i < forLength; i++) {
             cv.put("type", type);
             cv.put("gender", gender);
+
+            if (type.equals("Кроссовки") && gender.equals("М"))
+                cv.put("imageurl", "https://image.ibb.co/naP4kf/2162403-1.jpg");
+            else if (type.equals("Кроссовки") && gender.equals("Ж"))
+                cv.put("imageurl", "https://image.ibb.co/de88BL/6103959-1.jpg");
+            else if (type.equals("Ботинки") && gender.equals("М"))
+                cv.put("imageurl", "https://image.ibb.co/djkzJ0/5837005-1.jpg");
+            else if (type.equals("Ботинки") && gender.equals("Ж"))
+                cv.put("imageurl", "https://image.ibb.co/cR0AQf/5803026-1.jpg");
+            else if (type.equals("Кеды") && gender.equals("М"))
+                cv.put("imageurl", "https://image.ibb.co/mdkGy0/1769780-1.jpg");
+            else if (type.equals("Кеды") && gender.equals("Ж"))
+                cv.put("imageurl", "https://image.ibb.co/cyTrWL/175716-1.jpg");
+            else if (type.equals("Туфли") && gender.equals("М"))
+                cv.put("imageurl", "https://image.ibb.co/fsLry0/5831146-1.jpg");
+            else if (type.equals("Туфли") && gender.equals("Ж"))
+                cv.put("imageurl", "https://image.ibb.co/hiRWy0/5892161-1.jpg");
+            else if (type.equals("Сапоги") && gender.equals("Ж"))
+                cv.put("imageurl", "https://image.ibb.co/dq60Qf/5850439-1.jpg");
+            else if (type.equals("Балетки") && gender.equals("Ж"))
+                cv.put("imageurl", "https://image.ibb.co/jddN5f/5869399-1.jpg");
+            else
+                cv.put("imageurl", "https://image.ibb.co/bDUFrL/5803016-1.jpg");
+
             cv.put("coast", 1190 + i * 20);
             cv.put("name", type + " №" + i);
             cv.put("description", "Обувь произведена в Италии");
@@ -370,7 +394,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
     }
-
 
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);

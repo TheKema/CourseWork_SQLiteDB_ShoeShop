@@ -88,7 +88,7 @@
     <EditText
         android:id="@+id/etCoast"
         android:layout_width="wrap_content"
-        android:layout_height="44dp"
+        android:layout_height="40dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
@@ -112,7 +112,7 @@
     <EditText
         android:id="@+id/etProvider"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
@@ -155,7 +155,7 @@
         android:text="Описание:"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSize" />
+        app:layout_constraintTop_toBottomOf="@+id/etImageUrl" />
 
     <EditText
         android:id="@+id/etDesc"
@@ -168,7 +168,7 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView7"
-        app:layout_constraintTop_toBottomOf="@+id/btnSize" />
+        app:layout_constraintTop_toBottomOf="@+id/etImageUrl" />
 
     <Button
         android:id="@+id/btnAddOrder"
@@ -189,5 +189,30 @@
         android:text="Очистить поля"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="31dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Картинка: "
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSize" />
+
+    <EditText
+        android:id="@+id/etImageUrl"
+        android:layout_width="243dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Ссылка на картинку"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/btnSize" />
 
 </android.support.constraint.ConstraintLayout>

@@ -1,4 +1,5 @@
 package ainullov.kamil.com.shoeshop.user.fragments;
+
 import android.app.Fragment;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -15,16 +16,15 @@ import java.util.List;
 
 import ainullov.kamil.com.shoeshop.MainActivity;
 import ainullov.kamil.com.shoeshop.R;
-import ainullov.kamil.com.shoeshop.user.adapters.FavoriteAdapter;
 import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
+import ainullov.kamil.com.shoeshop.user.adapters.FavoriteAdapter;
 import ainullov.kamil.com.shoeshop.user.pojo.BasketFavoriteShoe;
 
 // Корзина
-public class FavoriteFragment extends Fragment{
+public class FavoriteFragment extends Fragment {
     List<BasketFavoriteShoe> favoriteShoes = new ArrayList<>();
     DataBaseHelper dbHelper;
     FavoriteAdapter adapter;
-
 
 
     @Override
@@ -47,9 +47,11 @@ public class FavoriteFragment extends Fragment{
             int idColIndex = c.getColumnIndex("id");
             int uniquekeyColIndex = c.getColumnIndex("shoeUniquekeyBasket");
             int shoeSizeColIndex = c.getColumnIndex("shoeSize");
+            int imageurlColIndex = c.getColumnIndex("imageurl");
+
 
             do {
-                favoriteShoes.add(new BasketFavoriteShoe(c.getInt(uniquekeyColIndex), c.getString(shoeSizeColIndex)));
+                favoriteShoes.add(new BasketFavoriteShoe(c.getInt(uniquekeyColIndex), c.getString(imageurlColIndex), c.getString(shoeSizeColIndex)));
 
             } while (c.moveToNext());
         }

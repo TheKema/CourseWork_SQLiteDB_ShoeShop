@@ -30,9 +30,11 @@ public class OrderProductFragment extends Fragment implements View.OnClickListen
     EditText etCoast;
     EditText etProvider;
     EditText etDesc;
+    EditText etImageUrl;
     Button btnSize;
     Button btnAddOrder;
     Button btnClearFields;
+
 
     private static int genderPosition = 0;
     private static int typePosition = 0;
@@ -50,6 +52,7 @@ public class OrderProductFragment extends Fragment implements View.OnClickListen
     String provider = "КазОдеждСтрой";
     String description = "Обувь произведена в США";
     String date = String.valueOf(System.currentTimeMillis());  // При добавлении товара считывается текущее время
+    String imageurl = "https://image.ibb.co/dqwH5f/2184495-1.jpg"; // использую сайт https://imgbb.com/ для хранения фотографий обуви
     Random random = new Random();
     int uniquekey = random.nextInt(); // При доб. тов. добавить уникальный ключ
 
@@ -58,8 +61,6 @@ public class OrderProductFragment extends Fragment implements View.OnClickListen
 
     // ArrayList, из чисел - размер обуви, превращаем в строку и суем в db, потом достанем и превратив в ArrayList
     ArrayList<String> sizeArrayList = new ArrayList<>();
-
-
 
 
     @Override
@@ -75,6 +76,7 @@ public class OrderProductFragment extends Fragment implements View.OnClickListen
 
         spinnerGender = (Spinner) view.findViewById(R.id.spinnerGender);
         spinnerType = (Spinner) view.findViewById(R.id.spinnerType);
+        etImageUrl = (EditText) view.findViewById(R.id.etImageUrl);
         etName = (EditText) view.findViewById(R.id.etNameDialog);
         etCoast = (EditText) view.findViewById(R.id.etCoast);
         etProvider = (EditText) view.findViewById(R.id.etProvider);
@@ -160,6 +162,8 @@ public class OrderProductFragment extends Fragment implements View.OnClickListen
                 provider = etProvider.getText().toString();
                 date = String.valueOf(System.currentTimeMillis());
 
+                imageurl = etImageUrl.getText().toString();
+
                 DataBaseHelper dbHelper;
                 dbHelper = new DataBaseHelper(getActivity());
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -170,6 +174,7 @@ public class OrderProductFragment extends Fragment implements View.OnClickListen
                 cv.put("coast", coast);
                 cv.put("name", name);
                 cv.put("description", description);
+                cv.put("imageurl", imageurl);
                 cv.put("provider", provider);
                 cv.put("date", date);
                 cv.put("size", size);

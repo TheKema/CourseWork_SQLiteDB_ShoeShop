@@ -8,12 +8,28 @@ public class OrderAccountingPojo {
     private String name;
     private int coast;
     private String provider;
+    private String imageurl;
     private String date;
     private String description;
     private String size;
 
 
     public OrderAccountingPojo() {
+    }
+
+    // С изображением
+    public OrderAccountingPojo(int uniquekey, String type, String gender, int quantity, String name, int coast, String provider, String date, String description, String size, String imageurl) {
+        this.uniquekey = uniquekey;
+        this.type = type;
+        this.gender = gender;
+        this.quantity = quantity;
+        this.name = name;
+        this.coast = coast;
+        this.provider = provider;
+        this.date = date;
+        this.description = description;
+        this.size = size;
+        this.imageurl = imageurl;
     }
 
     public OrderAccountingPojo(int uniquekey, String type, String gender, int quantity, String name, int coast, String provider, String date, String description, String size) {
@@ -38,6 +54,14 @@ public class OrderAccountingPojo {
         this.provider = provider;
         this.date = solddate;
         this.size = size;
+    }
+
+    public String getImageurl() {
+        return imageurl;
+    }
+
+    public void setImageurl(String imageurl) {
+        this.imageurl = imageurl;
     }
 
     public int getUniquekey() {

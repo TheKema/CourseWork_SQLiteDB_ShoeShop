@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import ainullov.kamil.com.shoeshop.MainActivity;
@@ -59,6 +61,7 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
         int uniquekeyColIndex;
         int nameColIndex;
         int coastColIndex;
+        int imageurlColIndex;
 
         dbHelper = new DataBaseHelper(context);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -71,11 +74,15 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
             uniquekeyColIndex = c.getColumnIndex("uniquekey");
             nameColIndex = c.getColumnIndex("name");
             coastColIndex = c.getColumnIndex("coast");
+            imageurlColIndex = c.getColumnIndex("imageurl");
 
             do {
                 holder.tvBasketName.setText(c.getString(nameColIndex));
                 holder.tvBasketCoast.setText(String.valueOf(c.getInt(coastColIndex)));
                 holder.tvBasketSize.setText(basketFavoriteShoe.getSize());
+
+                Picasso.with(context).load(c.getString(imageurlColIndex)).into(holder.ivBasketShoe);
+
             } while (c.moveToNext());
         }
         c.close();

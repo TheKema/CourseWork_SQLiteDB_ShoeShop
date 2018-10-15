@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import ainullov.kamil.com.shoeshop.R;
@@ -43,6 +45,9 @@ public class ShowShoesAdapter extends RecyclerView.Adapter<ShowShoesAdapter.View
         OneShoe shoe = shoes.get(position);
         holder.tvShoeName.setText(shoe.getName());
         holder.tvShoeCost.setText(String.valueOf(shoe.getCoast()));
+
+        Picasso.with(context).load(shoe.getImageurl()).into(holder.ivShoe);
+
     }
 
     @Override
