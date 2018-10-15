@@ -75,7 +75,7 @@ public class OrderProductFragment extends Fragment implements View.OnClickListen
 
         spinnerGender = (Spinner) view.findViewById(R.id.spinnerGender);
         spinnerType = (Spinner) view.findViewById(R.id.spinnerType);
-        etName = (EditText) view.findViewById(R.id.etName);
+        etName = (EditText) view.findViewById(R.id.etNameDialog);
         etCoast = (EditText) view.findViewById(R.id.etCoast);
         etProvider = (EditText) view.findViewById(R.id.etProvider);
         etDesc = (EditText) view.findViewById(R.id.etDesc);

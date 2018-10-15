@@ -25,9 +25,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
 import ainullov.kamil.com.shoeshop.login.LoginFragment;
 import ainullov.kamil.com.shoeshop.manager.ManagerFragment;
-import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
+import ainullov.kamil.com.shoeshop.user.PersonalAreaFragment;
 import ainullov.kamil.com.shoeshop.user.fragments.BasketFragment;
 import ainullov.kamil.com.shoeshop.user.fragments.FavoriteFragment;
 import ainullov.kamil.com.shoeshop.user.fragments.MainFragment;
@@ -37,9 +38,13 @@ import ainullov.kamil.com.shoeshop.user.pojo.ShoeType;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    public static String USERNAME_USER_DB = "adminuser";
-    public static String USERNAME_BASKET_DB = "adminbasket";
-    public static String USERNAME_FAVORITE_DB = "adminfavorite";
+    public static final String ADMIN_LOGIN = "admin";
+    public static final String ADMIN_PASSWORD = "admin";
+
+
+    public static String USERNAME_USER_DB = "";
+    public static String USERNAME_BASKET_DB = "";
+    public static String USERNAME_FAVORITE_DB = "";
 
     public static boolean manTRUEwomanFALSE = false;
     public static String shoesTYPE = "Кроссовки";
@@ -52,16 +57,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     WomanFragment womanFragment = null;
     BasketFragment basketFragment = null;
     FavoriteFragment favoriteFragment = null;
-    ManagerFragment managerFragment= null;
+    ManagerFragment managerFragment = null;
     MainFragment mainFragment = null;
 
     LoginFragment loginFragment = null;
+    PersonalAreaFragment personalAreaFragment = null;
 
     SharedPreferences prefs = null;
 
     // На время. первичное добавление данных в БД, для примера
     Random random = new Random();
     int uniquekey = random.nextInt(); // При доб. тов. добавить уникальный ключ
+
+    SharedPreferences shref;
+    final String USERNAME_USER_DBkey = "USERNAME_USER_DB";
+    final String USERNAME_BASKET_DBkey = "USERNAME_BASKET_DB";
+    final String USERNAME_FAVORITE_DBkey = "USERNAME_FAVORITE_DB";
 
     @Override
     protected void onResume() {
@@ -70,14 +81,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //Первый запуск. Проверка. Заполнения БД
         if (prefs.getBoolean("firstrun", true)) {
 
-            addToDB("Кроссовки","М", 7);
-            addToDB("Кроссовки","Ж", 5);
-            addToDB("Ботинки","М", 4);
-            addToDB("Ботинки","Ж", 9);
-            addToDB("Туфли","Ж", 8);
-            addToDB("Кеды","М", 2);
-            addToDB("Кеды","Ж", 6);
-            addToDB("Сапоги","Ж", 5);
+            addToDB("Кроссовки", "М", 7);
+            addToDB("Кроссовки", "Ж", 5);
+            addToDB("Ботинки", "М", 4);
+            addToDB("Ботинки", "Ж", 9);
+            addToDB("Туфли", "Ж", 8);
+            addToDB("Кеды", "М", 2);
+            addToDB("Кеды", "Ж", 6);
+            addToDB("Сапоги", "Ж", 5);
+
+
+            // Аккаунт админа
+            DataBaseHelper dbHelper;
+            dbHelper = new DataBaseHelper(this);
+            dbHelper.createClientDB(dbHelper, "admin");
+            // подключение к БД
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
+            ContentValues cv = new ContentValues();
+            cv.put("login", ADMIN_LOGIN);
+            cv.put("password", ADMIN_PASSWORD);
+            db.insert("admin" + "user", null, cv);
+            dbHelper.close();
+
 
             prefs.edit().putBoolean("firstrun", false).apply();
         }
@@ -90,11 +115,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        loginFragment = new LoginFragment();
-        FragmentTransaction fTrans;
-        fTrans = getFragmentManager().beginTransaction();
-        fTrans.replace(R.id.container, loginFragment);
-        fTrans.commit();
+        load();
+        if (!MainActivity.USERNAME_USER_DB.equals("")) {
+            mainFragment = new MainFragment();
+            FragmentTransaction fTrans;
+            fTrans = getFragmentManager().beginTransaction();
+            fTrans.replace(R.id.container, mainFragment);
+            fTrans.commit();
+        } else {
+            loginFragment = new LoginFragment();
+            FragmentTransaction fTrans;
+            fTrans = getFragmentManager().beginTransaction();
+            fTrans.replace(R.id.container, loginFragment);
+            fTrans.commit();
+        }
 
 // mainFragment = new MainFragment();
 //        FragmentTransaction fTrans;
@@ -103,7 +137,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        fTrans.commit();
 
         prefs = getSharedPreferences("ainullov.kamil.com.shoeshop", MODE_PRIVATE);
-
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -152,13 +185,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_personal_area) {
-            managerFragment = new ManagerFragment();
-            FragmentTransaction fTrans;
-            fTrans = getFragmentManager().beginTransaction();
-            fTrans.replace(R.id.container, managerFragment);
-            fTrans.addToBackStack(null);
-            fTrans.commit();
-            return true;
+            if (!MainActivity.USERNAME_USER_DB.equals("")) {
+
+                if ((MainActivity.ADMIN_LOGIN + "user").equals(MainActivity.USERNAME_USER_DB)) {
+                    managerFragment = new ManagerFragment();
+                    FragmentTransaction fTrans;
+                    fTrans = getFragmentManager().beginTransaction();
+                    fTrans.replace(R.id.container, managerFragment);
+                    fTrans.addToBackStack(null);
+                    fTrans.commit();
+                    return true;
+                } else {
+                    personalAreaFragment = new PersonalAreaFragment();
+                    FragmentTransaction fTrans;
+                    fTrans = getFragmentManager().beginTransaction();
+                    fTrans.replace(R.id.container, personalAreaFragment);
+                    fTrans.addToBackStack(null);
+                    fTrans.commit();
+                    return true;
+
+                }
+
+            }
         }
         if (id == R.id.action_basket) {
             basketFragment = new BasketFragment();
@@ -195,6 +243,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         managerFragment = new ManagerFragment();
 
+        personalAreaFragment = new PersonalAreaFragment();
+
         FragmentTransaction fTrans;
         fTrans = getFragmentManager().beginTransaction();
         int id = item.getItemId();
@@ -223,8 +273,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fTrans.replace(R.id.container, basketFragment);
             fTrans.addToBackStack(null);
         } else if (id == R.id.nav_personal_area) {
-            fTrans.replace(R.id.container, managerFragment);
-            fTrans.addToBackStack(null);
+            if (!MainActivity.USERNAME_USER_DB.equals("")) {
+
+
+                if ((MainActivity.ADMIN_LOGIN + "user").equals(MainActivity.USERNAME_USER_DB)) {
+
+                    fTrans.replace(R.id.container, managerFragment);
+                    fTrans.addToBackStack(null);
+                } else {
+                    fTrans.replace(R.id.container, personalAreaFragment);
+                    fTrans.addToBackStack(null);
+                }
+            }
+
         }
         fTrans.commit();
 
@@ -236,9 +297,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-
     // Метод для заполнения ДБ при старте приложения
-    private void addToDB(String type, String gender, int forLength){
+    private void addToDB(String type, String gender, int forLength) {
         // Заполнение БД
         DataBaseHelper dbHelper;
         dbHelper = new DataBaseHelper(this);
@@ -250,10 +310,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         for (int i = 0; i < forLength; i++) {
             cv.put("type", type);
             cv.put("gender", gender);
-            cv.put("coast", 1190+i*20);
-            cv.put("name", type+" №"+i);
+            cv.put("coast", 1190 + i * 20);
+            cv.put("name", type + " №" + i);
             cv.put("description", "Обувь произведена в Италии");
-            cv.put("provider", "ОбувьДел№"+i);
+            cv.put("provider", "ОбувьДел№" + i);
             cv.put("date", String.valueOf(System.currentTimeMillis()));
 //         ArrayList, из чисел - размер обуви, превращаем в строку и суем в db, потом достанем и превратив в ArrayList
             ArrayList<String> items = new ArrayList<>();
@@ -314,7 +374,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString("USERNAME_USER_DB",  USERNAME_USER_DB);
+        outState.putString("USERNAME_USER_DB", USERNAME_USER_DB);
         outState.putString("USERNAME_BASKET_DB", USERNAME_BASKET_DB);
         outState.putString("USERNAME_FAVORITE_DB", USERNAME_FAVORITE_DB);
         outState.putBoolean("manTRUEwomanFALSE", manTRUEwomanFALSE);
@@ -331,4 +391,40 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         shoesTYPE = savedInstanceState.getString("shoesTYPE");
         gender = savedInstanceState.getString("gender");
     }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        save();
+    }
+
+
+    public void load() {
+        shref = getPreferences(MODE_PRIVATE);
+        //Если впервые запускаем
+        boolean hasVisited = shref.getBoolean("hasVisited", false);
+        if (!hasVisited) {
+            SharedPreferences.Editor e = shref.edit();
+            e.putBoolean("hasVisited", true);
+            e.commit();
+        } else {
+            MainActivity.USERNAME_USER_DB = shref.getString(USERNAME_USER_DBkey, "");
+            MainActivity.USERNAME_FAVORITE_DB = shref.getString(USERNAME_FAVORITE_DBkey, "");
+            MainActivity.USERNAME_BASKET_DB = shref.getString(USERNAME_BASKET_DBkey, "");
+
+        }
+    }
+
+    public void save() {
+        shref = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor;
+        editor = shref.edit();
+        editor.putString(USERNAME_USER_DBkey, MainActivity.USERNAME_USER_DB);
+        editor.putString(USERNAME_FAVORITE_DBkey, MainActivity.USERNAME_FAVORITE_DB);
+        editor.putString(USERNAME_BASKET_DBkey, MainActivity.USERNAME_BASKET_DB);
+
+        editor.commit();
+    }
+
 }

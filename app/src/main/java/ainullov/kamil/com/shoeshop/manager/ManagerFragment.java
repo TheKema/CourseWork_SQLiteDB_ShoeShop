@@ -7,9 +7,12 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
+import ainullov.kamil.com.shoeshop.MainActivity;
 import ainullov.kamil.com.shoeshop.R;
+import ainullov.kamil.com.shoeshop.login.LoginFragment;
 import ainullov.kamil.com.shoeshop.manager.dayResults.DayResultsFragment;
 import ainullov.kamil.com.shoeshop.manager.employeePerf.EmployeePerfFragment;
 import ainullov.kamil.com.shoeshop.manager.orderProduct.OrderProductFragment;
@@ -28,6 +31,7 @@ public class ManagerFragment extends Fragment implements View.OnClickListener {
     TextView tvDayResults;
     TextView tvSalesVolume;
     TextView tvEmployeePerf;
+    Button btnExit;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,6 +51,8 @@ public class ManagerFragment extends Fragment implements View.OnClickListener {
         tvSalesVolume = (TextView) view.findViewById(R.id.tvSalesVolume);
         tvEmployeePerf = (TextView) view.findViewById(R.id.tvEmployeePerf);
 
+        btnExit = (Button) view.findViewById(R.id.btnExit);
+        btnExit.setOnClickListener(this);
 
         tvOrderProduct.setOnClickListener(this);
         tvProvider.setOnClickListener(this);
@@ -68,6 +74,9 @@ public class ManagerFragment extends Fragment implements View.OnClickListener {
         DayResultsFragment dayResultsFragment = new DayResultsFragment();
         SalesVolumeFragment salesVolumeFragment = new SalesVolumeFragment();
         EmployeePerfFragment employeePerfFragment = new EmployeePerfFragment();
+
+        LoginFragment loginFragment = new LoginFragment();
+
         FragmentTransaction fTrans;
         fTrans = getFragmentManager().beginTransaction();
 
@@ -100,6 +109,13 @@ public class ManagerFragment extends Fragment implements View.OnClickListener {
             case R.id.tvEmployeePerf:
                 fTrans.replace(R.id.container, employeePerfFragment);
                 fTrans.addToBackStack(null);
+                break;
+            case R.id.btnExit:
+                MainActivity.USERNAME_USER_DB="";
+                MainActivity.USERNAME_BASKET_DB="";
+                MainActivity.USERNAME_FAVORITE_DB="";
+                fTrans.remove(this);
+                fTrans.add(R.id.container, loginFragment);
                 break;
         }
         fTrans.commit();

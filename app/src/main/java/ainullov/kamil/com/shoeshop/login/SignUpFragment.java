@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -15,7 +16,6 @@ import android.widget.Toast;
 
 import ainullov.kamil.com.shoeshop.R;
 import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
-import ainullov.kamil.com.shoeshop.login.LoginFragment;
 
 
 public class SignUpFragment extends Fragment implements View.OnClickListener {
@@ -24,10 +24,16 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
     EditText etLogin;
     EditText etPassword;
     EditText etRepPassword;
+    EditText etName;
+    EditText etNumber;
+    EditText etEmail;
 
     String strLogin;
     String strPassword;
     String strRepPassword;
+    String strName;
+    String strNumber;
+    String strEmail;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,6 +50,9 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
         etLogin = (EditText) view.findViewById(R.id.etLogin);
         etPassword = (EditText) view.findViewById(R.id.etPassword);
         etRepPassword = (EditText) view.findViewById(R.id.etRepPassword);
+        etName = (EditText) view.findViewById(R.id.etNameDialog);
+        etNumber = (EditText) view.findViewById(R.id.etNumber);
+        etEmail = (EditText) view.findViewById(R.id.etEmail);
         btnBack.setOnClickListener(this);
         btnSignUp.setOnClickListener(this);
     }
@@ -59,29 +68,43 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
                 strLogin = etLogin.getText().toString();
                 strPassword = etPassword.getText().toString();
                 strRepPassword = etRepPassword.getText().toString();
+                strName = etName.getText().toString();
+                strNumber = etNumber.getText().toString();
+                strEmail = etEmail.getText().toString();
 
                 if (strPassword.equals(strRepPassword)) {
-                    DataBaseHelper dbHelper;
-                    dbHelper = new DataBaseHelper(getActivity());
-                    dbHelper.createClientDB(dbHelper, strLogin);
-                    // подключение к БД
-                    SQLiteDatabase db = dbHelper.getWritableDatabase();
+                    try {
+                        DataBaseHelper dbHelper;
+                        dbHelper = new DataBaseHelper(getActivity());
+                        dbHelper.createClientDB(dbHelper, strLogin);
+                        // подключение к БД
+                        SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-                    ContentValues cv = new ContentValues();
-                    cv.put("login", strLogin);
-                    cv.put("password", strPassword);
-                    db.insert(strLogin + "user", null, cv);
-                    Toast.makeText(getActivity(), "Вы зарегестрировались", Toast.LENGTH_SHORT).show();
+                        ContentValues cv = new ContentValues();
+                        cv.put("login", strLogin);
+                        cv.put("password", strPassword);
+                        cv.put("name", strName);
+                        cv.put("number", strNumber);
+                        cv.put("email", strEmail);
+                        db.insert(strLogin + "user", null, cv);
+                        Toast.makeText(getActivity(), "Вы зарегестрировались", Toast.LENGTH_SHORT).show();
 
-                    dbHelper.close();
+                        dbHelper.close();
+
+                        fTrans.remove(this);
+                        fTrans.add(R.id.container, loginFragment);
+                    } catch (SQLiteException e) {
+                        Toast.makeText(getActivity(), "Такой логин уже существует", Toast.LENGTH_SHORT).show();
+                        etLogin.setText("");
+                        etPassword.setText("");
+                        etRepPassword.setText("");
+
+                    }
                 } else {
                     Toast.makeText(getActivity(), "Пароли не совпадают", Toast.LENGTH_SHORT).show();
                     etPassword.setText("");
                     etRepPassword.setText("");
                 }
-
-                fTrans.remove(this);
-                fTrans.add(R.id.container, loginFragment);
                 break;
             case R.id.btnBack:
                 fTrans.remove(this);
@@ -90,4 +113,5 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
         }
         fTrans.commit();
     }
+
 }

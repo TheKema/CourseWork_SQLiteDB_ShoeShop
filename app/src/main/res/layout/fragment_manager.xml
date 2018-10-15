@@ -248,4 +248,10 @@
             app:layout_constraintStart_toStartOf="parent" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btnExit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Выйти из аккаунта" />
 </LinearLayout>

@@ -68,10 +68,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 + "id integer primary key autoincrement,"
                 + "login text,"
                 + "password text,"
-                + "basketuniquekeylist text,"
-                + "basketnamelist text,"
-                + "favoriteuniquekeylist text,"
-                + "favoritenamelist text" + ");");
+                + "name text,"
+                + "number text,"
+                + "email text" + ");");
 
         sqLiteDatabase.execSQL("create table " + dbName + "basket ("
                 + "id integer primary key autoincrement,"
