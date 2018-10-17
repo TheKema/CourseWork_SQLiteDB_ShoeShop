@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             addToDB("Сапоги", "Ж", 5);
 
 
+
             // Аккаунт админа
             DataBaseHelper dbHelper;
             dbHelper = new DataBaseHelper(this);
@@ -116,6 +117,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
 
         load();
+
         if (!MainActivity.USERNAME_USER_DB.equals("")) {
             mainFragment = new MainFragment();
             FragmentTransaction fTrans;
@@ -130,14 +132,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fTrans.commit();
         }
 
-// mainFragment = new MainFragment();
-//        FragmentTransaction fTrans;
-//        fTrans = getFragmentManager().beginTransaction();
-//        fTrans.replace(R.id.container, mainFragment);
-//        fTrans.commit();
-
         prefs = getSharedPreferences("ainullov.kamil.com.shoeshop", MODE_PRIVATE);
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -159,8 +154,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         shoeTypesWoman.add(new ShoeType("Туфли"));
         shoeTypesWoman.add(new ShoeType("Сапоги"));
         shoeTypesWoman.add(new ShoeType("Балетки"));
-
-
     }
 
     @Override
@@ -275,9 +268,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_personal_area) {
             if (!MainActivity.USERNAME_USER_DB.equals("")) {
 
-
                 if ((MainActivity.ADMIN_LOGIN + "user").equals(MainActivity.USERNAME_USER_DB)) {
-
                     fTrans.replace(R.id.container, managerFragment);
                     fTrans.addToBackStack(null);
                 } else {
@@ -285,7 +276,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     fTrans.addToBackStack(null);
                 }
             }
-
         }
         fTrans.commit();
 
@@ -296,7 +286,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-
     // Метод для заполнения ДБ при старте приложения
     private void addToDB(String type, String gender, int forLength) {
         // Заполнение БД
@@ -306,7 +295,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         ContentValues cv = new ContentValues();
-
         for (int i = 0; i < forLength; i++) {
             cv.put("type", type);
             cv.put("gender", gender);
@@ -359,7 +347,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             while (checkRepeat("shoe") != 0) {
                 uniquekey = random.nextInt();
             }
-
             if (checkRepeat("shoe") == 0) {
                 cv.put("uniquekey", uniquekey);
             }
@@ -415,13 +402,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         gender = savedInstanceState.getString("gender");
     }
 
-
     @Override
     protected void onPause() {
         super.onPause();
         save();
     }
-
 
     public void load() {
         shref = getPreferences(MODE_PRIVATE);
@@ -446,7 +431,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         editor.putString(USERNAME_USER_DBkey, MainActivity.USERNAME_USER_DB);
         editor.putString(USERNAME_FAVORITE_DBkey, MainActivity.USERNAME_FAVORITE_DB);
         editor.putString(USERNAME_BASKET_DBkey, MainActivity.USERNAME_BASKET_DB);
-
         editor.commit();
     }
 

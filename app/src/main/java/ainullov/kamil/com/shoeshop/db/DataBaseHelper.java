@@ -56,6 +56,19 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 + "provider text,"
                 + "solddate text," //
                 + "size text" + ");");
+
+        sqLiteDatabase.execSQL("create table orders ("
+                + "id integer primary key autoincrement,"
+                + "name text,"
+                + "number text,"
+                + "date text,"
+                + "type text,"
+                + "gender text,"
+                + "shoename text,"
+                + "coast integer,"
+                + "size text,"
+                + "orderNumber integer,"
+                + "email text" + ");");
     }
 
     @Override

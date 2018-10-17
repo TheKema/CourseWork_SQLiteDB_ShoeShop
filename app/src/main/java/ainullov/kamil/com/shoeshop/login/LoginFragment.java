@@ -94,7 +94,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     c.close();
                     dbHelper.close();
 
-
                 } catch (SQLiteException e) {
                     Toast.makeText(getActivity(), " Не существует такого пользователя ", Toast.LENGTH_SHORT).show();
                 }

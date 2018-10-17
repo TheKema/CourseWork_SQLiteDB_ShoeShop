@@ -13,6 +13,7 @@ import android.widget.TextView;
 import ainullov.kamil.com.shoeshop.MainActivity;
 import ainullov.kamil.com.shoeshop.R;
 import ainullov.kamil.com.shoeshop.login.LoginFragment;
+import ainullov.kamil.com.shoeshop.manager.activeOrders.ActiveOrdersFragment;
 import ainullov.kamil.com.shoeshop.manager.dayResults.DayResultsFragment;
 import ainullov.kamil.com.shoeshop.manager.employeePerf.EmployeePerfFragment;
 import ainullov.kamil.com.shoeshop.manager.orderProduct.OrderProductFragment;
@@ -30,6 +31,7 @@ public class ManagerFragment extends Fragment implements View.OnClickListener {
     TextView tvDayResults;
     TextView tvSalesVolume;
     TextView tvEmployeePerf;
+    TextView tvActiveOrders;
     Button btnExit;
 
     @Override
@@ -45,6 +47,7 @@ public class ManagerFragment extends Fragment implements View.OnClickListener {
         tvProvider = (TextView) view.findViewById(R.id.tvProvider);
         tvStorageContent = (TextView) view.findViewById(R.id.tvStorageContent);
 
+        tvActiveOrders = (TextView) view.findViewById(R.id.tvActiveOrders);
         tvSalesAccounting = (TextView) view.findViewById(R.id.tvSalesAccounting);
         tvDayResults = (TextView) view.findViewById(R.id.tvDayResults);
         tvSalesVolume = (TextView) view.findViewById(R.id.tvSalesVolume);
@@ -57,6 +60,7 @@ public class ManagerFragment extends Fragment implements View.OnClickListener {
         tvProvider.setOnClickListener(this);
         tvStorageContent.setOnClickListener(this);
 
+        tvActiveOrders.setOnClickListener(this);
         tvSalesAccounting.setOnClickListener(this);
         tvDayResults.setOnClickListener(this);
         tvSalesVolume.setOnClickListener(this);
@@ -73,6 +77,7 @@ public class ManagerFragment extends Fragment implements View.OnClickListener {
         DayResultsFragment dayResultsFragment = new DayResultsFragment();
         SalesVolumeFragment salesVolumeFragment = new SalesVolumeFragment();
         EmployeePerfFragment employeePerfFragment = new EmployeePerfFragment();
+        ActiveOrdersFragment activeOrdersFragment = new ActiveOrdersFragment();
 
         LoginFragment loginFragment = new LoginFragment();
 
@@ -93,7 +98,11 @@ public class ManagerFragment extends Fragment implements View.OnClickListener {
                 fTrans.addToBackStack(null);
                 break;
 
-            case R.id.tvSalesAccounting:  /// Могут быть ошибки, т.к. id в layout'ах  смешались с storageContentFragment, ИСПРАВИТЬ!
+            case R.id.tvActiveOrders:
+                fTrans.replace(R.id.container, activeOrdersFragment);
+                fTrans.addToBackStack(null);
+                break;
+            case R.id.tvSalesAccounting:
                 fTrans.replace(R.id.container, salesAccountingFragment);
                 fTrans.addToBackStack(null);
                 break;

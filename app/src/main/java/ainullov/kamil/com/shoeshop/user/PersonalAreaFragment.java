@@ -155,7 +155,6 @@ public class PersonalAreaFragment extends Fragment implements View.OnClickListen
                     }
                 });
 
-
                 dialog.show();
 
                 break;
