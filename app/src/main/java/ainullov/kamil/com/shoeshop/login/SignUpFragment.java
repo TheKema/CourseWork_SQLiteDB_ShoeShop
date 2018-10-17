@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,10 +37,17 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
     String strEmail;
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_signup, container, false);
     }
+
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -98,7 +106,6 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
                         etLogin.setText("");
                         etPassword.setText("");
                         etRepPassword.setText("");
-
                     }
                 } else {
                     Toast.makeText(getActivity(), "Пароли не совпадают", Toast.LENGTH_SHORT).show();

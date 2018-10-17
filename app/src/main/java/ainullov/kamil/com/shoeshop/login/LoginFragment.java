@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     String strLogin;
     String strPassword;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,8 +76,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 int passwordColIndex;
 
                 try {
-
-
                     dbHelper = new DataBaseHelper(getActivity());
                     SQLiteDatabase db = dbHelper.getWritableDatabase();
                     c = db.query(MainActivity.USERNAME_USER_DB, null, null, null, null, null, null);
@@ -79,11 +84,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                         loginColIndex = c.getColumnIndex("login");
                         passwordColIndex = c.getColumnIndex("password");
                         do {
-
                             if (strPassword.equals(c.getString(passwordColIndex))) {
                                 Toast.makeText(getActivity(), "Здравствуйте, " + c.getString(loginColIndex), Toast.LENGTH_SHORT).show();
                                 fTrans.remove(this);
                                 fTrans.add(R.id.container, mainFragment);
+
+                                    ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+
                             } else {
                                 Toast.makeText(getActivity(), "Неправильный пароль " + c.getString(loginColIndex), Toast.LENGTH_SHORT).show();
                                 etPassword.setText("");

@@ -100,17 +100,6 @@ public class UserOrderProductFragment extends Fragment implements View.OnClickLi
         }
         c.close();
         dbHelper.close();
-
-
-//        rbPickup.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (rbPickup.isChecked())
-//                    btnUserOrderProduct.setClickable(true);
-//                else
-//                    btnUserOrderProduct.setClickable(false);
-//            }
-//        });
     }
 
     @Override

@@ -16,18 +16,6 @@ public class OneShoe {
         this.name = name;
     }
 
-//    public OneShoe(int id, int uniquekey, String type, String gender, int quantity, String name, int coast, String desc, String size) {
-//        this.id = id;
-//        this.uniquekey = uniquekey;
-//        this.type = type;
-//        this.gender = gender;
-//        this.quantity = quantity;
-//        this.name = name;
-//        this.coast = coast;
-//        this.desc = desc;
-//        this.size = size;
-//    }
-
     public OneShoe(int id, int uniquekey, String type, String gender, int quantity, String name, String imageurl, int coast, String desc, String size) {
         this.id = id;
         this.uniquekey = uniquekey;

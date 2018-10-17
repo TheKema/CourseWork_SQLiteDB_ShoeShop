@@ -5,6 +5,7 @@ import android.app.FragmentTransaction;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 //    public void onCreate(Bundle savedInstanceState) {
 //        super.onCreate(savedInstanceState);
 //        setRetainInstance(true); }
+
 
 
     @Override

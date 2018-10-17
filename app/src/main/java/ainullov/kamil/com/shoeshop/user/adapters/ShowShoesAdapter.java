@@ -44,7 +44,7 @@ public class ShowShoesAdapter extends RecyclerView.Adapter<ShowShoesAdapter.View
     public void onBindViewHolder(ShowShoesAdapter.ViewHolder holder, int position) {
         OneShoe shoe = shoes.get(position);
         holder.tvShoeName.setText(shoe.getName());
-        holder.tvShoeCost.setText(String.valueOf(shoe.getCoast()));
+        holder.tvShoeCoast.setText(String.valueOf(shoe.getCoast()));
 
         Picasso.with(context).load(shoe.getImageurl()).into(holder.ivShoe);
 
@@ -57,14 +57,14 @@ public class ShowShoesAdapter extends RecyclerView.Adapter<ShowShoesAdapter.View
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         final ImageView ivShoe;
-        final TextView tvShoeName, tvShoeCost;
+        final TextView tvShoeName, tvShoeCoast;
         final LinearLayout llShow;
 
         ViewHolder(View view) {
             super(view);
             ivShoe = (ImageView) view.findViewById(R.id.ivShoeDetailed);
             tvShoeName = (TextView) view.findViewById(R.id.tvShoeName);
-            tvShoeCost = (TextView) view.findViewById(R.id.tvShoeCost);
+            tvShoeCoast = (TextView) view.findViewById(R.id.tvShoeCoast);
             llShow = (LinearLayout) view.findViewById(R.id.llShow);
 
             llShow.setOnClickListener(new View.OnClickListener() {

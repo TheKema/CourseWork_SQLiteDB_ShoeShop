@@ -12,7 +12,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 import ainullov.kamil.com.shoeshop.R;
 import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
@@ -42,30 +44,14 @@ public class ActiveOrdersAdapter extends RecyclerView.Adapter<ActiveOrdersAdapte
     public void onBindViewHolder(ActiveOrdersAdapter.ViewHolder holder, int position) {
         ActiveOrdersPojo activeOrdersPojo = activeOrdersPojos.get(position);
 
-//        SimpleDateFormat formatDayOfWeek = new SimpleDateFormat("dd.MM.yy, HH:mm", Locale.ENGLISH);
-//        String dayOfWeeki = formatDayOfWeek.format(Double.valueOf(activeOrdersPojo.getDate()));
-//
-//        StringBuilder strSizes = new StringBuilder("");
-//
-//        try {
-//            JSONObject json = new JSONObject(activeOrdersPojo.getSize());
-//            JSONArray items = json.optJSONArray("uniqueArrays");
-//            for (int i = 0; i < items.length(); i++) {
-//                if (i == 0) {
-//                    strSizes.append(items.optString(i));
-//                } else
-//                    strSizes.append(", " + items.optString(i));
-//            }
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-
+        SimpleDateFormat formatDayOfWeek = new SimpleDateFormat("dd.MM.yy, HH:mm", Locale.ENGLISH);
+        String dayOfWeeki = formatDayOfWeek.format(Double.valueOf(activeOrdersPojo.getDate()));
 
         holder.tvOrderNumber.setText("Номер заказа: " + activeOrdersPojo.getOrderNumber());
         holder.tvName.setText("Имя покупателя: " + activeOrdersPojo.getName());
         holder.tvNumber.setText("Номер: " + activeOrdersPojo.getNumber());
         holder.tvEmail.setText("Эл. почта: " + activeOrdersPojo.getEmail());
-        holder.tvDate.setText("Дата заказа: " + activeOrdersPojo.getDate());
+        holder.tvDate.setText("Дата заказа: " + dayOfWeeki);
         holder.tvShoeName.setText("Именование обуви: " + activeOrdersPojo.getShoename());
         holder.tvType.setText("Тип: " + activeOrdersPojo.getType());
         holder.tvGender.setText("Пол: " + activeOrdersPojo.getGender());
