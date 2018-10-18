@@ -12,6 +12,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:text="X"
+        android:background="@drawable/roundedbutton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

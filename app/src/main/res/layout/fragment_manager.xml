@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/leftbarcats">
 
     <LinearLayout
         android:id="@+id/llStorage"
@@ -49,7 +50,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@android:drawable/ic_dialog_dialer" />
+                android:src="@drawable/storage512" />
         </LinearLayout>
 
         <View
@@ -161,7 +162,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@android:drawable/ic_menu_save" />
+                android:src="@drawable/accounting512" />
         </LinearLayout>
 
         <View
@@ -271,6 +272,7 @@
     <Button
         android:id="@+id/btnExit"
         android:layout_width="match_parent"
+        android:background="@drawable/roundedbutton"
         android:layout_height="wrap_content"
         android:text="Выйти из аккаунта" />
 </LinearLayout>

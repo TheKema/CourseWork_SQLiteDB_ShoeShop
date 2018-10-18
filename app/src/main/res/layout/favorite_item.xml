@@ -23,9 +23,10 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:text="Пример №1"
         app:layout_constraintEnd_toStartOf="@+id/btnDelete"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toEndOf="@+id/ivFavoriteShoe"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,13 +34,16 @@
         android:id="@+id/tvFavoriteCoast"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="1119"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnDelete"
         app:layout_constraintStart_toEndOf="@+id/ivFavoriteShoe"
-        app:layout_constraintTop_toBottomOf="@+id/tvFavoriteName" />
+        app:layout_constraintTop_toBottomOf="@+id/tvFavoriteName"
+        app:layout_constraintVertical_bias="0.157" />
 
 
     <Button
@@ -49,6 +53,18 @@
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:text="X"
+        android:background="@drawable/roundedbutton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>

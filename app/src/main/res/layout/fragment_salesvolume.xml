@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/kot1">
 
     <TextView
         android:id="@+id/tv1"
@@ -102,6 +103,7 @@
         android:layout_marginTop="8dp"
         android:text="Получить"
         android:textSize="10sp"
+        android:background="@drawable/roundedbutton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerType" />
 </android.support.constraint.ConstraintLayout>

@@ -5,14 +5,17 @@
         android:id="@+id/action_personal_area"
         android:orderInCategory="100"
         android:title="Л.к."
+        android:icon="@drawable/user96"
         app:showAsAction="always" />
     <item
         android:id="@+id/action_basket"
         android:title="Корз."
+        android:icon="@drawable/basket96"
         app:showAsAction="always">
     </item>
     <item
         android:id="@+id/action_favorite"
+        android:icon="@drawable/favorite96"
         android:title="Избр."
         app:showAsAction="ifRoom">
     </item>

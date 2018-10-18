@@ -2,32 +2,31 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
-
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_main"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/home96"
             android:title="Главная" />
         <item
             android:id="@+id/nav_man"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/man100"
             android:title="Для мужчин" />
         <item
             android:id="@+id/nav_woman"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/woman100"
             android:title="Для женщин" />
         <item
             android:id="@+id/nav_favorites"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/favorite96"
             android:title="Избранное" />
         <item
             android:id="@+id/nav_basket"
-            android:icon="@drawable/ic_menu_share"
+            android:icon="@drawable/basket96"
             android:title="Корзина" />
         <item
             android:id="@+id/nav_personal_area"
-            android:icon="@drawable/ic_menu_send"
-            android:title="Личгый кабинет" />
+            android:icon="@drawable/user96"
+            android:title="Личный кабинет" />
     </group>
 
 
