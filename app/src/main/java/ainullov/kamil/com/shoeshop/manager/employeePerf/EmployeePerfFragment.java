@@ -48,9 +48,9 @@ public class EmployeePerfFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        getActivity().setTitle("");
 
         btnEmpAdd = (Button) view.findViewById(R.id.btnAddEmp);
-
 
         dbHelper = new DataBaseHelper(getActivity());
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -93,7 +93,6 @@ public class EmployeePerfFragment extends Fragment {
 
                 Button btnOkDialog = (Button) dialog.findViewById(R.id.btnOkDialog);
 
-
                 btnOkDialog.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -127,13 +126,9 @@ public class EmployeePerfFragment extends Fragment {
                         }
                     }
                 });
-
                 dialog.show();
-
             }
         });
-
-
     }
 
 

@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -91,15 +90,12 @@ public class ShoesDetailedFragment extends Fragment implements View.OnClickListe
 
 
         Bundle bundle = this.getArguments();
-//        int id = bundle.getInt("id");
         int uniquekey = bundle.getInt("uniquekey");
 
         dbHelper = new DataBaseHelper(getActivity());
         // подключение к БД
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         selection = "uniquekey = ?";
-//        selection = "id = ?";
-//        selectionArgs = new String[]{String.valueOf(id)};
         selectionArgs = new String[]{String.valueOf(uniquekey)};
         // Чтение, делаем запрос всех данных из таблицы, получаем Cursor
         c = db.query("shoe", null, selection, selectionArgs, null, null, null);
@@ -138,14 +134,10 @@ public class ShoesDetailedFragment extends Fragment implements View.OnClickListe
         c.close();
         dbHelper.close();
 
-        //!!!
-        // На будущее, когда нужно будет разбираться с размерами и количеством
         // Конвертирование ArrayList в string array
         Object[] objSizes = arrayListSize.toArray();
         String[] strSizes = Arrays.copyOf(objSizes, objSizes.length, String[].class);
 
-        //Убрать повторяющиеся размеры
-        // Нет сортировки по размеру
         uniqueListSize = new HashSet<String>(arrayListSize);
         Object[] objUniqueSizes = uniqueListSize.toArray();
         String[] strUniqueSizes = Arrays.copyOf(objUniqueSizes, objUniqueSizes.length, String[].class);
@@ -154,11 +146,8 @@ public class ShoesDetailedFragment extends Fragment implements View.OnClickListe
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, strUniqueSizes);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerSizeDetailed.setAdapter(adapter);
-        // заголовок
         spinnerSizeDetailed.setPrompt("Title");
-        // выделяем элемент
         spinnerSizeDetailed.setSelection(0);
-        // устанавливаем обработчик нажатия
         spinnerSizeDetailed.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
@@ -167,8 +156,6 @@ public class ShoesDetailedFragment extends Fragment implements View.OnClickListe
                 // для метода get, чтобы получить значение выбранной позиции
                 List<String> listGetPosition = new ArrayList<>(uniqueListSize);
                 sizePicked = listGetPosition.get(sizeposition);
-
-                Toast.makeText(getActivity(), "Pos " + sizePicked, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -215,19 +202,15 @@ public class ShoesDetailedFragment extends Fragment implements View.OnClickListe
                     dbFav.insert(MainActivity.USERNAME_FAVORITE_DB, null, cvFav);
                     dbHelperFav.close();
                 }
-
                 break;
         }
     }
-
 
     // Проверка, добавлялся ли ранее товар в корзину или в избранное
     public int checkRepeat(String tableName) {
         DataBaseHelper dbHelper;
         dbHelper = new DataBaseHelper(getActivity());
-        // подключение к БД
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-
         Cursor c = null;
         try {
             db = dbHelper.getReadableDatabase();
@@ -246,6 +229,4 @@ public class ShoesDetailedFragment extends Fragment implements View.OnClickListe
             }
         }
     }
-
-
 }

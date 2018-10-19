@@ -25,7 +25,6 @@ import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
 import ainullov.kamil.com.shoeshop.user.fragments.ShoesDetailedFragment;
 import ainullov.kamil.com.shoeshop.user.pojo.BasketFavoriteShoe;
 
-//Корзина Adapter
 public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder> {
 
     private LayoutInflater inflater;
@@ -140,7 +139,6 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
                     SQLiteDatabase db = dbHelper.getWritableDatabase();
                     db.delete(MainActivity.USERNAME_BASKET_DB, "shoeUniquekeyBasket = " + deleteItemByUniqueKey, null);
                     dbHelper.close();
-
 
                     basketFavoriteShoes.remove(getAdapterPosition());
                     notifyDataSetChanged();

@@ -3,18 +3,13 @@ package ainullov.kamil.com.shoeshop.user.fragments;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-
-import com.bumptech.glide.Glide;
-import com.squareup.picasso.Picasso;
 
 import ainullov.kamil.com.shoeshop.MainActivity;
 import ainullov.kamil.com.shoeshop.R;
@@ -31,7 +26,6 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 //        setRetainInstance(true); }
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -46,15 +40,11 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         btnWomanMain = (Button) view.findViewById(R.id.btnWomanMain);
         btnManMain.setOnClickListener(this);
         btnWomanMain.setOnClickListener(this);
-        getActivity().setTitle("Обувной магазин");
+        getActivity().setTitle("Котобувь");
 
         // в MainFragment происходит очищение bakcstack
         FragmentManager fm = getActivity().getFragmentManager();
         fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-
-//        Glide.with(getActivity()).load("https://openweathermap.org/img/w/10d.png").into(ivHeader);
-//        Picasso.with(getActivity()).load("https://image.ibb.co/mMjRy0/3031245-1.jpg").into(ivHeader);
-
     }
 
     @Override

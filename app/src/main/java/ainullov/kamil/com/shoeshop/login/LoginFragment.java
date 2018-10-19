@@ -108,8 +108,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
                 break;
             case R.id.btnSignUp:
-//                fTrans.replace(R.id.container, signUpFragment);
-//                fTrans.addToBackStack(null);
                 fTrans.remove(this);
                 fTrans.add(R.id.container, signUpFragment);
                 break;

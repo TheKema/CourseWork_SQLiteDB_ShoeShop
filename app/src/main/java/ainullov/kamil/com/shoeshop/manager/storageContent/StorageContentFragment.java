@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -66,6 +65,7 @@ public class StorageContentFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        getActivity().setTitle("");
         orderAccountingPojos.clear();
 
         spinnerGenderStorageContent = (Spinner) view.findViewById(R.id.spinnerGender);
@@ -84,7 +84,6 @@ public class StorageContentFragment extends Fragment {
                                        int position, long id) {
 
                 gender = adapterGender.getItem(position);
-                Toast.makeText(getActivity(), "type " + type + " gender " + gender, Toast.LENGTH_SHORT).show();
                 if (gender.equals("М"))
                     strType = strTypeMan;
                 else
@@ -156,7 +155,6 @@ public class StorageContentFragment extends Fragment {
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                 StorageContentAdapter adapter = new StorageContentAdapter(getActivity(), orderAccountingPojos);
                 recyclerView.setAdapter(adapter);
-
             }
 
             @Override

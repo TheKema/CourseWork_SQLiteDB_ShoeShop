@@ -24,14 +24,12 @@ import ainullov.kamil.com.shoeshop.user.adapters.BasketAdapter;
 import ainullov.kamil.com.shoeshop.user.pojo.BasketFavoriteShoe;
 import ainullov.kamil.com.shoeshop.user.userOrderProduct.UserOrderProductFragment;
 
-// Корзина
 public class BasketFragment extends Fragment implements View.OnClickListener {
     List<BasketFavoriteShoe> basketFavoriteShoes = new ArrayList<>();
     DataBaseHelper dbHelper;
     BasketAdapter adapter;
 
     Button btnBuy;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,14 +44,13 @@ public class BasketFragment extends Fragment implements View.OnClickListener {
         btnBuy.setOnClickListener(this);
         getActivity().setTitle("Корзина");
 
-        basketFavoriteShoes.clear(); // Очистка, для того, чтобы элементы не дублировались. Исправить!
+        basketFavoriteShoes.clear(); // Очистка, для того, чтобы элементы не дублировались.
 
         dbHelper = new DataBaseHelper(getActivity());
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         Cursor c = db.query(MainActivity.USERNAME_BASKET_DB, null, null, null, null, null, null);
         c.moveToFirst();
         if (c.moveToFirst()) {
-            int idColIndex = c.getColumnIndex("id");
             int uniquekeyColIndex = c.getColumnIndex("shoeUniquekeyBasket");
             int shoeSizeColIndex = c.getColumnIndex("shoeSize");
             int imageurlColIndex = c.getColumnIndex("imageurl");
@@ -76,7 +73,6 @@ public class BasketFragment extends Fragment implements View.OnClickListener {
 
         switch (view.getId()) {
             case R.id.btnBuy:
-
                 if (basketFavoriteShoes.size() != 0) {
                     UserOrderProductFragment userOrderProductFragment = new UserOrderProductFragment();
                     FragmentTransaction fTrans;

@@ -2,7 +2,6 @@ package ainullov.kamil.com.shoeshop.user.userOrderProduct;
 
 import android.app.Dialog;
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -58,7 +57,7 @@ public class UserOrderProductFragment extends Fragment implements View.OnClickLi
     String solddate = String.valueOf(System.currentTimeMillis());
 
     Random random = new Random();
-    int uniquekey = random.nextInt(); // При доб. тов. добавить уникальный ключ
+    int uniquekey = random.nextInt();
 
     FragmentTransaction fTrans;
     MainFragment mainFragment = new MainFragment();
@@ -79,10 +78,9 @@ public class UserOrderProductFragment extends Fragment implements View.OnClickLi
         rbPickup = (RadioButton) view.findViewById(R.id.rbPickup);
         btnUserOrderProduct = (Button) view.findViewById(R.id.btnUserOrderProduct);
         btnUserOrderProduct.setOnClickListener(this);
-        getActivity().setTitle("Оформление заказа");
+        getActivity().setTitle("");
 
         rbOnlinePay.setClickable(false);
-//        btnUserOrderProduct.setClickable(false);
 
         dbHelper = new DataBaseHelper(getActivity());
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -118,7 +116,7 @@ public class UserOrderProductFragment extends Fragment implements View.OnClickLi
                     String sizeListOrders = "";
 
 
-// BasketFavoriteShoe List для добавления в sold (1) и удаления из shoe (2)
+                    // BasketFavoriteShoe List для добавления в sold (1) и удаления из shoe (2)
                     List<BasketFavoriteShoe> basketFavoriteShoes = new ArrayList<>();
                     DataBaseHelper dbHelper;
                     String size = "41";
@@ -149,7 +147,7 @@ public class UserOrderProductFragment extends Fragment implements View.OnClickLi
                     dbHelper.close();
 
 
-                    // Пока отдельно реализую добавление в sold (1) и удаление из shoe (2)
+                    // Отдельно реализовал добавление в sold (1) и удаление из shoe (2)
 
                     // (1)
                     // Прохождение по всем товарам списка
@@ -201,10 +199,9 @@ public class UserOrderProductFragment extends Fragment implements View.OnClickLi
                         cvSold.put("name", name);
                         cvSold.put("provider", provider);
                         cvSold.put("solddate", solddate);
-//                        cvSold.put("size", size);
                         cvSold.put("size", basketFavoriteShoes.get(i).getSize());
 
-//Добавление значений в лист для orders
+                        //Добавление значений в лист для orders
                         if (i == basketFavoriteShoes.size() - 1) {
                             genderListOrders += gender;
                             typeListOrders += type;
@@ -223,7 +220,6 @@ public class UserOrderProductFragment extends Fragment implements View.OnClickLi
                         while (checkRepeat("sold", "uniquekey") != 0) {
                             uniquekey = random.nextInt();
                         }
-
                         if (checkRepeat("sold", "uniquekey") == 0) {
                             cvSold.put("uniquekey", uniquekey);
                         }
@@ -232,7 +228,7 @@ public class UserOrderProductFragment extends Fragment implements View.OnClickLi
                     }
 
 
-//////////////////////////// Вставка в БД Orders
+                    // Вставка в БД Orders
                     nameOrders = etName.getText().toString();
                     numberOrders = etNumber.getText().toString();
                     emailOrders = etEmail.getText().toString();
@@ -263,8 +259,7 @@ public class UserOrderProductFragment extends Fragment implements View.OnClickLi
 
                     dbOrders.insert("orders", null, cvOrders);
                     dbHelperOrders.close();
-////////////////////////////
-
+                    //
 
                     // (2)
                     // Прохождение по всем товарам списка
@@ -278,7 +273,6 @@ public class UserOrderProductFragment extends Fragment implements View.OnClickLi
                         DataBaseHelper dbHelperChangeShoe;
                         String selection = null;
                         String[] selectionArgs = null;
-                        int quantityColIndex;
                         int sizeColIndex;
 
                         // Подключаемся к БД и получаем у i позиции  количество и размеры
@@ -291,7 +285,6 @@ public class UserOrderProductFragment extends Fragment implements View.OnClickLi
                         cBasketDelete = dbChangeShoe.query("shoe", null, selection, selectionArgs, null, null, null);
                         cBasketDelete.moveToFirst();
                         if (cBasketDelete.moveToFirst()) {
-                            quantityColIndex = cBasketDelete.getColumnIndex("quantity");
                             sizeColIndex = cBasketDelete.getColumnIndex("size");
 
                             do {
@@ -328,14 +321,10 @@ public class UserOrderProductFragment extends Fragment implements View.OnClickLi
                                     e.printStackTrace();
                                 }
                                 String arrayList = json.toString();
-
                                 cv.put("quantity", arrayListSize.size());
                                 cv.put("size", arrayList);
-                                Toast.makeText(getActivity(), "sizes " + arrayList, Toast.LENGTH_SHORT).show();
-
                                 // Обновляем записм в бд если >0, если =0, то удаляем
                                 if (arrayListSize.size() > 0) {
-//                                db.insert("shoe", null, cv);
                                     dbChangeShoe.update("shoe", cv, "uniquekey = ?", new String[]{String.valueOf(shoeUniquekeyBasket)});
                                 }
                                 if (arrayListSize.size() == 0) {
@@ -359,7 +348,6 @@ public class UserOrderProductFragment extends Fragment implements View.OnClickLi
 
                     basketFavoriteShoes.clear();
 
-
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.userorderproduct_dialog);
                     final TextView tvOrderNumberDialog = (TextView) dialog.findViewById(R.id.tvOrderNumberDialog);
@@ -376,7 +364,6 @@ public class UserOrderProductFragment extends Fragment implements View.OnClickLi
                             fTrans.replace(R.id.container, mainFragment);
 //                            fTrans.addToBackStack(null); // не добавляю, чтобы нельзя было возвратиться
                             fTrans.commit();
-
                         }
                     });
 
@@ -386,9 +373,7 @@ public class UserOrderProductFragment extends Fragment implements View.OnClickLi
                 break;
 
         }
-//        fTrans.commit();
     }
-
 
     //     Проверка, есть ли такой же уникальный ключ для db sold
     public int checkRepeat(String tableName, String column) {

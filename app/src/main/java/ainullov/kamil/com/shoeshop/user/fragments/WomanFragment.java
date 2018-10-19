@@ -16,7 +16,6 @@ import ainullov.kamil.com.shoeshop.user.adapters.ShoeTypeAdapter;
 //Виды женской обуви
 public class WomanFragment extends Fragment {
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -26,7 +25,6 @@ public class WomanFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         ShoeTypeAdapter adapter = new ShoeTypeAdapter(getActivity(), MainActivity.shoeTypesWoman);

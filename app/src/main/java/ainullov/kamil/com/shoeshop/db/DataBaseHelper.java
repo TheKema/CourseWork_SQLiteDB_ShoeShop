@@ -22,7 +22,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("create table shoe ("
                 + "id integer primary key autoincrement,"
                 + "uniquekey integer,"
-                + "type text,"  // SELECT * FROM child_table WHERE parent_id = 2
+                + "type text,"
                 + "gender text,"
                 + "quantity integer,"
                 + "name text,"

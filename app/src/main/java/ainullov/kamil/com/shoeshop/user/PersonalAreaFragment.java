@@ -53,7 +53,7 @@ public class PersonalAreaFragment extends Fragment implements View.OnClickListen
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        getActivity().setTitle("");
         tvLogin = (TextView) view.findViewById(R.id.tvLogin);
         tvName = (TextView) view.findViewById(R.id.tvName);
         tvNumber = (TextView) view.findViewById(R.id.tvNumber);
@@ -87,7 +87,6 @@ public class PersonalAreaFragment extends Fragment implements View.OnClickListen
                 strPassword = c.getString(passwordColIndex);
             } while (c.moveToNext());
         }
-
         c.close();
         dbHelper.close();
     }
@@ -121,7 +120,6 @@ public class PersonalAreaFragment extends Fragment implements View.OnClickListen
 
                 Button btnOkDialog = (Button) dialog.findViewById(R.id.btnOkDialog);
                 Button btnBackDialog = (Button) dialog.findViewById(R.id.btnBackDialog);
-
 
                 btnOkDialog.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -207,7 +205,6 @@ public class PersonalAreaFragment extends Fragment implements View.OnClickListen
                         dialogChangePassword.dismiss();
                     }
                 });
-
                 dialogChangePassword.show();
                 break;
         }

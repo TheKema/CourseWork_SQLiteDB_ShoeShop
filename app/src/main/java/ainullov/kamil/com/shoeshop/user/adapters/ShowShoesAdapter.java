@@ -20,7 +20,7 @@ import ainullov.kamil.com.shoeshop.R;
 import ainullov.kamil.com.shoeshop.user.fragments.ShoesDetailedFragment;
 import ainullov.kamil.com.shoeshop.user.pojo.OneShoe;
 
-//Конкретная информация о товаре Adapter
+//Конкретная информация о товаре
 public class ShowShoesAdapter extends RecyclerView.Adapter<ShowShoesAdapter.ViewHolder> {
 
     private LayoutInflater inflater;
@@ -47,7 +47,6 @@ public class ShowShoesAdapter extends RecyclerView.Adapter<ShowShoesAdapter.View
         holder.tvShoeCoast.setText(String.valueOf(shoe.getCoast()));
 
         Picasso.with(context).load(shoe.getImageurl()).into(holder.ivShoe);
-
     }
 
     @Override
@@ -75,17 +74,8 @@ public class ShowShoesAdapter extends RecyclerView.Adapter<ShowShoesAdapter.View
                     ShoesDetailedFragment shoesDetailedFragment = new ShoesDetailedFragment();
 
                     Bundle bundle = new Bundle();
-//                    bundle.putInt("id", shoe.getId());
                     bundle.putInt("uniquekey", shoe.getUniquekey());
-//                    bundle.putString("type", shoe.getType());
-//                    bundle.putString("gender", shoe.getGender());
-//                    bundle.putInt("quantity", shoe.getQuantity());
-//                    bundle.putString("name", shoe.getName());
-//                    bundle.putInt("coast", shoe.getCoast());
-//                    bundle.putString("desciption", shoe.getDesc());
-//                    bundle.putInt("size", shoe.getSize());
                     shoesDetailedFragment.setArguments(bundle);
-
 
                     FragmentTransaction fTrans;
                     fTrans = ((Activity) context).getFragmentManager().beginTransaction();

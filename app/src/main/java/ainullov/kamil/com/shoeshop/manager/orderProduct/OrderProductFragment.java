@@ -15,7 +15,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -34,7 +33,6 @@ public class OrderProductFragment extends Fragment implements View.OnClickListen
     Button btnSize;
     Button btnAddOrder;
     Button btnClearFields;
-
 
     private static int genderPosition = 0;
     private static int typePosition = 0;
@@ -72,7 +70,7 @@ public class OrderProductFragment extends Fragment implements View.OnClickListen
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Toast.makeText(getActivity(), "OrderProductFragment " + OrderProductFragment.size, Toast.LENGTH_SHORT).show();
+        getActivity().setTitle("");
 
         spinnerGender = (Spinner) view.findViewById(R.id.spinnerGender);
         spinnerType = (Spinner) view.findViewById(R.id.spinnerType);
@@ -101,7 +99,6 @@ public class OrderProductFragment extends Fragment implements View.OnClickListen
                                        int position, long id) {
 
                 gender = adapterGender.getItem(position);
-                Toast.makeText(getActivity(), "type " + type + " gender " + gender, Toast.LENGTH_SHORT).show();
                 if (gender.equals("М"))
                     strType = strTypeMan;
                 else
@@ -134,8 +131,6 @@ public class OrderProductFragment extends Fragment implements View.OnClickListen
             public void onNothingSelected(AdapterView<?> arg0) {
             }
         });
-
-
     }
 
     @Override
@@ -191,7 +186,6 @@ public class OrderProductFragment extends Fragment implements View.OnClickListen
                 db.insert("shoe", null, cv);
                 db.insert("deliveries", null, cv);
                 dbHelper.close();
-
 
                 break;
             case R.id.btnClearFields:

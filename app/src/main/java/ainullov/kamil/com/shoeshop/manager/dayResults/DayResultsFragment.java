@@ -14,7 +14,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -72,6 +71,8 @@ public class DayResultsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         orderAccountingPojos.clear();
 
+        getActivity().setTitle("");
+
         spinnerGenderStorageContent = (Spinner) view.findViewById(R.id.spinnerGender);
         spinnerTypeStorageContent = (Spinner) view.findViewById(R.id.spinnerType);
         tvSoldSumSA = (TextView) view.findViewById(R.id.tvSoldSum);
@@ -88,7 +89,6 @@ public class DayResultsFragment extends Fragment {
                                        int position, long id) {
 
                 gender = adapterGender.getItem(position);
-                Toast.makeText(getActivity(), "type " + type + " gender " + gender, Toast.LENGTH_SHORT).show();
                 if (gender.equals("М") || gender.equals("Ж")) {
                     spinnerTypeStorageContent.setVisibility(View.VISIBLE);
 
@@ -101,7 +101,6 @@ public class DayResultsFragment extends Fragment {
                     adapterType = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, strType);
                     adapterType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinnerTypeStorageContent.setAdapter(adapterType);
-                    // заголовок
                     spinnerTypeStorageContent.setPrompt("Title");
                     spinnerTypeStorageContent.setSelection(typePosition);
 
@@ -110,7 +109,6 @@ public class DayResultsFragment extends Fragment {
                     spinnerTypeStorageContent.setVisibility(View.INVISIBLE);
 
                     orderAccountingPojos.clear();
-
 
                     // Подсчет суммы проданного
                     int soldSum = 0;
@@ -134,7 +132,6 @@ public class DayResultsFragment extends Fragment {
 
                         do {
                             // Добавляем только те, у которых день эквивалентен текущему дню
-
                             String dayOfWeek = formatDayOfWeek.format(Double.valueOf(c.getString(solddateColIndex)));
                             if (today.equals(dayOfWeek)) {
 
@@ -206,7 +203,6 @@ public class DayResultsFragment extends Fragment {
 
                     do {
                         // Добавляем только те, у которых день эквивалентен текущему дню
-
                         String dayOfWeek = formatDayOfWeek.format(Double.valueOf(c.getString(solddateColIndex)));
                         if (today.equals(dayOfWeek)) {
 
@@ -232,15 +228,12 @@ public class DayResultsFragment extends Fragment {
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                 DayResultsAdapter adapter = new DayResultsAdapter(getActivity(), orderAccountingPojos);
                 recyclerView.setAdapter(adapter);
-
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
             }
         });
-
     }
-
 
 }

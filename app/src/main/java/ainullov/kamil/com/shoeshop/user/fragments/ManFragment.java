@@ -1,7 +1,6 @@
 package ainullov.kamil.com.shoeshop.user.fragments;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,7 +13,6 @@ import ainullov.kamil.com.shoeshop.MainActivity;
 import ainullov.kamil.com.shoeshop.R;
 import ainullov.kamil.com.shoeshop.user.adapters.ShoeTypeAdapter;
 
-// Виды мужской обуви
 public class ManFragment extends Fragment {
 
     @Override

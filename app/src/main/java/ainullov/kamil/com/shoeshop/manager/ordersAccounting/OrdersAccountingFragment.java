@@ -35,6 +35,8 @@ public class OrdersAccountingFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        getActivity().setTitle("");
+
         orderAccountingPojos.clear();
 
         int uniquekeyColIndex;
@@ -86,6 +88,5 @@ public class OrdersAccountingFragment extends Fragment {
         OrdersAccountingAdapter adapter = new OrdersAccountingAdapter(getActivity(), orderAccountingPojos);
         recyclerView.setAdapter(adapter);
     }
-
 
 }

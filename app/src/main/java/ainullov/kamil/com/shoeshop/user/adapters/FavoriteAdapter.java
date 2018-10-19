@@ -25,7 +25,6 @@ import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
 import ainullov.kamil.com.shoeshop.user.fragments.ShoesDetailedFragment;
 import ainullov.kamil.com.shoeshop.user.pojo.BasketFavoriteShoe;
 
-//Понравившееся Adapter
 public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHolder> {
 
     private LayoutInflater inflater;
@@ -57,8 +56,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
         DataBaseHelper dbHelper;
         String selection = null;
         String[] selectionArgs = null;
-        int idColIndex;   // Если в нужно будет добавить дополнительную информацию в item
-        int uniquekeyColIndex;
+
         int nameColIndex;
         int coastColIndex;
         int imageurlColIndex;
@@ -70,8 +68,6 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
         c = db.query("shoe", null, selection, selectionArgs, null, null, null);
         c.moveToFirst();
         if (c.moveToFirst()) {
-            idColIndex = c.getColumnIndex("id");
-            uniquekeyColIndex = c.getColumnIndex("uniquekey");
             nameColIndex = c.getColumnIndex("name");
             coastColIndex = c.getColumnIndex("coast");
             imageurlColIndex = c.getColumnIndex("imageurl");
@@ -81,7 +77,6 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
                 holder.tvFavoriteCoast.setText(String.valueOf(c.getInt(coastColIndex)));
 
                 Picasso.with(context).load(c.getString(imageurlColIndex)).into(holder.ivFavoriteShoe);
-
             } while (c.moveToNext());
         }
         c.close();

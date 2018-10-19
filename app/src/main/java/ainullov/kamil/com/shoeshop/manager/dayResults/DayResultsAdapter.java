@@ -48,8 +48,6 @@ public class DayResultsAdapter extends RecyclerView.Adapter<DayResultsAdapter.Vi
         holder.tvProviderDRItem.setText("Поставщик: " + orderAccountingPojo.getProvider());
         holder.tvSoldDateDRItem.setText("Дата продажи: " + dayOfWeeki);
         holder.tvSizeDRItem.setText("Размер: " + orderAccountingPojo.getSize());
-
-
     }
 
     @Override
@@ -74,8 +72,6 @@ public class DayResultsAdapter extends RecyclerView.Adapter<DayResultsAdapter.Vi
             tvProviderDRItem = (TextView) view.findViewById(R.id.tvProviderItem);
             tvSoldDateDRItem = (TextView) view.findViewById(R.id.tvDateSAItem);
             tvSizeDRItem = (TextView) view.findViewById(R.id.tvSizeSAItem);
-
-
         }
     }
 }

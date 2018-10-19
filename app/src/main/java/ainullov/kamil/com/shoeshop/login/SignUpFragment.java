@@ -39,7 +39,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
     }
 
     @Override
@@ -85,7 +85,6 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
                         DataBaseHelper dbHelper;
                         dbHelper = new DataBaseHelper(getActivity());
                         dbHelper.createClientDB(dbHelper, strLogin);
-                        // подключение к БД
                         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
                         ContentValues cv = new ContentValues();

@@ -18,12 +18,10 @@ import ainullov.kamil.com.shoeshop.R;
 import ainullov.kamil.com.shoeshop.user.fragments.ShowShoesFragment;
 import ainullov.kamil.com.shoeshop.user.pojo.ShoeType;
 
-//Вид обуви Adapter
 public class ShoeTypeAdapter extends RecyclerView.Adapter<ShoeTypeAdapter.ViewHolder> {
 
     private LayoutInflater inflater;
     List<ShoeType> shoeTypes;
-
     Context context;
 
     public ShoeTypeAdapter(Context context, List<ShoeType> shoeTypes) {
@@ -64,7 +62,6 @@ public class ShoeTypeAdapter extends RecyclerView.Adapter<ShoeTypeAdapter.ViewHo
                 public void onClick(View view) {
                     int positionIndex = getAdapterPosition();
                     MainActivity.shoesTYPE = shoeTypes.get(positionIndex).getName();
-                    Toast.makeText(context, "shoesTYPE" + MainActivity.shoesTYPE, Toast.LENGTH_SHORT).show();
                     ShowShoesFragment showShoesFragment = new ShowShoesFragment();
                     FragmentTransaction fTrans;
                     fTrans = ((Activity) context).getFragmentManager().beginTransaction();

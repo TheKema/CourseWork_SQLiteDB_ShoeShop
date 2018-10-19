@@ -12,14 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import ainullov.kamil.com.shoeshop.R;
 import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
-import ainullov.kamil.com.shoeshop.manager.ordersAccounting.OrdersAccountingAdapter;
 import ainullov.kamil.com.shoeshop.manager.pojo.ActiveOrdersPojo;
-import ainullov.kamil.com.shoeshop.manager.pojo.OrderAccountingPojo;
 
 public class ActiveOrdersFragment extends Fragment {
     List<ActiveOrdersPojo> activeOrdersPojos = new ArrayList<>();
@@ -36,6 +33,8 @@ public class ActiveOrdersFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        getActivity().setTitle("");
+
         activeOrdersPojos.clear();
 
         int nameColIndex;
@@ -82,7 +81,6 @@ public class ActiveOrdersFragment extends Fragment {
         c.close();
         dbHelper.close();
 
-//        Collections.reverse(activeOrdersPojos);
         RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.rvActiveOrders);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         ActiveOrdersAdapter adapter = new ActiveOrdersAdapter(getActivity(), activeOrdersPojos);

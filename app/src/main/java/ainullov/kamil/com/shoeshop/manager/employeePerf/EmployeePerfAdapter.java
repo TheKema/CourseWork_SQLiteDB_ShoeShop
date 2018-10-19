@@ -43,7 +43,6 @@ public class EmployeePerfAdapter extends RecyclerView.Adapter<EmployeePerfAdapte
     public void onBindViewHolder(EmployeePerfAdapter.ViewHolder holder, int position) {
         WorkersPojo workersPojo = workersPojos.get(position);
 
-
         holder.tvEmpName.setText(workersPojo.getName());
         holder.tvEmpRating.setText(String.valueOf(workersPojo.getRating()));
     }
@@ -58,7 +57,6 @@ public class EmployeePerfAdapter extends RecyclerView.Adapter<EmployeePerfAdapte
         final ConstraintLayout clEmp;
 
         final ImageButton imageBtnDel;
-
         final TextView tvEmpName, tvEmpRating;
 
         ViewHolder(View view) {
@@ -91,7 +89,6 @@ public class EmployeePerfAdapter extends RecyclerView.Adapter<EmployeePerfAdapte
                             String strRatingDialog = etRatingDialog.getText().toString();
                             int uniquekey = workersPojos.get(getAdapterPosition()).getUniquekey();
 
-
                             ContentValues cv = new ContentValues();
                             DataBaseHelper dbHelper = new DataBaseHelper(context);
                             SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -105,7 +102,6 @@ public class EmployeePerfAdapter extends RecyclerView.Adapter<EmployeePerfAdapte
                             dbHelper.close();
                             notifyDataSetChanged();
                             dialog.dismiss();
-
                         }
                     });
 
@@ -128,7 +124,6 @@ public class EmployeePerfAdapter extends RecyclerView.Adapter<EmployeePerfAdapte
                     notifyDataSetChanged();
                 }
             });
-
         }
     }
 }

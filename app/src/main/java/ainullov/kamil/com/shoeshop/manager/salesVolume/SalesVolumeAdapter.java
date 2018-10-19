@@ -48,8 +48,6 @@ public class SalesVolumeAdapter extends RecyclerView.Adapter<SalesVolumeAdapter.
         holder.tvProviderSVItem.setText("Поставщик: " + orderAccountingPojo.getProvider());
         holder.tvSoldDateSVItem.setText("Дата продажи: " + dayOfWeeki);
         holder.tvSizeSVItem.setText("Размер: " + orderAccountingPojo.getSize());
-
-
     }
 
     @Override

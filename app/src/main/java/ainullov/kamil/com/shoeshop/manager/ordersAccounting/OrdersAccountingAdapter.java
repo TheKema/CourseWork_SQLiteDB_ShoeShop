@@ -64,7 +64,6 @@ public class OrdersAccountingAdapter extends RecyclerView.Adapter<OrdersAccounti
             e.printStackTrace();
         }
 
-
         holder.tvGenderOAItem.setText("Пол: " + orderAccountingPojo.getGender());
         holder.tvTypeOAItem.setText("Вид: " + orderAccountingPojo.getType());
         holder.tvNameOAItem.setText("Название: " + orderAccountingPojo.getName());
@@ -97,7 +96,6 @@ public class OrdersAccountingAdapter extends RecyclerView.Adapter<OrdersAccounti
             tvDateOAItem = (TextView) view.findViewById(R.id.tvDateSAItem);
             tvSizeOAItem = (TextView) view.findViewById(R.id.tvSizeSAItem);
 
-
             //Переход к товару переход к ShoesDetailedFragment
             clOAitem.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -116,6 +114,5 @@ public class OrdersAccountingAdapter extends RecyclerView.Adapter<OrdersAccounti
             });
         }
     }
-
 }
 

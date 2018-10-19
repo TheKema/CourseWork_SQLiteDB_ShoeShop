@@ -14,14 +14,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import ainullov.kamil.com.shoeshop.R;
 import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
 import ainullov.kamil.com.shoeshop.manager.orderProduct.ChoseSizesOrderProductFragment;
-import ainullov.kamil.com.shoeshop.manager.orderProduct.OrderProductFragment;
 
 public class StorageContentChangeProductFragment extends Fragment implements View.OnClickListener {
     Spinner spinnerGender;
@@ -73,7 +71,6 @@ public class StorageContentChangeProductFragment extends Fragment implements Vie
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Toast.makeText(getActivity(), "OrderProductFragment " + OrderProductFragment.size, Toast.LENGTH_SHORT).show();
 
         spinnerGender = (Spinner) view.findViewById(R.id.spinnerGender);
         spinnerType = (Spinner) view.findViewById(R.id.spinnerType);
@@ -135,7 +132,6 @@ public class StorageContentChangeProductFragment extends Fragment implements Vie
                                        int position, long id) {
 
                 gender = adapterGender.getItem(position);
-                Toast.makeText(getActivity(), "type " + type + " gender " + gender, Toast.LENGTH_SHORT).show();
                 if (gender.equals("М"))
                     strType = strTypeMan;
                 else
@@ -168,7 +164,6 @@ public class StorageContentChangeProductFragment extends Fragment implements Vie
             public void onNothingSelected(AdapterView<?> arg0) {
             }
         });
-
 
     }
 
@@ -227,7 +222,6 @@ public class StorageContentChangeProductFragment extends Fragment implements Vie
 
                 db.update("shoe", cv, whereClause, whereArgs);
                 dbHelper.close();
-
 
                 break;
             case R.id.btnClearFields:

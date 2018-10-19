@@ -21,14 +21,12 @@ import ainullov.kamil.com.shoeshop.manager.storageContent.StorageContentChangePr
 public class ChoseSizesOrderProductFragment extends Fragment implements View.OnClickListener {
     Button btnAddSizes;
 
-    // Переделать!!! Добавить программное добавление фрагментов, в которых будет ll и два et
     EditText et1, et2, et3, et4, et5, et6, et7, et8, et9, et10, et11, et12, et13, et14;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_chosesizes_orderproduct, container, false);
-
     }
 
     @Override
@@ -56,8 +54,6 @@ public class ChoseSizesOrderProductFragment extends Fragment implements View.OnC
 
     @Override
     public void onClick(View view) {
-
-
         switch (view.getId()) {
             case R.id.btnAddSizes:
                 OrderProductFragment.size = "";
@@ -97,11 +93,9 @@ public class ChoseSizesOrderProductFragment extends Fragment implements View.OnC
                     OrderProductFragment.size = json.toString();
                     OrderProductFragment.quantity = items.size();
                 } else if (strAddOrChange.equals("change")) {
-                    // Чтобы не создавать новый
                     StorageContentChangeProductFragment.size = json.toString();
                     StorageContentChangeProductFragment.quantity = items.size();
                 }
-
                 getActivity().getFragmentManager().popBackStack();
 
                 break;

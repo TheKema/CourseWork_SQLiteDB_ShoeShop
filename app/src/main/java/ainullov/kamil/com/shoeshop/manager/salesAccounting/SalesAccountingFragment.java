@@ -14,7 +14,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,9 +25,6 @@ import ainullov.kamil.com.shoeshop.manager.pojo.OrderAccountingPojo;
 
 public class SalesAccountingFragment extends Fragment {
 
-    // Будет использоваться для sold дб,
-    // вместо date будет  solddate
-    // вместо size в виде json будет один размер
     List<OrderAccountingPojo> orderAccountingPojos = new ArrayList<>();
     Cursor c;
     DataBaseHelper dbHelper;
@@ -68,6 +64,8 @@ public class SalesAccountingFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        getActivity().setTitle("");
+
         orderAccountingPojos.clear();
 
         spinnerGenderSalesAccounting = (Spinner) view.findViewById(R.id.spinnerGender);
@@ -86,7 +84,6 @@ public class SalesAccountingFragment extends Fragment {
                                        int position, long id) {
 
                 gender = adapterGender.getItem(position);
-                Toast.makeText(getActivity(), "type " + type + " gender " + gender, Toast.LENGTH_SHORT).show();
                 if (gender.equals("М"))
                     strType = strTypeMan;
                 else
@@ -165,6 +162,5 @@ public class SalesAccountingFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> arg0) {
             }
         });
-
     }
 }

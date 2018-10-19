@@ -22,7 +22,6 @@ import ainullov.kamil.com.shoeshop.user.pojo.OneShoe;
 
 //Вид обуви
 public class ShowShoesFragment extends Fragment {
-
     List<OneShoe> shoes = new ArrayList<>();
     DataBaseHelper dbHelper;
     String selection = null;
@@ -60,7 +59,6 @@ public class ShowShoesFragment extends Fragment {
             int imageurlColIndex = c.getColumnIndex("imageurl");
 
             do {
-//            if (!c.getString(typeColIndex).isEmpty())
                 shoes.add(new OneShoe(c.getInt(idColIndex),
                         c.getInt(uniquekeyColIndex),
                         c.getString(typeColIndex),
@@ -78,12 +76,9 @@ public class ShowShoesFragment extends Fragment {
 
 
         RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.rvShow);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         ShowShoesAdapter adapter = new ShowShoesAdapter(getActivity(), shoes);
         recyclerView.setAdapter(adapter);
-
     }
-
 
 }

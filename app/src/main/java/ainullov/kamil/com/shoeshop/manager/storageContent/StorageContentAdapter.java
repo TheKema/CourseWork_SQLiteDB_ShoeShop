@@ -156,7 +156,6 @@ public class StorageContentAdapter extends RecyclerView.Adapter<StorageContentAd
                     bundle.putInt("quantity", orderAccountingPojos.get(getAdapterPosition()).getQuantity());
                     bundle.putString("imageurl", orderAccountingPojos.get(getAdapterPosition()).getImageurl());
 
-
                     storageContentChangeProductFragment.setArguments(bundle);
 
                     FragmentTransaction fTrans;

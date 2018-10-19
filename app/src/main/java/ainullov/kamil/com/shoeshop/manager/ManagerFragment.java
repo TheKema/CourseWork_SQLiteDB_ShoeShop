@@ -43,6 +43,7 @@ public class ManagerFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        getActivity().setTitle("");
         tvOrderProduct = (TextView) view.findViewById(R.id.tvOrderProduct);
         tvProvider = (TextView) view.findViewById(R.id.tvProvider);
         tvStorageContent = (TextView) view.findViewById(R.id.tvStorageContent);
@@ -52,7 +53,6 @@ public class ManagerFragment extends Fragment implements View.OnClickListener {
         tvDayResults = (TextView) view.findViewById(R.id.tvDayResults);
         tvSalesVolume = (TextView) view.findViewById(R.id.tvSalesVolume);
         tvEmployeePerf = (TextView) view.findViewById(R.id.tvEmployeePerf);
-
         btnExit = (Button) view.findViewById(R.id.btnExit);
         btnExit.setOnClickListener(this);
 
@@ -97,7 +97,6 @@ public class ManagerFragment extends Fragment implements View.OnClickListener {
                 fTrans.replace(R.id.container, storageContentFragment);
                 fTrans.addToBackStack(null);
                 break;
-
             case R.id.tvActiveOrders:
                 fTrans.replace(R.id.container, activeOrdersFragment);
                 fTrans.addToBackStack(null);

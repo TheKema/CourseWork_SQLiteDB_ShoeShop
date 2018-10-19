@@ -13,7 +13,6 @@ public class OrderAccountingPojo {
     private String description;
     private String size;
 
-
     public OrderAccountingPojo() {
     }
 

@@ -1,7 +1,5 @@
 package ainullov.kamil.com.shoeshop;
 
-//import android.app.Fragment;
-
 import android.app.FragmentTransaction;
 import android.content.ContentValues;
 import android.content.SharedPreferences;
@@ -48,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public static boolean manTRUEwomanFALSE = false;
     public static String shoesTYPE = "Кроссовки";
-    public static String gender = "M"; // Ж 0 - женщина, М 1 = мужчина, 2
+    public static String gender = "M";
 
     public static List<ShoeType> shoeTypesMan = new ArrayList<>();
     public static List<ShoeType> shoeTypesWoman = new ArrayList<>();
@@ -67,9 +65,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     SharedPreferences prefs = null;
 
-    // На время. первичное добавление данных в БД, для примера
     Random random = new Random();
-    int uniquekey = random.nextInt(); // При доб. тов. добавить уникальный ключ
+    int uniquekey = random.nextInt();
 
     SharedPreferences shref;
     final String USERNAME_USER_DBkey = "USERNAME_USER_DB";
@@ -80,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onResume() {
         super.onResume();
 
-        //Первый запуск. Проверка. Заполнения БД
+        //Первый запуск. Проверка. Заполнения БД для примера
         if (prefs.getBoolean("firstrun", true)) {
 
             addToDB("Кроссовки", "М", 7);
@@ -91,7 +88,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             addToDB("Кеды", "М", 2);
             addToDB("Кеды", "Ж", 6);
             addToDB("Сапоги", "Ж", 5);
-
 
             // Аккаунт админа
             DataBaseHelper dbHelper;
@@ -181,7 +177,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_personal_area) {
             if (!MainActivity.USERNAME_USER_DB.equals("")) {
@@ -202,7 +197,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     fTrans.addToBackStack(null);
                     fTrans.commit();
                     return true;
-
                 }
 
             }
@@ -254,8 +248,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_man) {
             manTRUEwomanFALSE = true;
             gender = "М";
-            // Выводим выбранный пункт в заголовке
-//            setTitle(item.getTitle());
             setTitle("М");
             fTrans.replace(R.id.container, manFragment);
             fTrans.addToBackStack(null);
@@ -285,19 +277,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         fTrans.commit();
 
-        // Выделяем выбранный пункт меню в шторке
         item.setChecked(true);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
+
     // Метод для заполнения ДБ при старте приложения
     private void addToDB(String type, String gender, int forLength) {
         // Заполнение БД
         DataBaseHelper dbHelper;
         dbHelper = new DataBaseHelper(this);
-        // подключение к БД
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         ContentValues cv = new ContentValues();
@@ -356,14 +347,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (checkRepeat("shoe") == 0) {
                 cv.put("uniquekey", uniquekey);
             }
-
             db.insert("shoe", null, cv);
         }
         dbHelper.close();
     }
 
 
-    // На время. первичное добавление данных в БД, для примера
     // Проверка, есть ли такой же уникальный ключ
     public int checkRepeat(String tableName) {
         DataBaseHelper dbHelper;
@@ -416,7 +405,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void load() {
         shref = getPreferences(MODE_PRIVATE);
-        //Если впервые запускаем
         boolean hasVisited = shref.getBoolean("hasVisited", false);
         if (!hasVisited) {
             SharedPreferences.Editor e = shref.edit();

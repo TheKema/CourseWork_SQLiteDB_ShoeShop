@@ -1,8 +1,8 @@
 package ainullov.kamil.com.shoeshop.user.pojo;
 
 public class OneShoe {
-    private int id;        // !
-    private int uniquekey; // Добавить изображение
+    private int id;
+    private int uniquekey;
     private String type;
     private String gender;
     private int quantity;

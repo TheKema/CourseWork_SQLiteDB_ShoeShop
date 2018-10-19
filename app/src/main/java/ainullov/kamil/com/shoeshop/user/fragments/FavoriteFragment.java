@@ -20,12 +20,10 @@ import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
 import ainullov.kamil.com.shoeshop.user.adapters.FavoriteAdapter;
 import ainullov.kamil.com.shoeshop.user.pojo.BasketFavoriteShoe;
 
-// Корзина
 public class FavoriteFragment extends Fragment {
     List<BasketFavoriteShoe> favoriteShoes = new ArrayList<>();
     DataBaseHelper dbHelper;
     FavoriteAdapter adapter;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,7 +35,7 @@ public class FavoriteFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle("Избранное");
-        favoriteShoes.clear(); // Очистка, для того, чтобы элементы не дублировались. Исправить!
+        favoriteShoes.clear(); // Очистка, для того, чтобы элементы не дублировались.
 
         dbHelper = new DataBaseHelper(getActivity());
         SQLiteDatabase db = dbHelper.getWritableDatabase();

@@ -16,7 +16,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -25,14 +24,11 @@ import java.util.List;
 import java.util.Locale;
 
 import ainullov.kamil.com.shoeshop.R;
-import ainullov.kamil.com.shoeshop.manager.pojo.OrderAccountingPojo;
 import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
+import ainullov.kamil.com.shoeshop.manager.pojo.OrderAccountingPojo;
 
 public class SalesVolumeFragment extends Fragment implements View.OnClickListener {
 
-    // Будет использоваться для sold дб,
-    // вместо date будет  solddate
-    // вместо size в виде json будет один размер
     List<OrderAccountingPojo> orderAccountingPojos = new ArrayList<>();
     Cursor c;
     DataBaseHelper dbHelper;
@@ -57,7 +53,6 @@ public class SalesVolumeFragment extends Fragment implements View.OnClickListene
 
     private static int genderPosition = 0;
     private static int typePosition = 0;
-    private static int datePosition = 0;
     String[] strTypeMan = new String[]{"Ботинки", "Кеды", "Кроссовки", "Туфли"};
     String[] strTypeWoman = new String[]{"Ботинки", "Кеды", "Кроссовки", "Туфли", "Сапоги", "Балетки"};
     String[] strType = new String[]{};
@@ -65,9 +60,7 @@ public class SalesVolumeFragment extends Fragment implements View.OnClickListene
     // Переменные для вставки в бд
     String gender = "М";
     String type = "Кроссовки";
-
-    String date = "08.11.2018"; // ПРОВЕРИТЬ!
-
+    String date = "08.11.2018";
 
     // Подсчет суммы проданного
     int soldSum;
@@ -82,6 +75,7 @@ public class SalesVolumeFragment extends Fragment implements View.OnClickListene
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        getActivity().setTitle("");
         orderAccountingPojos.clear();
 
         spinnerGenderSalesVolume = (Spinner) view.findViewById(R.id.spinnerGender);
@@ -104,7 +98,6 @@ public class SalesVolumeFragment extends Fragment implements View.OnClickListene
                                        int position, long id) {
 
                 gender = adapterGender.getItem(position);
-                Toast.makeText(getActivity(), "type " + type + " gender " + gender, Toast.LENGTH_SHORT).show();
                 if (gender.equals("М") || gender.equals("Ж")) {
                     spinnerTypeSalesVolume.setVisibility(View.VISIBLE);
 
@@ -152,7 +145,6 @@ public class SalesVolumeFragment extends Fragment implements View.OnClickListene
 
                             String dayOfWeek = formatDayOfWeek.format(Double.valueOf(c.getString(solddateColIndex)));
                             if (today.equals(dayOfWeek)) {
-
                                 orderAccountingPojos.add(new OrderAccountingPojo(c.getInt(uniquekeyColIndex),
                                         c.getString(typeColIndex),
                                         c.getString(genderColIndex),
@@ -203,7 +195,6 @@ public class SalesVolumeFragment extends Fragment implements View.OnClickListene
             }
         });
 
-
         String[] strDate = new String[]{"День", "Месяц"};
         final ArrayAdapter<String> adapterDay = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, strDate);
         adapterDay.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -216,8 +207,6 @@ public class SalesVolumeFragment extends Fragment implements View.OnClickListene
                                        int position, long id) {
 
                 date = adapterDay.getItem(position);
-                Toast.makeText(getActivity(), "date " + date, Toast.LENGTH_SHORT).show();
-
 
             }
 

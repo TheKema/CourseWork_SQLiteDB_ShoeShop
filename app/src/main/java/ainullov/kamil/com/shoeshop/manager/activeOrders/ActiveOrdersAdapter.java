@@ -1,10 +1,7 @@
 package ainullov.kamil.com.shoeshop.manager.activeOrders;
 
-import android.app.Activity;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +16,6 @@ import java.util.Locale;
 import ainullov.kamil.com.shoeshop.R;
 import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
 import ainullov.kamil.com.shoeshop.manager.pojo.ActiveOrdersPojo;
-import ainullov.kamil.com.shoeshop.user.fragments.ShoesDetailedFragment;
 
 public class ActiveOrdersAdapter extends RecyclerView.Adapter<ActiveOrdersAdapter.ViewHolder> {
 
@@ -85,7 +81,7 @@ public class ActiveOrdersAdapter extends RecyclerView.Adapter<ActiveOrdersAdapte
             tvSize = (TextView) view.findViewById(R.id.tvSize);
 
 
-            //Переход к товару переход к ShoesDetailedFragment
+            //Переход к ShoesDetailedFragment
             btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
