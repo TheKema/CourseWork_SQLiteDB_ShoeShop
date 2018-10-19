@@ -2,6 +2,7 @@ package ainullov.kamil.com.shoeshop.user.userOrderProduct;
 
 import android.app.Dialog;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -370,10 +371,12 @@ public class UserOrderProductFragment extends Fragment implements View.OnClickLi
                         @Override
                         public void onClick(View v) {
                             dialog.dismiss();
+
                             fTrans = getFragmentManager().beginTransaction();
                             fTrans.replace(R.id.container, mainFragment);
-                            fTrans.addToBackStack(null);
+//                            fTrans.addToBackStack(null); // не добавляю, чтобы нельзя было возвратиться
                             fTrans.commit();
+
                         }
                     });
 

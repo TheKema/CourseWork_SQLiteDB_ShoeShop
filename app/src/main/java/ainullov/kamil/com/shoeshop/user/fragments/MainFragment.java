@@ -1,6 +1,7 @@
 package ainullov.kamil.com.shoeshop.user.fragments;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.media.Image;
 import android.os.Bundle;
@@ -46,6 +47,10 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         btnManMain.setOnClickListener(this);
         btnWomanMain.setOnClickListener(this);
         getActivity().setTitle("Обувной магазин");
+
+        // в MainFragment происходит очищение bakcstack
+        FragmentManager fm = getActivity().getFragmentManager();
+        fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
 //        Glide.with(getActivity()).load("https://openweathermap.org/img/w/10d.png").into(ivHeader);
 //        Picasso.with(getActivity()).load("https://image.ibb.co/mMjRy0/3031245-1.jpg").into(ivHeader);

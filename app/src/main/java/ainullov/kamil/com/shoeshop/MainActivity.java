@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static List<ShoeType> shoeTypesMan = new ArrayList<>();
     public static List<ShoeType> shoeTypesWoman = new ArrayList<>();
 
+    public static boolean appStart = true;
+
     ManFragment manFragment = null;
     WomanFragment womanFragment = null;
     BasketFragment basketFragment = null;
@@ -89,7 +91,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             addToDB("Кеды", "М", 2);
             addToDB("Кеды", "Ж", 6);
             addToDB("Сапоги", "Ж", 5);
-
 
 
             // Аккаунт админа
@@ -143,17 +144,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        shoeTypesMan.add(new ShoeType("Ботинки"));
-        shoeTypesMan.add(new ShoeType("Кеды"));
-        shoeTypesMan.add(new ShoeType("Кроссовки"));
-        shoeTypesMan.add(new ShoeType("Туфли"));
 
-        shoeTypesWoman.add(new ShoeType("Ботинки"));
-        shoeTypesWoman.add(new ShoeType("Кеды"));
-        shoeTypesWoman.add(new ShoeType("Кроссовки"));
-        shoeTypesWoman.add(new ShoeType("Туфли"));
-        shoeTypesWoman.add(new ShoeType("Сапоги"));
-        shoeTypesWoman.add(new ShoeType("Балетки"));
+        if (appStart == true) {
+            shoeTypesMan.add(new ShoeType("Ботинки"));
+            shoeTypesMan.add(new ShoeType("Кеды"));
+            shoeTypesMan.add(new ShoeType("Кроссовки"));
+            shoeTypesMan.add(new ShoeType("Туфли"));
+
+            shoeTypesWoman.add(new ShoeType("Ботинки"));
+            shoeTypesWoman.add(new ShoeType("Кеды"));
+            shoeTypesWoman.add(new ShoeType("Кроссовки"));
+            shoeTypesWoman.add(new ShoeType("Туфли"));
+            shoeTypesWoman.add(new ShoeType("Сапоги"));
+            shoeTypesWoman.add(new ShoeType("Балетки"));
+        appStart = false;
+        }
+
     }
 
     @Override
