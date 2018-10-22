@@ -5,6 +5,7 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
@@ -59,6 +60,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
 
         int nameColIndex;
         int coastColIndex;
+        int discountColIndex;
         int imageurlColIndex;
 
         dbHelper = new DataBaseHelper(context);
@@ -70,12 +72,22 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
         if (c.moveToFirst()) {
             nameColIndex = c.getColumnIndex("name");
             coastColIndex = c.getColumnIndex("coast");
+            discountColIndex = c.getColumnIndex("discount");
             imageurlColIndex = c.getColumnIndex("imageurl");
 
             do {
                 holder.tvFavoriteName.setText(c.getString(nameColIndex));
                 holder.tvFavoriteCoast.setText(String.valueOf(c.getInt(coastColIndex)));
 
+                int discountcoast = 0;
+                if (c.getInt(discountColIndex) != 0 && c.getInt(discountColIndex) != 100) {
+                    discountcoast = (int) (100 - c.getInt(discountColIndex)) * c.getInt(coastColIndex) / 100;
+
+                    holder.tvFavoriteCoast.setPaintFlags(holder.tvFavoriteCoast.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                    holder.tvFavoriteCoast.setTextColor(context.getResources().getColor(R.color.red));
+
+                    holder.tvFavoriteDiscountCoast.setText(String.valueOf(discountcoast));
+                } else holder.tvFavoriteDiscountCoast.setText("");
                 Picasso.with(context).load(c.getString(imageurlColIndex)).into(holder.ivFavoriteShoe);
             } while (c.moveToNext());
         }
@@ -91,13 +103,14 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
         final ConstraintLayout clFavorite;
         final ImageView ivFavoriteShoe;
-        final TextView tvFavoriteName, tvFavoriteCoast;
+        final TextView tvFavoriteName, tvFavoriteCoast, tvFavoriteDiscountCoast;
         final Button btnDelete;
 
         ViewHolder(View view) {
             super(view);
             clFavorite = (ConstraintLayout) view.findViewById(R.id.clFavorite);
             ivFavoriteShoe = (ImageView) view.findViewById(R.id.ivFavoriteShoe);
+            tvFavoriteDiscountCoast = (TextView) view.findViewById(R.id.tvFavoriteDiscountCoast);
             tvFavoriteName = (TextView) view.findViewById(R.id.tvFavoriteName);
             tvFavoriteCoast = (TextView) view.findViewById(R.id.tvFavoriteCoast);
             btnDelete = (Button) view.findViewById(R.id.btnDelete);
@@ -106,7 +119,6 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
             clFavorite.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
                     BasketFavoriteShoe basketFavoriteShoe = favoriteShoes.get(getAdapterPosition());
 
                     ShoesDetailedFragment shoesDetailedFragment = new ShoesDetailedFragment();

@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -37,6 +38,7 @@ public class ShoesDetailedFragment extends Fragment implements View.OnClickListe
     ImageView ivShoeDetailed;
     TextView tvNameDetailed;
     TextView tvCoastDetailed;
+    TextView tvCoastDiscountDetailed;
     Spinner spinnerSizeDetailed;
     Button btnBasketDetailed;
     Button btnFavDetailed;
@@ -55,6 +57,7 @@ public class ShoesDetailedFragment extends Fragment implements View.OnClickListe
     int quantityColIndex;
     int nameColIndex;
     int coastColIndex;
+    int discountColIndex;
     int descriptionColIndex;
     int sizeColIndex;
     int imageurlColIndex;
@@ -81,13 +84,13 @@ public class ShoesDetailedFragment extends Fragment implements View.OnClickListe
         ivShoeDetailed = (ImageView) view.findViewById(R.id.ivShoeDetailed);
         tvNameDetailed = (TextView) view.findViewById(R.id.tvNameDetailed);
         tvCoastDetailed = (TextView) view.findViewById(R.id.tvCoastDetailed);
+        tvCoastDiscountDetailed = (TextView) view.findViewById(R.id.tvCoastDiscountDetailed);
         tvDescDetailed = (TextView) view.findViewById(R.id.tvDescDetailed);
         spinnerSizeDetailed = (Spinner) view.findViewById(R.id.spinnerSizeDetailed);
         btnBasketDetailed = (Button) view.findViewById(R.id.btnBasketDetailed);
         btnFavDetailed = (Button) view.findViewById(R.id.btnFavDetailed);
         btnBasketDetailed.setOnClickListener(this);
         btnFavDetailed.setOnClickListener(this);
-
 
         Bundle bundle = this.getArguments();
         int uniquekey = bundle.getInt("uniquekey");
@@ -108,6 +111,7 @@ public class ShoesDetailedFragment extends Fragment implements View.OnClickListe
             quantityColIndex = c.getColumnIndex("quantity");
             nameColIndex = c.getColumnIndex("name");
             coastColIndex = c.getColumnIndex("coast");
+            discountColIndex = c.getColumnIndex("discount");
             descriptionColIndex = c.getColumnIndex("description");
             sizeColIndex = c.getColumnIndex("size");
             imageurlColIndex = c.getColumnIndex("imageurl");
@@ -123,8 +127,18 @@ public class ShoesDetailedFragment extends Fragment implements View.OnClickListe
                     e.printStackTrace();
                 }
                 shoeUniquekeyBasket = c.getInt(uniquekeyColIndex);
+
                 tvNameDetailed.setText(c.getString(nameColIndex));
                 tvCoastDetailed.setText(String.valueOf(c.getInt(coastColIndex)));
+
+                int discountcoast = 0;
+                if (c.getInt(discountColIndex) != 0 && c.getInt(discountColIndex) != 100) {
+                    discountcoast = (int) (100 - c.getInt(discountColIndex)) * c.getInt(coastColIndex) / 100;
+                    tvCoastDetailed.setPaintFlags(tvCoastDetailed.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                    tvCoastDetailed.setTextColor(getActivity().getResources().getColor(R.color.red));
+
+                    tvCoastDiscountDetailed.setText(String.valueOf(discountcoast));
+                } else tvCoastDiscountDetailed.setText("");
 
                 Picasso.with(getActivity()).load(c.getString(imageurlColIndex)).into(ivShoeDetailed);
                 strImageurl = c.getString(imageurlColIndex);

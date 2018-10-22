@@ -9,6 +9,7 @@ public class ActiveOrdersPojo {
     private String gender;
     private String shoename;
     private int coast;
+    private int discount;
     private String size;
     private int orderNumber;
     private String email;

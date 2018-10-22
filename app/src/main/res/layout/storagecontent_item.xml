@@ -94,13 +94,16 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvSizeSAItem" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDiscountItem" />
 
     <ImageButton
         android:id="@+id/imageBtnDel"
@@ -108,9 +111,9 @@
         android:layout_height="40dp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
+        android:background="@drawable/roundedbutton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/roundedbutton"
         app:srcCompat="@android:drawable/ic_delete" />
 
     <ImageButton
@@ -119,8 +122,18 @@
         android:layout_height="40dp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
+        android:background="@drawable/roundedbutton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageBtnDel"
-        android:background="@drawable/roundedbutton"
         app:srcCompat="@android:drawable/ic_menu_preferences" />
+
+    <TextView
+        android:id="@+id/tvDiscountItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Скидка: 10% Цена по скидке: 12333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSizeSAItem" />
 </android.support.constraint.ConstraintLayout>

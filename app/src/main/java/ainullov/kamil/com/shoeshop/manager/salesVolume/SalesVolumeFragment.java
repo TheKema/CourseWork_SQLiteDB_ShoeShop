@@ -261,7 +261,6 @@ public class SalesVolumeFragment extends Fragment implements View.OnClickListene
 
                     do {
                         // Добавляем только те, у которых день эквивалентен текущему дню
-
                         String dayOfWeek = formatDayOfWeek.format(Double.valueOf(c.getString(solddateColIndex)));
                         if (today.equals(dayOfWeek)) {
 

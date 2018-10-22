@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:text="Пример №1"
         app:layout_constraintEnd_toStartOf="@+id/btnDelete"
         app:layout_constraintStart_toEndOf="@+id/ivFavoriteShoe"
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:text="1119"
         app:layout_constraintEnd_toStartOf="@+id/btnDelete"
         app:layout_constraintStart_toEndOf="@+id/ivFavoriteShoe"
@@ -45,20 +45,17 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginStart="68dp"
-        android:layout_marginTop="8dp"
         android:text="Размер:"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ivFavoriteShoe"
-        app:layout_constraintTop_toBottomOf="@+id/tvFavoriteCoast"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toEndOf="@+id/ivFavoriteShoe" />
 
     <TextView
         android:id="@+id/tvBasketSize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="42"
@@ -89,4 +86,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tvBasketDiscountCoast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="2dp"
+        android:text="990"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toStartOf="@+id/btnDelete"
+        app:layout_constraintStart_toEndOf="@+id/ivFavoriteShoe"
+        app:layout_constraintTop_toBottomOf="@+id/tvFavoriteCoast"
+        app:layout_constraintVertical_bias="0.0" />
 </android.support.constraint.ConstraintLayout>

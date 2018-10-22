@@ -20,8 +20,8 @@
 
     <TextView
         android:id="@+id/tvNameDetailed"
-        android:layout_width="195dp"
-        android:layout_height="37dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -32,8 +32,8 @@
 
     <TextView
         android:id="@+id/tvCoastDetailed"
-        android:layout_width="135dp"
-        android:layout_height="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -46,10 +46,10 @@
         android:id="@+id/spinnerSizeDetailed"
         android:layout_width="85dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="92dp"
+        android:layout_marginEnd="72dp"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCoastDetailed" />
+        app:layout_constraintTop_toBottomOf="@+id/tvCoastDiscountDetailed" />
 
     <Button
         android:id="@+id/btnBasketDetailed"
@@ -88,10 +88,11 @@
     <TextView
         android:id="@+id/tvDescDetailed"
         android:layout_width="350dp"
-        android:layout_height="88dp"
+        android:layout_height="70dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:gravity="center"
         android:text="Эта обувь была произведена в США"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -106,6 +107,18 @@
         android:layout_marginTop="8dp"
         android:text="Размер:"
         app:layout_constraintEnd_toStartOf="@+id/spinnerSizeDetailed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCoastDiscountDetailed" />
+
+    <TextView
+        android:id="@+id/tvCoastDiscountDetailed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="990"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvCoastDetailed" />
 

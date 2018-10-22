@@ -67,11 +67,17 @@ public class StorageContentAdapter extends RecyclerView.Adapter<StorageContentAd
             e.printStackTrace();
         }
 
+        int discountcoast = 0;
+        if (orderAccountingPojo.getDiscount() != 0 && orderAccountingPojo.getDiscount() != 100)
+            discountcoast = (int) ((100 - orderAccountingPojo.getDiscount())) * orderAccountingPojo.getCoast() / 100;
+        else
+            discountcoast = orderAccountingPojo.getCoast();
 
         holder.tvGenderCSItem.setText("Пол: " + orderAccountingPojo.getGender());
         holder.tvTypeCSItem.setText("Вид: " + orderAccountingPojo.getType());
         holder.tvNameCSItem.setText("Название: " + orderAccountingPojo.getName());
         holder.tvCoastCSItem.setText("Цена: " + orderAccountingPojo.getCoast());
+        holder.tvDiscountItem.setText("Скидка: " + orderAccountingPojo.getDiscount() + "% , цена по скидке: " + discountcoast);
         holder.tvProviderCSItem.setText("Поставщик: " + orderAccountingPojo.getProvider());
         holder.tvDateCSItem.setText("Дата поставки: " + dayOfWeeki);
         holder.tvSizeCSItem.setText("Кол-во: " + orderAccountingPojo.getQuantity() + " Размер(ы): " + strSizes);
@@ -89,7 +95,7 @@ public class StorageContentAdapter extends RecyclerView.Adapter<StorageContentAd
         final ImageButton imageBtnDel, imageBtnChange;
 
         final TextView tvGenderCSItem, tvTypeCSItem, tvNameCSItem,
-                tvCoastCSItem, tvProviderCSItem, tvDateCSItem, tvSizeCSItem;
+                tvCoastCSItem, tvDiscountItem, tvProviderCSItem, tvDateCSItem, tvSizeCSItem;
 
         ViewHolder(View view) {
             super(view);
@@ -98,6 +104,7 @@ public class StorageContentAdapter extends RecyclerView.Adapter<StorageContentAd
             tvTypeCSItem = (TextView) view.findViewById(R.id.tvTypeItem);
             tvNameCSItem = (TextView) view.findViewById(R.id.tvNameItem);
             tvCoastCSItem = (TextView) view.findViewById(R.id.tvCoastItem);
+            tvDiscountItem = (TextView) view.findViewById(R.id.tvDiscountItem);
             tvProviderCSItem = (TextView) view.findViewById(R.id.tvProviderItem);
             tvDateCSItem = (TextView) view.findViewById(R.id.tvDateSAItem);
             tvSizeCSItem = (TextView) view.findViewById(R.id.tvSizeSAItem);
@@ -149,6 +156,7 @@ public class StorageContentAdapter extends RecyclerView.Adapter<StorageContentAd
                     bundle.putString("gender", orderAccountingPojos.get(getAdapterPosition()).getGender());
                     bundle.putString("type", orderAccountingPojos.get(getAdapterPosition()).getType());
                     bundle.putInt("coast", orderAccountingPojos.get(getAdapterPosition()).getCoast());
+                    bundle.putInt("discount", orderAccountingPojos.get(getAdapterPosition()).getDiscount());
                     bundle.putString("name", orderAccountingPojos.get(getAdapterPosition()).getName());
                     bundle.putString("provider", orderAccountingPojos.get(getAdapterPosition()).getProvider());
                     bundle.putString("description", orderAccountingPojos.get(getAdapterPosition()).getDescription());

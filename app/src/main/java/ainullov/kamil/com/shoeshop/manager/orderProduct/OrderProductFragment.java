@@ -30,6 +30,7 @@ public class OrderProductFragment extends Fragment implements View.OnClickListen
     EditText etProvider;
     EditText etDesc;
     EditText etImageUrl;
+    EditText etDiscount;
     Button btnSize;
     Button btnAddOrder;
     Button btnClearFields;
@@ -46,11 +47,12 @@ public class OrderProductFragment extends Fragment implements View.OnClickListen
     String gender = "М";
     String type = "Кроссовки";
     int coast = 1990;
+    int discount = 0; // В процентах
     String name = "Обувь 1";
     String provider = "КазОдеждСтрой";
     String description = "Обувь произведена в США";
     String date = String.valueOf(System.currentTimeMillis());  // При добавлении товара считывается текущее время
-    String imageurl = "https://image.ibb.co/dqwH5f/2184495-1.jpg"; // использую сайт https://imgbb.com/ для хранения фотографий обуви
+    String imageurl = "https://image.ibb.co/dqwH5f/2184312312312495-1.jpg"; // использую сайт https://imgbb.com/ для хранения фотографий обуви
     Random random = new Random();
     int uniquekey = random.nextInt(); // При доб. тов. добавить уникальный ключ
 
@@ -79,6 +81,7 @@ public class OrderProductFragment extends Fragment implements View.OnClickListen
         etCoast = (EditText) view.findViewById(R.id.etCoast);
         etProvider = (EditText) view.findViewById(R.id.etProvider);
         etDesc = (EditText) view.findViewById(R.id.etDesc);
+        etDiscount = (EditText) view.findViewById(R.id.etDiscount);
         btnSize = (Button) view.findViewById(R.id.btnSize);
         btnAddOrder = (Button) view.findViewById(R.id.btnAddOrder);
         btnClearFields = (Button) view.findViewById(R.id.btnClearFields);
@@ -138,7 +141,6 @@ public class OrderProductFragment extends Fragment implements View.OnClickListen
 
         switch (view.getId()) {
             case R.id.btnSize:
-
                 ChoseSizesOrderProductFragment choseSizesOrderProductFragment = new ChoseSizesOrderProductFragment();
                 Bundle bundleAddOrChange = new Bundle();
                 bundleAddOrChange.putString("addorchange", "add");
@@ -153,11 +155,17 @@ public class OrderProductFragment extends Fragment implements View.OnClickListen
             case R.id.btnAddOrder:
                 name = etName.getText().toString();
                 coast = Integer.valueOf(etCoast.getText().toString());
+
+                if (etDiscount.getText().length() != 0)
+                    discount = Integer.valueOf(etDiscount.getText().toString());
+                else discount = 0;
+
                 description = etDesc.getText().toString();
                 provider = etProvider.getText().toString();
                 date = String.valueOf(System.currentTimeMillis());
 
-                imageurl = etImageUrl.getText().toString();
+                if (etImageUrl.getText().length() != 0)
+                    imageurl = etImageUrl.getText().toString();
 
                 DataBaseHelper dbHelper;
                 dbHelper = new DataBaseHelper(getActivity());
@@ -167,6 +175,7 @@ public class OrderProductFragment extends Fragment implements View.OnClickListen
                 cv.put("type", type);
                 cv.put("gender", gender);
                 cv.put("coast", coast);
+                cv.put("discount", discount);
                 cv.put("name", name);
                 cv.put("description", description);
                 cv.put("imageurl", imageurl);

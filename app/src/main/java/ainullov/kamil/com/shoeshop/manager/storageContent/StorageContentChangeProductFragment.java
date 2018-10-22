@@ -29,6 +29,7 @@ public class StorageContentChangeProductFragment extends Fragment implements Vie
     EditText etProvider;
     EditText etDesc;
     EditText etImageUrl;
+    EditText etDiscount;
     Button btnSize;
     Button btnAddOrder;
     Button btnClearFields;
@@ -43,16 +44,16 @@ public class StorageContentChangeProductFragment extends Fragment implements Vie
 
     String[] strGender = new String[]{"М", "Ж"};
 
-
     // Переменные для вставки в бд
     String gender = "М";
     String type = "Кроссовки";
     int coast = 1990;
+    int discount = 0; // В процентах
     String name = "Обувь 1";
     String provider = "КазОдеждСтрой";
     String description = "Обувь произведена в США";
     String date = String.valueOf(System.currentTimeMillis());  // При добавлении товара считывается текущее время
-    String imageurl = "https://image.ibb.co/dqwH5f/2184495-1.jpg";
+    String imageurl = "https://image.ibb.co/dqwH5f/21844931233135-1.jpg";
 
 
     // ArrayList, из чисел - размер обуви, превращаем в строку и суем в db, потом достанем и превратив в ArrayList
@@ -60,7 +61,6 @@ public class StorageContentChangeProductFragment extends Fragment implements Vie
 
     public static String size; // Нужно, чтобы из фрагмента можно было изменить.
     public static int quantity;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -79,6 +79,7 @@ public class StorageContentChangeProductFragment extends Fragment implements Vie
         etProvider = (EditText) view.findViewById(R.id.etProvider);
         etDesc = (EditText) view.findViewById(R.id.etDesc);
         etImageUrl = (EditText) view.findViewById(R.id.etImageUrl);
+        etDiscount = (EditText) view.findViewById(R.id.etDiscount);
         btnSize = (Button) view.findViewById(R.id.btnSize);
         btnAddOrder = (Button) view.findViewById(R.id.btnAddOrder);
         btnAddOrder.setText("Изменить");
@@ -92,6 +93,7 @@ public class StorageContentChangeProductFragment extends Fragment implements Vie
         gender = bundle.getString("gender");
         type = bundle.getString("type");
         coast = bundle.getInt("coast");
+        discount = bundle.getInt("discount");
         name = bundle.getString("name");
         provider = bundle.getString("provider");
         size = bundle.getString("size");
@@ -101,6 +103,7 @@ public class StorageContentChangeProductFragment extends Fragment implements Vie
 
         etName.setText(name);
         etCoast.setText(String.valueOf(coast));
+        etDiscount.setText(String.valueOf(discount));
         etProvider.setText(provider);
         etDesc.setText(description);
         etImageUrl.setText(imageurl);
@@ -189,10 +192,17 @@ public class StorageContentChangeProductFragment extends Fragment implements Vie
             case R.id.btnAddOrder:
                 name = etName.getText().toString();
                 coast = Integer.valueOf(etCoast.getText().toString());
+
+                if (etDiscount.getText().length() != 0)
+                    discount = Integer.valueOf(etDiscount.getText().toString());
+                else discount = 0;
+
                 description = etDesc.getText().toString();
                 provider = etProvider.getText().toString();
                 date = String.valueOf(System.currentTimeMillis());
-                imageurl = etImageUrl.getText().toString();
+
+                if (etImageUrl.getText().length() != 0)
+                    imageurl = etImageUrl.getText().toString();
 
                 DataBaseHelper dbHelper;
                 dbHelper = new DataBaseHelper(getActivity());
@@ -202,6 +212,7 @@ public class StorageContentChangeProductFragment extends Fragment implements Vie
                 cv.put("type", type);
                 cv.put("gender", gender);
                 cv.put("coast", coast);
+                cv.put("discount", discount);
                 cv.put("name", name);
                 cv.put("description", description);
                 cv.put("provider", provider);

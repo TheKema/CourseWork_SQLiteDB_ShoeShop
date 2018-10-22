@@ -34,16 +34,13 @@
         android:id="@+id/tvFavoriteCoast"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="1119"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnDelete"
         app:layout_constraintStart_toEndOf="@+id/ivFavoriteShoe"
-        app:layout_constraintTop_toBottomOf="@+id/tvFavoriteName"
-        app:layout_constraintVertical_bias="0.157" />
+        app:layout_constraintTop_toBottomOf="@+id/tvFavoriteName" />
 
 
     <Button
@@ -57,7 +54,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/tvFavoriteDiscountCoast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="2dp"
+        android:text="990"
+        app:layout_constraintEnd_toStartOf="@+id/btnDelete"
+        app:layout_constraintStart_toEndOf="@+id/ivFavoriteShoe"
+        app:layout_constraintTop_toBottomOf="@+id/tvFavoriteCoast" />
+
     <View
+        android:id="@+id/view5"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginBottom="2dp"

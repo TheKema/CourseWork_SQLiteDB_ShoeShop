@@ -27,6 +27,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 + "quantity integer,"
                 + "name text,"
                 + "coast integer,"
+                + "discount integer,"
                 + "provider text,"
                 + "imageurl text," // использую сайт https://imgbb.com/ для хранения фотографий обуви
                 + "date text,"
@@ -41,6 +42,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 + "quantity integer,"
                 + "name text,"
                 + "coast integer,"
+                + "discount integer,"
                 + "provider text,"
                 + "date text,"
                 + "description text,"
@@ -53,6 +55,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 + "gender text,"
                 + "name text,"
                 + "coast integer,"
+                + "discount integer,"
                 + "provider text,"
                 + "solddate text," //
                 + "size text" + ");");

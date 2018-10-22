@@ -5,6 +5,7 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
@@ -60,6 +61,7 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
         int uniquekeyColIndex;
         int nameColIndex;
         int coastColIndex;
+        int discountColIndex;
         int imageurlColIndex;
 
         dbHelper = new DataBaseHelper(context);
@@ -73,12 +75,27 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
             uniquekeyColIndex = c.getColumnIndex("uniquekey");
             nameColIndex = c.getColumnIndex("name");
             coastColIndex = c.getColumnIndex("coast");
+            discountColIndex = c.getColumnIndex("discount");
             imageurlColIndex = c.getColumnIndex("imageurl");
 
             do {
+
                 holder.tvBasketName.setText(c.getString(nameColIndex));
                 holder.tvBasketCoast.setText(String.valueOf(c.getInt(coastColIndex)));
                 holder.tvBasketSize.setText(basketFavoriteShoe.getSize());
+
+                int discountcoast = 0;
+                if (c.getInt(discountColIndex) != 0 && c.getInt(discountColIndex) != 100) {
+                    discountcoast = (int) (100 - c.getInt(discountColIndex)) * c.getInt(coastColIndex) / 100;
+
+                    holder.tvBasketCoast.setPaintFlags(holder.tvBasketCoast.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                    holder.tvBasketCoast.setTextColor(context.getResources().getColor(R.color.red));
+
+                    holder.tvBasketDiscountCoast.setText(String.valueOf(discountcoast));
+
+
+                } else
+                    holder.tvBasketDiscountCoast.setText("");
 
                 Picasso.with(context).load(c.getString(imageurlColIndex)).into(holder.ivBasketShoe);
 
@@ -96,7 +113,7 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder {
         final ConstraintLayout clBasket;
         final ImageView ivBasketShoe;
-        final TextView tvBasketName, tvBasketCoast, tvBasketSize;
+        final TextView tvBasketName, tvBasketCoast, tvBasketDiscountCoast, tvBasketSize;
         final Button btnDelete;
 
         ViewHolder(View view) {
@@ -106,6 +123,7 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
             tvBasketName = (TextView) view.findViewById(R.id.tvFavoriteName);
             tvBasketCoast = (TextView) view.findViewById(R.id.tvFavoriteCoast);
             tvBasketSize = (TextView) view.findViewById(R.id.tvBasketSize);
+            tvBasketDiscountCoast = (TextView) view.findViewById(R.id.tvBasketDiscountCoast);
             btnDelete = (Button) view.findViewById(R.id.btnDelete);
 
             //Переход к товару из корзины, переход к ShoesDetailedFragment

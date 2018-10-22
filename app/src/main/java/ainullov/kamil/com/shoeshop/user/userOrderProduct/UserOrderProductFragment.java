@@ -52,6 +52,7 @@ public class UserOrderProductFragment extends Fragment implements View.OnClickLi
     String gender = "М";
     String type = "Кроссовки";
     int coast = 1990;
+    int discount = 0;
     String name = "Обувь 1";
     String provider = "КазОдеждСтрой";
     String solddate = String.valueOf(System.currentTimeMillis());
@@ -107,7 +108,6 @@ public class UserOrderProductFragment extends Fragment implements View.OnClickLi
         switch (view.getId()) {
             case R.id.btnUserOrderProduct:
                 if (rbPickup.isChecked()) {
-
                     //Список значений для orders в columns gender,type,coast,name
                     String genderListOrders = "";
                     String typeListOrders = "";
@@ -115,15 +115,14 @@ public class UserOrderProductFragment extends Fragment implements View.OnClickLi
                     String nameListOrders = "";
                     String sizeListOrders = "";
 
-
                     // BasketFavoriteShoe List для добавления в sold (1) и удаления из shoe (2)
                     List<BasketFavoriteShoe> basketFavoriteShoes = new ArrayList<>();
                     DataBaseHelper dbHelper;
-                    String size = "41";
                     int typeColIndex;
                     int genderColIndex;
                     int nameColIndex;
                     int coastColIndex;
+                    int discountColIndex;
                     int providerColIndex;
 
                     basketFavoriteShoes.clear(); // Очистка, для того, чтобы элементы не дублировались. // Раньше было в другом месте
@@ -173,13 +172,29 @@ public class UserOrderProductFragment extends Fragment implements View.OnClickLi
                             genderColIndex = cSoldAdd.getColumnIndex("gender");
                             nameColIndex = cSoldAdd.getColumnIndex("name");
                             coastColIndex = cSoldAdd.getColumnIndex("coast");
+
+
+                            discountColIndex = cSoldAdd.getColumnIndex("discount");
+
+
                             providerColIndex = cSoldAdd.getColumnIndex("provider");
 
                             do {
+
+                                int discountcoast = 0;
+                                if (cSoldAdd.getInt(discountColIndex) != 0 && cSoldAdd.getInt(discountColIndex) != 100)
+                                    discountcoast = (int) (100 - cSoldAdd.getInt(discountColIndex)) * cSoldAdd.getInt(coastColIndex) / 100;
+
+
                                 gender = cSoldAdd.getString(genderColIndex);
                                 type = cSoldAdd.getString(typeColIndex);
                                 name = cSoldAdd.getString(nameColIndex);
-                                coast = cSoldAdd.getInt(coastColIndex);
+//                                coast = cSoldAdd.getInt(coastColIndex);
+                                // ТУТ ИЗМЕНЕНА ЦЕНА, ДАЛЬШЕ БУДЕТ СО СКИДКОЙ!
+                                coast = discountcoast;
+
+                                discount = cSoldAdd.getInt(discountColIndex);
+
                                 provider = cSoldAdd.getString(providerColIndex);
 
                             } while (cSoldAdd.moveToNext());
@@ -195,7 +210,11 @@ public class UserOrderProductFragment extends Fragment implements View.OnClickLi
                         ContentValues cvSold = new ContentValues();
                         cvSold.put("type", type);
                         cvSold.put("gender", gender);
+                        cvSold.put("discount", discount);
+
                         cvSold.put("coast", coast);
+
+
                         cvSold.put("name", name);
                         cvSold.put("provider", provider);
                         cvSold.put("solddate", solddate);

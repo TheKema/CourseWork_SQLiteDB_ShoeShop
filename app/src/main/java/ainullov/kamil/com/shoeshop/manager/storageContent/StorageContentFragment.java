@@ -35,6 +35,7 @@ public class StorageContentFragment extends Fragment {
     int quantityColIndex;
     int nameColIndex;
     int coastColIndex;
+    int discountColIndex;
     int providerColIndex;
     int dateColIndex;
     int descriptionColIndex;
@@ -127,6 +128,7 @@ public class StorageContentFragment extends Fragment {
                     quantityColIndex = c.getColumnIndex("quantity");
                     nameColIndex = c.getColumnIndex("name");
                     coastColIndex = c.getColumnIndex("coast");
+                    discountColIndex = c.getColumnIndex("discount");
                     providerColIndex = c.getColumnIndex("provider");
                     dateColIndex = c.getColumnIndex("date");
                     descriptionColIndex = c.getColumnIndex("description");
@@ -140,11 +142,12 @@ public class StorageContentFragment extends Fragment {
                                 c.getInt(quantityColIndex),
                                 c.getString(nameColIndex),
                                 c.getInt(coastColIndex),
+                                c.getInt(discountColIndex),
                                 c.getString(providerColIndex),
+                                c.getString(imageurlColIndex),
                                 c.getString(dateColIndex),
                                 c.getString(descriptionColIndex),
-                                c.getString(sizeColIndex),
-                                c.getString(imageurlColIndex)));
+                                c.getString(sizeColIndex)));
                     } while (c.moveToNext());
                 }
                 c.close();

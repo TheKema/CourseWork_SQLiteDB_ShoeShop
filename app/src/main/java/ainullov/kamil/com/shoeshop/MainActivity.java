@@ -68,6 +68,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Random random = new Random();
     int uniquekey = random.nextInt();
 
+    boolean booleanDiscount = true; // Для первонач. добавления скидки при заполнения бд
+
     SharedPreferences shref;
     final String USERNAME_USER_DBkey = "USERNAME_USER_DB";
     final String USERNAME_BASKET_DBkey = "USERNAME_BASKET_DB";
@@ -100,7 +102,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             cv.put("password", ADMIN_PASSWORD);
             db.insert("admin" + "user", null, cv);
             dbHelper.close();
-
 
             prefs.edit().putBoolean("firstrun", false).apply();
         }
@@ -153,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             shoeTypesWoman.add(new ShoeType("Туфли"));
             shoeTypesWoman.add(new ShoeType("Сапоги"));
             shoeTypesWoman.add(new ShoeType("Балетки"));
-        appStart = false;
+            appStart = false;
         }
 
     }
@@ -320,6 +321,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 cv.put("imageurl", "https://image.ibb.co/bDUFrL/5803016-1.jpg");
 
             cv.put("coast", 1190 + i * 20);
+
+            if (booleanDiscount) {
+                cv.put("discount", 10);
+                booleanDiscount = false;
+            } else {
+                cv.put("discount", 0);
+                booleanDiscount = true;
+            }
+
             cv.put("name", type + " №" + i);
             cv.put("description", "Обувь произведена в Италии");
             cv.put("provider", "ОбувьДел№" + i);
