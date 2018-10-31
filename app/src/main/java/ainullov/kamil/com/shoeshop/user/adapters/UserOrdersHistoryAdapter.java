@@ -1,12 +1,10 @@
 package ainullov.kamil.com.shoeshop.user.adapters;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -14,11 +12,9 @@ import java.util.List;
 import java.util.Locale;
 
 import ainullov.kamil.com.shoeshop.R;
-import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
-import ainullov.kamil.com.shoeshop.manager.activeOrders.ActiveOrdersAdapter;
 import ainullov.kamil.com.shoeshop.manager.pojo.ActiveOrdersPojo;
 
-public class UserOrdersHistoryAdapter  extends RecyclerView.Adapter<UserOrdersHistoryAdapter.ViewHolder> {
+public class UserOrdersHistoryAdapter extends RecyclerView.Adapter<UserOrdersHistoryAdapter.ViewHolder> {
 
     private LayoutInflater inflater;
     private List<ActiveOrdersPojo> activeOrdersPojos;

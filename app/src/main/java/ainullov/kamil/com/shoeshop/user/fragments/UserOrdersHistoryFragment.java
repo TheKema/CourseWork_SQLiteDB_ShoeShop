@@ -15,9 +15,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import ainullov.kamil.com.shoeshop.MainActivity;
 import ainullov.kamil.com.shoeshop.R;
 import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
-import ainullov.kamil.com.shoeshop.manager.activeOrders.ActiveOrdersAdapter;
 import ainullov.kamil.com.shoeshop.manager.pojo.ActiveOrdersPojo;
 import ainullov.kamil.com.shoeshop.user.adapters.UserOrdersHistoryAdapter;
 
@@ -40,8 +40,6 @@ public class UserOrdersHistoryFragment extends Fragment {
 
         activeOrdersPojos.clear();
 
-        int nameColIndex;
-        int numberColIndex;
         int dateColIndex;
         int typeColIndex;
         int genderColIndex;
@@ -49,11 +47,10 @@ public class UserOrdersHistoryFragment extends Fragment {
         int coastColIndex;
         int sizeColIndex;
         int orderNumberColIndex;
-        int emailColIndex;
 
         dbHelper = new DataBaseHelper(getActivity());
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        c = db.query("userorders", null, null, null, null, null, null);
+        c = db.query(MainActivity.USERNAME_ORDERSHISTORY_DB, null, null, null, null, null, null);
         c.moveToFirst();
         if (c.moveToFirst()) {
             dateColIndex = c.getColumnIndex("date");
@@ -84,6 +81,4 @@ public class UserOrdersHistoryFragment extends Fragment {
         UserOrdersHistoryAdapter adapter = new UserOrdersHistoryAdapter(getActivity(), activeOrdersPojos);
         recyclerView.setAdapter(adapter);
     }
-
-
 }

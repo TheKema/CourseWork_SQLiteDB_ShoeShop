@@ -33,7 +33,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
     }
 
     @Override
@@ -69,6 +69,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 MainActivity.USERNAME_USER_DB = strLogin + "user";
                 MainActivity.USERNAME_BASKET_DB = strLogin + "basket";
                 MainActivity.USERNAME_FAVORITE_DB = strLogin + "favorite";
+                MainActivity.USERNAME_ORDERSHISTORY_DB = strLogin + "userorders";
 
                 Cursor c;
                 DataBaseHelper dbHelper;
@@ -89,7 +90,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                                 fTrans.remove(this);
                                 fTrans.add(R.id.container, mainFragment);
 
-                                    ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+                                ((AppCompatActivity) getActivity()).getSupportActionBar().show();
 
                             } else {
                                 Toast.makeText(getActivity(), "Неправильный пароль, " + c.getString(loginColIndex), Toast.LENGTH_SHORT).show();

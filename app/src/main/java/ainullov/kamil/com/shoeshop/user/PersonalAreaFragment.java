@@ -107,6 +107,7 @@ public class PersonalAreaFragment extends Fragment implements View.OnClickListen
                 MainActivity.USERNAME_USER_DB = "";
                 MainActivity.USERNAME_BASKET_DB = "";
                 MainActivity.USERNAME_FAVORITE_DB = "";
+                MainActivity.USERNAME_ORDERSHISTORY_DB = "";
                 fTrans.remove(this);
                 fTrans.add(R.id.container, loginFragment);
                 break;

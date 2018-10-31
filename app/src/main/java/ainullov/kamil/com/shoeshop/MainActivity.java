@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static String USERNAME_USER_DB = "";
     public static String USERNAME_BASKET_DB = "";
     public static String USERNAME_FAVORITE_DB = "";
+    public static String USERNAME_ORDERSHISTORY_DB = "";
 
     public static boolean manTRUEwomanFALSE = false;
     public static String shoesTYPE = "Кроссовки";
@@ -74,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     final String USERNAME_USER_DBkey = "USERNAME_USER_DB";
     final String USERNAME_BASKET_DBkey = "USERNAME_BASKET_DB";
     final String USERNAME_FAVORITE_DBkey = "USERNAME_FAVORITE_DB";
+    final String USERNAME_ORDERSHISTORY_DBkey = "USERNAME_ORDERSHISTORY_DB";
 
     @Override
     protected void onResume() {
@@ -391,6 +393,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         outState.putString("USERNAME_USER_DB", USERNAME_USER_DB);
         outState.putString("USERNAME_BASKET_DB", USERNAME_BASKET_DB);
         outState.putString("USERNAME_FAVORITE_DB", USERNAME_FAVORITE_DB);
+        outState.putString("USERNAME_ORDERSHISTORY_DB", USERNAME_ORDERSHISTORY_DB);
         outState.putBoolean("manTRUEwomanFALSE", manTRUEwomanFALSE);
         outState.putString("shoesTYPE", shoesTYPE);
         outState.putString("gender", gender);
@@ -401,6 +404,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         USERNAME_USER_DB = savedInstanceState.getString("USERNAME_USER_DB");
         USERNAME_BASKET_DB = savedInstanceState.getString("USERNAME_BASKET_DB");
         USERNAME_FAVORITE_DB = savedInstanceState.getString("USERNAME_FAVORITE_DB");
+        USERNAME_ORDERSHISTORY_DB = savedInstanceState.getString("USERNAME_ORDERSHISTORY_DB");
         manTRUEwomanFALSE = savedInstanceState.getBoolean("manTRUEwomanFALSE");
         shoesTYPE = savedInstanceState.getString("shoesTYPE");
         gender = savedInstanceState.getString("gender");
@@ -423,6 +427,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             MainActivity.USERNAME_USER_DB = shref.getString(USERNAME_USER_DBkey, "");
             MainActivity.USERNAME_FAVORITE_DB = shref.getString(USERNAME_FAVORITE_DBkey, "");
             MainActivity.USERNAME_BASKET_DB = shref.getString(USERNAME_BASKET_DBkey, "");
+            MainActivity.USERNAME_ORDERSHISTORY_DB = shref.getString(USERNAME_ORDERSHISTORY_DBkey, "");
 
         }
     }
@@ -434,6 +439,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         editor.putString(USERNAME_USER_DBkey, MainActivity.USERNAME_USER_DB);
         editor.putString(USERNAME_FAVORITE_DBkey, MainActivity.USERNAME_FAVORITE_DB);
         editor.putString(USERNAME_BASKET_DBkey, MainActivity.USERNAME_BASKET_DB);
+        editor.putString(USERNAME_ORDERSHISTORY_DBkey, MainActivity.USERNAME_ORDERSHISTORY_DB);
         editor.commit();
     }
 

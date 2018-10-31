@@ -74,16 +74,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 + "orderNumber integer,"
                 + "email text" + ");");
 
-    // Для клиента
-        sqLiteDatabase.execSQL("create table userorders ("
-                + "id integer primary key autoincrement,"
-                + "date text,"
-                + "type text,"
-                + "gender text,"
-                + "shoename text,"
-                + "coast integer,"
-                + "orderNumber integer,"
-                + "size text" + ");");
     }
 
     @Override
@@ -116,6 +106,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 + "shoeId integer,"
                 + "imageurl text,"
                 + "gender text" + ");");
+
+        // Для клиента
+        sqLiteDatabase.execSQL("create table " + dbName + "userorders ("
+                + "id integer primary key autoincrement,"
+                + "date text,"
+                + "type text,"
+                + "gender text,"
+                + "shoename text,"
+                + "coast integer,"
+                + "orderNumber integer,"
+                + "size text" + ");");
 
     }
 }

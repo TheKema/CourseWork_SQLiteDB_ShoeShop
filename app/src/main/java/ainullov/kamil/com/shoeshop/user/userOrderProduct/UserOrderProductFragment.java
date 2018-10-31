@@ -295,7 +295,7 @@ public class UserOrderProductFragment extends Fragment implements View.OnClickLi
 
                     dbOrders.insert("orders", null, cvOrders);
                     //Одновременно в бд с заказами для клиента и для админа/сотрудника
-                    dbUserOrders.insert("userorders", null, cvUserOrders);
+                    dbUserOrders.insert(MainActivity.USERNAME_ORDERSHISTORY_DB, null, cvUserOrders);
                     dbHelperOrders.close();
                     dbHelperUserOrders.close();
                     //
@@ -403,6 +403,15 @@ public class UserOrderProductFragment extends Fragment implements View.OnClickLi
                             fTrans.replace(R.id.container, mainFragment);
 //                            fTrans.addToBackStack(null); // не добавляю, чтобы нельзя было возвратиться
                             fTrans.commit();
+                        }
+                    });
+
+                    // Требование преподавателя
+                    Button btnExit = (Button) dialog.findViewById(R.id.btnExit);
+                    btnExit.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            getActivity().finish();
                         }
                     });
 
