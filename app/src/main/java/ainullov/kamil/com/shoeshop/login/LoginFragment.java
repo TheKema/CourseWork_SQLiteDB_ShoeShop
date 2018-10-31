@@ -92,7 +92,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                                     ((AppCompatActivity)getActivity()).getSupportActionBar().show();
 
                             } else {
-                                Toast.makeText(getActivity(), "Неправильный пароль " + c.getString(loginColIndex), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "Неправильный пароль, " + c.getString(loginColIndex), Toast.LENGTH_SHORT).show();
                                 etPassword.setText("");
                             }
                         } while (c.moveToNext());

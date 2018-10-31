@@ -177,7 +177,6 @@ public class ShoesDetailedFragment extends Fragment implements View.OnClickListe
             }
         });
 
-
     }
 
     @Override

@@ -60,6 +60,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 + "solddate text," //
                 + "size text" + ");");
 
+        // Для админа/сотрудника
         sqLiteDatabase.execSQL("create table orders ("
                 + "id integer primary key autoincrement,"
                 + "name text,"
@@ -72,6 +73,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 + "size text,"
                 + "orderNumber integer,"
                 + "email text" + ");");
+
+    // Для клиента
+        sqLiteDatabase.execSQL("create table userorders ("
+                + "id integer primary key autoincrement,"
+                + "date text,"
+                + "type text,"
+                + "gender text,"
+                + "shoename text,"
+                + "coast integer,"
+                + "orderNumber integer,"
+                + "size text" + ");");
     }
 
     @Override

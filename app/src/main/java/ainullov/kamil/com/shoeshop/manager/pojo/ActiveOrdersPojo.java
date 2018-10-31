@@ -29,6 +29,17 @@ public class ActiveOrdersPojo {
         this.email = email;
     }
 
+    public ActiveOrdersPojo(String date, String type, String gender, String shoename,
+                            int coast, String size, int orderNumber) {
+        this.date = date;
+        this.type = type;
+        this.gender = gender;
+        this.shoename = shoename;
+        this.coast = coast;
+        this.size = size;
+        this.orderNumber = orderNumber;
+    }
+
     public int getId() {
         return id;
     }

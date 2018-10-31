@@ -191,7 +191,10 @@ public class UserOrderProductFragment extends Fragment implements View.OnClickLi
                                 name = cSoldAdd.getString(nameColIndex);
 //                                coast = cSoldAdd.getInt(coastColIndex);
                                 // ТУТ ИЗМЕНЕНА ЦЕНА, ДАЛЬШЕ БУДЕТ СО СКИДКОЙ!
-                                coast = discountcoast;
+                                if (discountcoast != 0)
+                                    coast = discountcoast;
+                                else
+                                    coast = cSoldAdd.getInt(coastColIndex);
 
                                 discount = cSoldAdd.getInt(discountColIndex);
 
@@ -256,8 +259,14 @@ public class UserOrderProductFragment extends Fragment implements View.OnClickLi
                     //Добавление в БД orders, для отслеживания заказов клиентов сотрудником
                     DataBaseHelper dbHelperOrders;
                     dbHelperOrders = new DataBaseHelper(getActivity());
+
+                    DataBaseHelper dbHelperUserOrders;
+                    dbHelperUserOrders = new DataBaseHelper(getActivity());
                     // подключение к БД
                     SQLiteDatabase dbOrders = dbHelperOrders.getWritableDatabase();
+                    SQLiteDatabase dbUserOrders = dbHelperUserOrders.getWritableDatabase();
+                    ContentValues cvUserOrders = new ContentValues();
+
                     ContentValues cvOrders = new ContentValues();
                     cvOrders.put("name", nameOrders);
                     cvOrders.put("number", numberOrders);
@@ -269,15 +278,26 @@ public class UserOrderProductFragment extends Fragment implements View.OnClickLi
                     cvOrders.put("shoename", nameListOrders);
                     cvOrders.put("size", sizeListOrders);
 
+                    cvUserOrders.put("date", dateOrders);
+                    cvUserOrders.put("type", typeListOrders);
+                    cvUserOrders.put("gender", genderListOrders);
+                    cvUserOrders.put("coast", coastListOrders);
+                    cvUserOrders.put("shoename", nameListOrders);
+                    cvUserOrders.put("size", sizeListOrders);
+
                     while (checkRepeat("orders", "orderNumber") != 0) {
                         orderNumber = randomOrders.nextInt(Integer.MAX_VALUE);
                     }
                     if (checkRepeat("orders", "orderNumber") == 0) {
                         cvOrders.put("orderNumber", orderNumber);
+                        cvUserOrders.put("orderNumber", orderNumber);
                     }
 
                     dbOrders.insert("orders", null, cvOrders);
+                    //Одновременно в бд с заказами для клиента и для админа/сотрудника
+                    dbUserOrders.insert("userorders", null, cvUserOrders);
                     dbHelperOrders.close();
+                    dbHelperUserOrders.close();
                     //
 
                     // (2)

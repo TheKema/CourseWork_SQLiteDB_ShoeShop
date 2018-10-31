@@ -20,6 +20,7 @@ import ainullov.kamil.com.shoeshop.MainActivity;
 import ainullov.kamil.com.shoeshop.R;
 import ainullov.kamil.com.shoeshop.db.DataBaseHelper;
 import ainullov.kamil.com.shoeshop.login.LoginFragment;
+import ainullov.kamil.com.shoeshop.user.fragments.UserOrdersHistoryFragment;
 
 public class PersonalAreaFragment extends Fragment implements View.OnClickListener {
     TextView tvLogin;
@@ -29,6 +30,7 @@ public class PersonalAreaFragment extends Fragment implements View.OnClickListen
     Button btnExit;
     Button btnChangeData;
     Button btnChangePassword;
+    Button btnUserOrdersHistory;
 
     String strLogin;
     String strPassword;
@@ -61,7 +63,9 @@ public class PersonalAreaFragment extends Fragment implements View.OnClickListen
         btnExit = (Button) view.findViewById(R.id.btnExit);
         btnChangeData = (Button) view.findViewById(R.id.btnChangeData);
         btnChangePassword = (Button) view.findViewById(R.id.btnChangePassword);
+        btnUserOrdersHistory = (Button) view.findViewById(R.id.btnUserOrdersHistory);
         btnExit.setOnClickListener(this);
+        btnUserOrdersHistory.setOnClickListener(this);
         btnChangeData.setOnClickListener(this);
         btnChangePassword.setOnClickListener(this);
 
@@ -94,6 +98,7 @@ public class PersonalAreaFragment extends Fragment implements View.OnClickListen
     @Override
     public void onClick(View view) {
         LoginFragment loginFragment = new LoginFragment();
+        UserOrdersHistoryFragment userOrdersHistoryFragment = new UserOrdersHistoryFragment();
         FragmentTransaction fTrans;
         fTrans = getFragmentManager().beginTransaction();
 
@@ -104,6 +109,10 @@ public class PersonalAreaFragment extends Fragment implements View.OnClickListen
                 MainActivity.USERNAME_FAVORITE_DB = "";
                 fTrans.remove(this);
                 fTrans.add(R.id.container, loginFragment);
+                break;
+            case R.id.btnUserOrdersHistory:
+                fTrans.replace(R.id.container, userOrdersHistoryFragment);
+                fTrans.addToBackStack(null);
                 break;
             case R.id.btnChangeData:
 

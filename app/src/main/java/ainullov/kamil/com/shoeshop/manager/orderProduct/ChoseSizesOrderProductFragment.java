@@ -70,7 +70,6 @@ public class ChoseSizesOrderProductFragment extends Fragment implements View.OnC
 
                 // ArrayList, из чисел - размер обуви, превращаем в строку и суем в db, потом достанем и превратив в ArrayList
                 ArrayList<String> items = new ArrayList<>();
-
 //                Проход по всем et
                 for (int j = 0; j < iquantity.length; j++) {
                     if (isizes[j] != 0 && iquantity[j] != 0) {
@@ -97,10 +96,7 @@ public class ChoseSizesOrderProductFragment extends Fragment implements View.OnC
                     StorageContentChangeProductFragment.quantity = items.size();
                 }
                 getActivity().getFragmentManager().popBackStack();
-
                 break;
-
         }
-
     }
 }

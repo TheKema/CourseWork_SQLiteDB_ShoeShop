@@ -156,7 +156,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             shoeTypesWoman.add(new ShoeType("Балетки"));
             appStart = false;
         }
-
     }
 
     @Override
