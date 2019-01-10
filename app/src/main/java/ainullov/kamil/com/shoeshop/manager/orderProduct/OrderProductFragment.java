@@ -153,48 +153,46 @@ public class OrderProductFragment extends Fragment implements View.OnClickListen
 
                 break;
             case R.id.btnAddOrder:
-                name = etName.getText().toString();
-                coast = Integer.valueOf(etCoast.getText().toString());
+                    name = etName.getText().toString();
+                    coast = Integer.valueOf(etCoast.getText().toString());
 
-                if (etDiscount.getText().length() != 0)
-                    discount = Integer.valueOf(etDiscount.getText().toString());
-                else discount = 0;
+                    if (etDiscount.getText().length() != 0)
+                        discount = Integer.valueOf(etDiscount.getText().toString());
+                    else discount = 0;
 
-                description = etDesc.getText().toString();
-                provider = etProvider.getText().toString();
-                date = String.valueOf(System.currentTimeMillis());
-
-                if (etImageUrl.getText().length() != 0)
+                    description = etDesc.getText().toString();
+                    provider = etProvider.getText().toString();
+                    date = String.valueOf(System.currentTimeMillis());
                     imageurl = etImageUrl.getText().toString();
 
-                DataBaseHelper dbHelper;
-                dbHelper = new DataBaseHelper(getActivity());
-                SQLiteDatabase db = dbHelper.getWritableDatabase();
+                    DataBaseHelper dbHelper;
+                    dbHelper = new DataBaseHelper(getActivity());
+                    SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-                ContentValues cv = new ContentValues();
-                cv.put("type", type);
-                cv.put("gender", gender);
-                cv.put("coast", coast);
-                cv.put("discount", discount);
-                cv.put("name", name);
-                cv.put("description", description);
-                cv.put("imageurl", imageurl);
-                cv.put("provider", provider);
-                cv.put("date", date);
-                cv.put("size", size);
-                cv.put("quantity", quantity);
+                    ContentValues cv = new ContentValues();
+                    cv.put("type", type);
+                    cv.put("gender", gender);
+                    cv.put("coast", coast);
+                    cv.put("discount", discount);
+                    cv.put("name", name);
+                    cv.put("description", description);
+                    cv.put("imageurl", imageurl);
+                    cv.put("provider", provider);
+                    cv.put("date", date);
+                    cv.put("size", size);
+                    cv.put("quantity", quantity);
 
-                while (checkRepeat("shoe") != 0) {
-                    uniquekey = random.nextInt();
-                }
+                    while (checkRepeat("shoe") != 0) {
+                        uniquekey = random.nextInt();
+                    }
 
-                if (checkRepeat("shoe") == 0) {
-                    cv.put("uniquekey", uniquekey);
-                }
+                    if (checkRepeat("shoe") == 0) {
+                        cv.put("uniquekey", uniquekey);
+                    }
 
-                db.insert("shoe", null, cv);
-                db.insert("deliveries", null, cv);
-                dbHelper.close();
+                    db.insert("shoe", null, cv);
+                    db.insert("deliveries", null, cv);
+                    dbHelper.close();
 
                 break;
             case R.id.btnClearFields:

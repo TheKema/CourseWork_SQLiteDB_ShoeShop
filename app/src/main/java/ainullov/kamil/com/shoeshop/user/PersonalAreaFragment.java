@@ -187,22 +187,23 @@ public class PersonalAreaFragment extends Fragment implements View.OnClickListen
                         String strOldPasswordDialog = "";
                         String strNewPasswordDialog = "";
 
-                        if (!etOldPasswordDialog.getText().toString().equals(null) && !etNewPasswordDialog.getText().toString().equals(null)) {
+                        if (etOldPasswordDialog.getText().length()!=0 && etNewPasswordDialog.getText().length()!=0) {
                             strOldPasswordDialog = etOldPasswordDialog.getText().toString();
                             strNewPasswordDialog = etNewPasswordDialog.getText().toString();
                         }
-
-                        if (strOldPasswordDialog.equals(strPassword)) {
-                            ContentValues cv = new ContentValues();
-                            DataBaseHelper dbHelper = new DataBaseHelper(getActivity());
-                            SQLiteDatabase db = dbHelper.getWritableDatabase();
-                            cv.put("password", strNewPasswordDialog);
-                            db.update(MainActivity.USERNAME_USER_DB, cv, "login = ?", new String[]{strLogin});
-                            dbHelper.close();
-                            Toast.makeText(getActivity(), "Пароль сохранен", Toast.LENGTH_SHORT).show();
-                            dialogChangePassword.dismiss();
-                        } else {
-                            Toast.makeText(getActivity(), "Неверный пароль", Toast.LENGTH_SHORT).show();
+                        if (!strNewPasswordDialog.equals("")) {
+                            if (strOldPasswordDialog.equals(strPassword)) {
+                                ContentValues cv = new ContentValues();
+                                DataBaseHelper dbHelper = new DataBaseHelper(getActivity());
+                                SQLiteDatabase db = dbHelper.getWritableDatabase();
+                                cv.put("password", strNewPasswordDialog);
+                                db.update(MainActivity.USERNAME_USER_DB, cv, "login = ?", new String[]{strLogin});
+                                dbHelper.close();
+                                Toast.makeText(getActivity(), "Пароль сохранен", Toast.LENGTH_SHORT).show();
+                                dialogChangePassword.dismiss();
+                            } else {
+                                Toast.makeText(getActivity(), "Неверный пароль", Toast.LENGTH_SHORT).show();
+                            }
                         }
 
 

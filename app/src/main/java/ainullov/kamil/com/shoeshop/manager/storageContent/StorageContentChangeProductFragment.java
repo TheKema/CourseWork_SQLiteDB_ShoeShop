@@ -190,50 +190,49 @@ public class StorageContentChangeProductFragment extends Fragment implements Vie
 
                 break;
             case R.id.btnAddOrder:
-                name = etName.getText().toString();
-                coast = Integer.valueOf(etCoast.getText().toString());
+                if (etName.getText().length() != 0 && etCoast.getText().length() != 0 && etDesc.getText().length() != 0 && etProvider.getText().length() != 0 && etImageUrl.getText().length() != 0) {
+                    name = etName.getText().toString();
+                    coast = Integer.valueOf(etCoast.getText().toString());
 
-                if (etDiscount.getText().length() != 0)
-                    discount = Integer.valueOf(etDiscount.getText().toString());
-                else discount = 0;
+                    if (etDiscount.getText().length() != 0)
+                        discount = Integer.valueOf(etDiscount.getText().toString());
+                    else discount = 0;
 
-                description = etDesc.getText().toString();
-                provider = etProvider.getText().toString();
-                date = String.valueOf(System.currentTimeMillis());
-
-                if (etImageUrl.getText().length() != 0)
+                    description = etDesc.getText().toString();
+                    provider = etProvider.getText().toString();
+                    date = String.valueOf(System.currentTimeMillis());
                     imageurl = etImageUrl.getText().toString();
 
-                DataBaseHelper dbHelper;
-                dbHelper = new DataBaseHelper(getActivity());
-                SQLiteDatabase db = dbHelper.getWritableDatabase();
+                    DataBaseHelper dbHelper;
+                    dbHelper = new DataBaseHelper(getActivity());
+                    SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-                ContentValues cv = new ContentValues();
-                cv.put("type", type);
-                cv.put("gender", gender);
-                cv.put("coast", coast);
-                cv.put("discount", discount);
-                cv.put("name", name);
-                cv.put("description", description);
-                cv.put("provider", provider);
-                cv.put("date", date);
-                cv.put("size", size);
-                cv.put("quantity", quantity);
-                cv.put("imageurl", imageurl);
+                    ContentValues cv = new ContentValues();
+                    cv.put("type", type);
+                    cv.put("gender", gender);
+                    cv.put("coast", coast);
+                    cv.put("discount", discount);
+                    cv.put("name", name);
+                    cv.put("description", description);
+                    cv.put("provider", provider);
+                    cv.put("date", date);
+                    cv.put("size", size);
+                    cv.put("quantity", quantity);
+                    cv.put("imageurl", imageurl);
 
-                Bundle bundleUnique = this.getArguments();
-                int uniquekey = bundleUnique.getInt("uniquekey");
-
-
-                String whereClause = null;
-                String[] whereArgs = null;
-                whereClause = "uniquekey = ?";
-                whereArgs = new String[]{String.valueOf(uniquekey)};
+                    Bundle bundleUnique = this.getArguments();
+                    int uniquekey = bundleUnique.getInt("uniquekey");
 
 
-                db.update("shoe", cv, whereClause, whereArgs);
-                dbHelper.close();
+                    String whereClause = null;
+                    String[] whereArgs = null;
+                    whereClause = "uniquekey = ?";
+                    whereArgs = new String[]{String.valueOf(uniquekey)};
 
+
+                    db.update("shoe", cv, whereClause, whereArgs);
+                    dbHelper.close();
+                }
                 break;
             case R.id.btnClearFields:
                 size = "";

@@ -130,6 +130,7 @@ public class ShoesDetailedFragment extends Fragment implements View.OnClickListe
 
                 tvNameDetailed.setText(c.getString(nameColIndex));
                 tvCoastDetailed.setText(String.valueOf(c.getInt(coastColIndex)));
+                tvDescDetailed.setText(c.getString(descriptionColIndex));
 
                 int discountcoast = 0;
                 if (c.getInt(discountColIndex) != 0 && c.getInt(discountColIndex) != 100) {

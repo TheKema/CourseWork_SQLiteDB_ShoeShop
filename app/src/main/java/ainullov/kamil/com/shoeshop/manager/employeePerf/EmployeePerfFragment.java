@@ -96,6 +96,7 @@ public class EmployeePerfFragment extends Fragment {
                 btnOkDialog.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        if(etNameDialog.getText().length()!=0&&etRatingDialog.getText().length()!=0){
                         String strNameDialog = etNameDialog.getText().toString();
                         String strRatingDialog = etRatingDialog.getText().toString();
 
@@ -124,6 +125,7 @@ public class EmployeePerfFragment extends Fragment {
                             Collections.sort(workersPojos, WorkersPojo.COMPARE_BY_RATING);
                             adapter.notifyDataSetChanged();
                         }
+                    }
                     }
                 });
                 dialog.show();

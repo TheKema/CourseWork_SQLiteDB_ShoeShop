@@ -79,23 +79,26 @@ public class ChoseSizesOrderProductFragment extends Fragment implements View.OnC
                     }
                 }
 
-                JSONObject json = new JSONObject();
-                try {
-                    json.put("uniqueArrays", new JSONArray(items));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                if(items.size()!=0) {
 
-                Bundle bundleAddOrChange = this.getArguments();
-                String strAddOrChange = bundleAddOrChange.getString("addorchange");
-                if (strAddOrChange.equals("add")) {
-                    OrderProductFragment.size = json.toString();
-                    OrderProductFragment.quantity = items.size();
-                } else if (strAddOrChange.equals("change")) {
-                    StorageContentChangeProductFragment.size = json.toString();
-                    StorageContentChangeProductFragment.quantity = items.size();
+                    JSONObject json = new JSONObject();
+                    try {
+                        json.put("uniqueArrays", new JSONArray(items));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    Bundle bundleAddOrChange = this.getArguments();
+                    String strAddOrChange = bundleAddOrChange.getString("addorchange");
+                    if (strAddOrChange.equals("add")) {
+                        OrderProductFragment.size = json.toString();
+                        OrderProductFragment.quantity = items.size();
+                    } else if (strAddOrChange.equals("change")) {
+                        StorageContentChangeProductFragment.size = json.toString();
+                        StorageContentChangeProductFragment.quantity = items.size();
+                    }
+                    getActivity().getFragmentManager().popBackStack();
                 }
-                getActivity().getFragmentManager().popBackStack();
                 break;
         }
     }

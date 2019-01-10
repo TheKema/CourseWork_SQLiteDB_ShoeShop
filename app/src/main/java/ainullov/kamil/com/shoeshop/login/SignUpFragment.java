@@ -80,37 +80,42 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
                 strNumber = etNumber.getText().toString();
                 strEmail = etEmail.getText().toString();
 
-                if (strPassword.equals(strRepPassword)) {
-                    try {
-                        DataBaseHelper dbHelper;
-                        dbHelper = new DataBaseHelper(getActivity());
-                        dbHelper.createClientDB(dbHelper, strLogin);
-                        SQLiteDatabase db = dbHelper.getWritableDatabase();
+                if (strLogin.length() != 0 && strPassword.length() != 0) {
 
-                        ContentValues cv = new ContentValues();
-                        cv.put("login", strLogin);
-                        cv.put("password", strPassword);
-                        cv.put("name", strName);
-                        cv.put("number", strNumber);
-                        cv.put("email", strEmail);
-                        db.insert(strLogin + "user", null, cv);
-                        Toast.makeText(getActivity(), "Вы зарегестрировались", Toast.LENGTH_SHORT).show();
+                    if (strPassword.equals(strRepPassword)) {
+                        try {
+                            DataBaseHelper dbHelper;
+                            dbHelper = new DataBaseHelper(getActivity());
+                            dbHelper.createClientDB(dbHelper, strLogin);
+                            SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-                        dbHelper.close();
+                            ContentValues cv = new ContentValues();
+                            cv.put("login", strLogin);
+                            cv.put("password", strPassword);
+                            cv.put("name", strName);
+                            cv.put("number", strNumber);
+                            cv.put("email", strEmail);
+                            db.insert(strLogin + "user", null, cv);
+                            Toast.makeText(getActivity(), "Вы зарегестрировались", Toast.LENGTH_SHORT).show();
 
-                        fTrans.remove(this);
-                        fTrans.add(R.id.container, loginFragment);
-                    } catch (SQLiteException e) {
-                        Toast.makeText(getActivity(), "Такой логин уже существует", Toast.LENGTH_SHORT).show();
-                        etLogin.setText("");
+                            dbHelper.close();
+
+                            fTrans.remove(this);
+                            fTrans.add(R.id.container, loginFragment);
+                        } catch (SQLiteException e) {
+                            Toast.makeText(getActivity(), "Такой логин уже существует", Toast.LENGTH_SHORT).show();
+                            etLogin.setText("");
+                            etPassword.setText("");
+                            etRepPassword.setText("");
+                        }
+                    } else {
+                        Toast.makeText(getActivity(), "Пароли не совпадают", Toast.LENGTH_SHORT).show();
                         etPassword.setText("");
                         etRepPassword.setText("");
                     }
-                } else {
-                    Toast.makeText(getActivity(), "Пароли не совпадают", Toast.LENGTH_SHORT).show();
-                    etPassword.setText("");
-                    etRepPassword.setText("");
-                }
+                }else
+                    Toast.makeText(getActivity(), "Необходимо заполнить поля", Toast.LENGTH_SHORT).show();
+
                 break;
             case R.id.btnBack:
                 fTrans.remove(this);

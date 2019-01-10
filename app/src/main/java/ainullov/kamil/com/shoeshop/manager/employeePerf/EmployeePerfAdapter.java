@@ -85,6 +85,7 @@ public class EmployeePerfAdapter extends RecyclerView.Adapter<EmployeePerfAdapte
                     btnOkDialog.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            if(etNameDialog.getText().length()!=0&&etRatingDialog.getText().length()!=0){
                             String strNameDialog = etNameDialog.getText().toString();
                             String strRatingDialog = etRatingDialog.getText().toString();
                             int uniquekey = workersPojos.get(getAdapterPosition()).getUniquekey();
@@ -102,6 +103,7 @@ public class EmployeePerfAdapter extends RecyclerView.Adapter<EmployeePerfAdapte
                             dbHelper.close();
                             notifyDataSetChanged();
                             dialog.dismiss();
+                        }
                         }
                     });
 
