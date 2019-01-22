@@ -2,11 +2,12 @@
 ## **SCREENSHOTS:**
 https://www.dropbox.com/sh/ae6sh76aoub5ogz/AAAb_RrEzd78BOIojU_aofcja?dl=0
 
-CourseWork_SQLiteDB_ShoeShop. 
+CourseWork_SQLiteDB_ShoeShop. Term paper on the "Shoe store". It was necessary to make an application using SQLite.
 ### Магазин обуви.  
 В приложение присутствуют 2 категории пользователей: конечный пользователь(покупатель) и администратор(сотрудник).  
 Учетную запись конечного пользователя необходимо создать самому.  
 Существует только одна учетная запись администратора(сотрудника): ЛОГИН: **admin** ПАРОЛЬ: **admin**.  
 При входе через уч. запись администратора(сотрудника) в личном кабинете открывается панель управления магазином.  
 При создании приложеня необходимо было пользоваться SQLite.
+
 
